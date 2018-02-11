@@ -6,6 +6,6 @@
     "npm": "5.6.x"
   },
   "scripts": {
-    "heroku-prebuild": "npm install -g bower && bower install"
+    "heroku-postbuild": "npm install -g bower && bower install"
   }
 }
