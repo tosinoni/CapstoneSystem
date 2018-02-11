@@ -1,6 +1,6 @@
 {
   "name": "capstone-system",
-  "description": "capstone system for final year students",
+  "description": "a capstone system for final year students",
   "version": "0.0.1",
   "engines": {
     "npm": "5.6.x"
