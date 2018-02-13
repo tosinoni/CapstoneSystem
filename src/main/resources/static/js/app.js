@@ -11,6 +11,9 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute'])
                 templateUrl: 'views/login/login.html',
                 controller: 'LoginController',
                 css: 'css/login/login.css',
+            })
+            .otherwise({
+                templateUrl: 'views/error/error.html'
             });
             // use the HTML5 History API
             $locationProvider.html5Mode({
