@@ -1,5 +1,5 @@
 // Declare app level module which depends on filters, and services
-angular.module('CapstoneSystem', ['ngResource', 'ngRoute'])
+angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles'])
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
