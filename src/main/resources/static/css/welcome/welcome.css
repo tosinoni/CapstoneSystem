@@ -1,0 +1,51 @@
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 550px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+/* On small screens, set height to 'auto' for the grid */
+@media screen and (max-width: 767px) {
+    .row.content {height: auto;}
+}
+
+.h4TileHeader{
+    font-weight: bold;
+}
+
+.gradeHeader{
+    font-weight: bold;
+    text-align: center;
+    font-size: larger;
+}
+
+.gradeContent{
+    text-align: center;
+}
+
+.projectsTile{
+    height:200px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 60px;
+    padding-bottom: 50px;
+}
+
+.utilsTile{
+    height:100px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.green{
+    font-weight: bold;
+    color:green;
+}
+
+.red{
+    font-weight: bold;
+    color:red;
+}

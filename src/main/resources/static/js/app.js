@@ -12,6 +12,11 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles'])
                 controller: 'LoginController',
                 css: 'css/login/login.css',
             })
+            .when('/welcome', {
+                templateUrl: 'views/welcome/welcome.html',
+                controller: 'WelcomeController',
+                css: 'css/welcome/welcome.css',
+            })
             .otherwise({
                 templateUrl: 'views/error/error.html'
             });
