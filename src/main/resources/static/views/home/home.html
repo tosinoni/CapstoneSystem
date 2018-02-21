@@ -1,201 +1,50 @@
-<body id="page-top">
-    <!-- Navigation -->
-    <a class="menu-toggle rounded" href="#">
-        <i class="fa fa-bars"></i>
-    </a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a class="js-scroll-trigger" href="#page-top">Capstone System</a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a class="js-scroll-trigger" href="#page-top">Home</a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a class="js-scroll-trigger" href="#about">About</a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a class="js-scroll-trigger" href="#login">Login</a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a class="js-scroll-trigger" href="#news">News</a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a class="js-scroll-trigger" href="#contact">Contact</a>
-            </li>
+<div class="container">
+    <aside id="sticky-social">
+        <ul>
+            <li><a href="http://www.sce.carleton.ca/courses/sysc-4907/index.html" class="entypo-linkedin" target="_blank"><span>Legacy Site</span></a></li>
+            <li><a href="https://www.facebook.com/CarletonUniFED" class="entypo-facebook" target="_blank"><span>Facebook</span></a></li>
+            <li><a href="https://twitter.com/CarletonU_Eng" class="entypo-twitter" target="_blank"><span>Twitter</span></a></li>
+            <li><a href="https://carleton.ca/engineering-design/" class="entypo-instagrem" target="_blank"><span>Web</span></a></li>
+            <li><a href="https://www.github.com/tosinoni/capstonesystem" class="entypo-stumbleupon" target="_blank"><span>Github</span></a></li>
+            <li><a href="mailto:ug-projects@sce.carleton.ca" class="entypo-pinterest"><span>Mail</span></a></li>
+            <li><a href="tel:6135202600" class="entypo-flickr"><span>Call</span></a></li>
         </ul>
-    </nav>
-
-    <!-- Header -->
-    <header class="masthead d-flex">
-        <div class="container text-center my-auto">
-            <h1 class="mb-1">Capstone System</h1>
-            <h3 class="mb-5">
-                <em>A portal to manage your fourth year engineering project.</em>
-            </h3>
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
-        </div>
-        <div class="overlay"></div>
-    </header>
-
-    <!-- About -->
-    <section class="content-section bg-primary text-white text-center" id="about">
-        <div class="container">
-            <div class="content-section-heading">
-                <h3 class="text-secondary mb-0">About</h3>
-                <h2 class="mb-5">What's There To Do?</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                <span class="service-icon rounded-circle mx-auto mb-3">
-                  <i class="icon-rocket"></i>
-                </span>
-                    <h4>
-                        <strong>Project</strong>
-                    </h4>
-                    <p class="text-faded mb-0">View and select a project.</p>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                <span class="service-icon rounded-circle mx-auto mb-3">
-                  <i class="icon-people"></i>
-                </span>
-                    <h4>
-                        <strong>Manage</strong>
-                    </h4>
-                    <p class="text-faded mb-0">Manage your team's project.</p>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-                <span class="service-icon rounded-circle mx-auto mb-3">
-                  <i class="icon-calendar"></i>
-                </span>
-                    <h4>
-                        <strong>Schedule</strong>
-                    </h4>
-                    <p class="text-faded mb-0">Select your team's availability.</p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                <span class="service-icon rounded-circle mx-auto mb-3">
-                  <i class="icon-cloud-upload"></i>
-                </span>
-                    <h4>
-                        <strong>Submit</strong>
-                    </h4>
-                    <p class="text-faded mb-0">Submit your team's final report.</p>
-                </div>
+    </aside>
+    <div class="row">
+        <h1 class="mainHeader">Welcome to the Capstone Portal</h1>
+        <p class="homeHeader">Browse the list of projects and manage your 4th year project.</p>
+        <p class="homeSubHeader">Click the button below to get started</p>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="material-button-anim">
+                <ul class="list-inline" id="options">
+                    <li class="option">
+                        <a href="/projects">
+                            <button class="material-button option1" type="button">
+                                <span class="fa fa-rocket" aria-hidden="true"></span>
+                            </button>
+                        </a>
+                    </li>
+                    <li class="option">
+                        <a href="/login">
+                            <button class="material-button option2" type="button">
+                                <span class="fa fa-sign-in" aria-hidden="true"></span>
+                            </button>
+                        </a>
+                    </li>
+                    <li class="option">
+                        <a href="#">
+                            <button class="material-button option3" type="button">
+                                <span class="fa fa-newspaper-o" aria-hidden="true"></span>
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+                <button class="material-button material-button-toggle" type="button">
+                    <span class="fa fa-plus-square" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
-    </section>
-
-    <!-- Callout -->
-    <section class="callout" id="login">
-        <div class="container text-center">
-            <h2 class="mx-auto mb-5">Welcome to
-                <em>your</em>
-                capstone project!</h2>
-            <div class="container text-center">
-                <a class="btn btn-primary btn-xl" href="/login">Login</a>
-                <a class="btn btn-primary btn-xl" href="/login">Register</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section class="content-section" id="news">
-        <div class="container">
-            <div class="content-section-heading text-center">
-                <h3 class="text-secondary mb-0">News</h3>
-                <h2 class="mb-5">Project Notices</h2>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-lg-6">
-                    <a class="portfolio-item" href="#">
-                  <span class="caption">
-                    <span class="caption-content">
-                      <h2>Resources</h2>
-                      <p class="mb-0">Did you know that you can borrow Raspberry PIs and Arduinos from the library. To do so, go to the CCS service desk on the 4th floor of the library.</p>
-                    </span>
-                  </span>
-                        <img class="img-fluid" src="img/portfolio-1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-6">
-                    <a class="portfolio-item" href="#">
-                  <span class="caption">
-                    <span class="caption-content">
-                      <h2>Email</h2>
-                      <p class="mb-0">Please use your Carleton University (cmail) accounts in all email correspondence. In particular, all email from yahoo, hotmail and gmail is being filtered out.</p>
-                    </span>
-                  </span>
-                        <img class="img-fluid" src="img/portfolio-2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-6">
-                    <a class="portfolio-item" href="#">
-                  <span class="caption">
-                    <span class="caption-content">
-                      <h2>Funding</h2>
-                      <p class="mb-0">Keep your eye on the Competitions sidebar. You may be able to get funding for equipment through the Carleton University Engineering Student Equipment Fund.</p>
-                    </span>
-                  </span>
-                        <img class="img-fluid" src="img/portfolio-3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-6">
-                    <a class="portfolio-item" href="#">
-                  <span class="caption">
-                    <span class="caption-content">
-                      <h2>Ethics</h2>
-                      <p class="mb-0">Any project that involves experimentation or data collection with human subjects requires approval from the ethics committee. </p>
-                    </span>
-                  </span>
-                        <img class="img-fluid" src="img/portfolio-4.jpg" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section id="contact" class="content-section bg-primary text-white">
-        <div class="container text-center">
-            <h2 class="mb-4">Contact Us</h2>
-            <a href="mailto:ug-projects@sce.carleton.ca?Subject=4th%20Year%20Project" class="btn btn-xl btn-light mr-4"><i class="fa fa-envelope"></i> Email Coordinator</a>
-            <a href="tel:6135205740" class="btn btn-xl btn-dark"><i class="fa fa-phone"></i> Call Department</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer text-center">
-        <div class="container">
-            <ul class="list-inline mb-5">
-                <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white mr-3" href="https://carleton.ca/engineering-design/">
-                        <i class="icon-globe"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.com/CarletonUniFED/">
-                        <i class="icon-social-facebook"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white mr-3" href="https://twitter.com/CarletonU_Eng">
-                        <i class="icon-social-twitter"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white" href="https://github.com/tosinoni/CapstoneSystem">
-                        <i class="icon-social-github"></i>
-                    </a>
-                </li>
-            </ul>
-            <p class="text-muted small mb-0">Copyright &copy; Carleton University 2018</p>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
-        <i class="fa fa-angle-up"></i>
-    </a>
-
-</body>
+    </div>
+</div>
