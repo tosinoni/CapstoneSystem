@@ -1,44 +1,22 @@
 <body>
-
-<nav class="navbar navbar-inverse visible-xs">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/welcome">Capstone System</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Dashboard</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Proposal</a></li>
-                <li><a href="#">Oral Presentation</a></li>
-                <li><a href="#">Final Report</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-3 sidenav hidden-xs">
             <h2>Capstone System</h2>
             <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="/welcome">Dashboard</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Proposal</a></li>
+                <li><a href="/projects">Projects</a></li>
                 <li><a href="#">Oral Presentation</a></li>
-                <li><a href="#">Final Report</a></li>
+                <li><a href="/profile">Profile</a></li>
                 <li><a href="#">Logout</a></li>
             </ul><br>
         </div>
         <br>
-
         <div class="col-sm-9">
+            <h1 class="portalheader">
+                <i class="icon-drawer" aria-hidden="true"></i> Dashboard
+            </h1>
+            <h4 class="h4TileHeader"><i class="icon-home"></i> Project Information</h4>
             <div class="row">
                 <div class="col-sm-7">
                     <div class="well">
@@ -51,23 +29,6 @@
                 </div>
                 <div class="col-sm-5">
                     <div class="well">
-                        <h4 class="h4TileHeader"><i class="icon-user"></i> Student Details</h4>
-                        <p><strong>Student Number:</strong> 100951843</p>
-                        <p><strong>Name:</strong> Mohamed Dahrouj</p>
-                        <p><strong>Email:</strong> mohameddahrouj@cmail.carleton.ca</p>
-                        <p><strong>Program:</strong> Software</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="well projectsTile">
-                        <h4 class="h4TileHeader"><i class="icon-rocket"></i> Projects</h4>
-                        <p>View Project Catalogue</p>
-                    </div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="well">
                         <h4 class="h4TileHeader"><i class="icon-people"></i> Project Members</h4>
                         <p><i class="icon-user"></i> Ali Farah</p>
                         <p><i class="icon-user"></i> Lava Tahir</p>
@@ -76,6 +37,16 @@
                     </div>
                 </div>
             </div>
+            <h4 class="h4TileHeader"><i class="icon-list"></i> All Projects</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="well projectsTile">
+                        <h4 class="h4TileHeader"><i class="icon-rocket"></i> Projects</h4>
+                        <p>View Project Catalogue</p>
+                    </div>
+                </div>
+            </div>
+            <h4 class="h4TileHeader"><i class="icon-grid"></i> Project Operations</h4>
             <div class="row">
                 <div class="col-sm-3">
                     <div class="well utilsTile">
