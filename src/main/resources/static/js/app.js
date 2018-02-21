@@ -17,6 +17,21 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles'])
                 controller: 'WelcomeController',
                 css: 'css/welcome/welcome.css',
             })
+            .when('/projects', {
+                templateUrl: 'views/projects/projects.html',
+                controller: 'ProjectsController',
+                css: 'css/projects/projects.css',
+            })
+            .when('/project', {
+                templateUrl: 'views/projects/project.html',
+                controller: 'ProjectsController',
+                css: 'css/projects/projects.css',
+            })
+            .when('/profile', {
+                templateUrl: 'views/profile/profile.html',
+                controller: 'ProfileController',
+                css: 'css/profile/profile.css',
+            })
             .otherwise({
                 templateUrl: 'views/error/error.html'
             });
