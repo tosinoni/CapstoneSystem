@@ -1,0 +1,83 @@
+<body>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav hidden-xs">
+            <h2>Capstone System</h2>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="/welcome">Dashboard</a></li>
+                <li class="active"><a href="/projects">Projects</a></li>
+                <li><a href="#">Oral Presentation</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul><br>
+        </div>
+        <br>
+        <div class="col-sm-9">
+            <h1 class="portalheader">
+                <i class="icon-rocket" aria-hidden="true"></i> Projects
+            </h1>
+            <table id="projectsTable" class="display" cellspacing="0" width="100%">
+                <button class="tableaddbutton" data-toggle="modal" data-target="#newProjectModal" style="float: right; margin-bottom: 20px;">New Project <i class="icon-plus" aria-hidden="true"></i></button>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Supervisor</th>
+                    <th>Members</th>
+                    <th>Programs</th>
+                    <th style="text-align: right">Action(s)</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Supervisor</th>
+                    <th>Members</th>
+                    <th>Programs</th>
+                    <th style="text-align: right">Action(s)</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Secure Electronic Communication Platform</td>
+                    <td>Jason Jaskolka</td>
+                    <td>3-5</td>
+                    <td>SE</td>
+                    <td style="text-align: right">
+                        <button data-target="#archive"><i class="icon-pin green" aria-hidden="true"></i></button>
+                        <button data-target="#edit"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                        <button data-target="#delete"><i class="icon-trash red" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Autonomous Vehicles</td>
+                    <td>Samuel Ajila</td>
+                    <td>2-4</td>
+                    <td>SE, EE</td>
+                    <td style="text-align: right">
+                        <button data-target="#archive"><i class="icon-pin green" aria-hidden="true"></i></button>
+                        <button data-target="#edit"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                        <button data-target="#delete"><i class="icon-trash red" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>A Clean Java Compiler</td>
+                    <td>Donald Bailey</td>
+                    <td>2-3</td>
+                    <td>SE</td>
+                    <td style="text-align: right">
+                        <button data-target="#archive"><i class="icon-pin green" aria-hidden="true"></i></button>
+                        <button data-target="#edit"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                        <button data-target="#delete"><i class="icon-trash red" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
