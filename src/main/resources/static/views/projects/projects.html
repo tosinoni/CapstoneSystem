@@ -81,3 +81,40 @@
     </div>
 </div>
 </body>
+
+<!-- Modal -->
+<div class="modal fade" id="newProjectModal" role="dialog">
+    <div class="modal-dialog" style="width: 90%; height : 80%">
+
+        <!-- Modal content-->
+        <form class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="icon-plus" aria-hidden="true"></i> New Project</h4>
+            </div>
+            <div class="modal-body">
+                Name:<br>
+                <input type="text" name="projectName" placeholder="Project Name" style="width:90%;">
+                <br><br>Description:<br>
+                <textarea rows="10" cols="100" name="projectDescription" placeholder="Project Description..." style="width:90%;"></textarea>
+                <br><br>Programs:<br>
+                <select class="programList" name="programs[]" multiple="multiple" style="width:90%;">
+                    <option value="EE">Electrical</option>
+                    <option value="SE">Software</option>
+                    <option value="CE">Communications</option>
+                    <option value="BME">Bio Medical</option>
+                </select>
+                <br><br>Members:<br>
+                <input type="number" name="minMembers" placeholder="Min">
+                to
+                <input type="number" name="maxMembers" placeholder="Max">
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+</div>
