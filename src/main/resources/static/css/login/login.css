@@ -97,3 +97,11 @@ body {
     background-color: #1CA347;
     border-color: #1CA347;
 }
+.programList{
+    height: 45px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}

@@ -18,7 +18,7 @@
                         <div class="col-lg-12">
                             <form id="login-form" action="#" method="post" role="form" style="display: block;">
                                 <div class="form-group">
-                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Email" value="">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
@@ -46,16 +46,31 @@
                             </form>
                             <form id="register-form" action="#" method="post" role="form" style="display: none;">
                                 <div class="form-group">
-                                    <input type="text" name="username" id="newUsername" tabindex="1" class="form-control" placeholder="Username" value="">
+                                    <input type="text" name="firstName" id="newFirstName" tabindex="1" class="form-control" placeholder="First Name" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="lastName" id="newLastName" tabindex="1" class="form-control" placeholder="Last Name" value="">
                                 </div>
                                 <div class="form-group">
                                     <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
                                 </div>
                                 <div class="form-group">
+                                    <input type="text" name="studentNumber" id="studentNumber" tabindex="2" class="form-control" placeholder="Student Number">
+                                </div>
+                                <div class="form-group">
+                                    <select tabindex="1" class="form-control programList select2-choice" name="program" style="width: 100%">
+                                        <option value="">Program</option>
+                                        <option value="EE">Electrical</option>
+                                        <option value="SE">Software</option>
+                                        <option value="CE">Communications</option>
+                                        <option value="BME">Bio Medical</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <input type="password" name="password" id="newPassword" tabindex="2" class="form-control" placeholder="Password">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                    <input type="password" name="confirmPassword" id="confirmPassword" tabindex="2" class="form-control" placeholder="Confirm Password">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
