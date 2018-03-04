@@ -4,4 +4,8 @@ angular.module('CapstoneSystem')
             $(this).toggleClass('open');
             $('.option').toggleClass('scale-on');
         });
+        $('.material-button-toggle').on("hover", function () {
+            $(this).toggleClass('open');
+            $('.option').toggleClass('scale-on');
+        });
     }]);
