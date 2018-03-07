@@ -8,4 +8,5 @@ angular.module('CapstoneSystem')
             $(this).toggleClass('open');
             $('.option').toggleClass('scale-on');
         });
+        $('.container.ng-scope').css("background","transparent");
     }]);

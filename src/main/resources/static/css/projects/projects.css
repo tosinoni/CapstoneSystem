@@ -7,6 +7,12 @@
     margin-bottom: 0px;
 }
 
+/* Set gray background color and 100% height */
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
 .h4TileHeader{
     font-weight: bold;
 }

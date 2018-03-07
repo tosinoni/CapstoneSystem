@@ -17,4 +17,5 @@ angular.module('CapstoneSystem')
         $('.programList').select2({
             placeholder: 'Program'
         });
+        $('.sidenav').css("height",$(document).height() + "px");
     }]);

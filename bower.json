@@ -15,6 +15,8 @@
     "datatables.net": "^1.10.16",
     "datatables.net-jqui": "^2.1.1",
     "datatables.net-select": "^1.2.3",
-    "datatables.net-select-jqui": "^1.2.3"
+    "datatables.net-select-jqui": "^1.2.3",
+    "froala-wysiwyg-editor": "^2.7.5",
+    "angular-froala": "^2.7.5"
   }
 }
