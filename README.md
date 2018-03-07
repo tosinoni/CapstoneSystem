@@ -27,3 +27,13 @@ In the CapstoneSystem directory, execute the following:
       mvn clean package
       java -jar target/CapstoneSystem-0.0.1-SNAPSHOT.jar
       visit http://localhost:8080
+
+## Hot reloading in IntelliJ
+
+Open intellij and perform the below actions:
+
+      Open Settings --> Build-Execution-Deployment --> Compiler  
+      enable Build Project Automatically.
+      Apply and close.
+      press ctrl+shift+A and search for the registry
+      enable compiler.automake.allow.when.app.running

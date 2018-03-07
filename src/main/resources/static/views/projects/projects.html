@@ -1,0 +1,120 @@
+<body>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav hidden-xs">
+            <h2>Capstone System</h2>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="/welcome">Dashboard</a></li>
+                <li class="active"><a href="/projects">Projects</a></li>
+                <li><a href="#">Oral Presentation</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul><br>
+        </div>
+        <br>
+        <div class="col-sm-9">
+            <h1 class="portalheader">
+                <i class="icon-rocket" aria-hidden="true"></i> Projects
+            </h1>
+            <table id="projectsTable" class="display" cellspacing="0" width="100%">
+                <button class="tableaddbutton" data-toggle="modal" data-target="#newProjectModal" style="float: right; margin-bottom: 20px;">New Project <i class="icon-plus" aria-hidden="true"></i></button>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Supervisor</th>
+                    <th>Members</th>
+                    <th>Programs</th>
+                    <th style="text-align: right">Action(s)</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Supervisor</th>
+                    <th>Members</th>
+                    <th>Programs</th>
+                    <th style="text-align: right">Action(s)</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Secure Electronic Communication Platform</td>
+                    <td>Jason Jaskolka</td>
+                    <td>3-5</td>
+                    <td>SE</td>
+                    <td style="text-align: right">
+                        <button data-target="#archive"><i class="icon-pin green" aria-hidden="true"></i></button>
+                        <button data-target="#edit"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                        <button data-target="#delete"><i class="icon-trash red" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Autonomous Vehicles</td>
+                    <td>Samuel Ajila</td>
+                    <td>2-4</td>
+                    <td>SE, EE</td>
+                    <td style="text-align: right">
+                        <button data-target="#archive"><i class="icon-pin green" aria-hidden="true"></i></button>
+                        <button data-target="#edit"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                        <button data-target="#delete"><i class="icon-trash red" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>A Clean Java Compiler</td>
+                    <td>Donald Bailey</td>
+                    <td>2-3</td>
+                    <td>SE</td>
+                    <td style="text-align: right">
+                        <button data-target="#archive"><i class="icon-pin green" aria-hidden="true"></i></button>
+                        <button data-target="#edit"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                        <button data-target="#delete"><i class="icon-trash red" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+<!-- Modal -->
+<div class="modal fade" id="newProjectModal" role="dialog">
+    <div class="modal-dialog" style="width: 90%; height : 80%">
+
+        <!-- Modal content-->
+        <form class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="icon-plus" aria-hidden="true"></i> New Project</h4>
+            </div>
+            <div class="modal-body">
+                Name:<br>
+                <input type="text" name="projectName" placeholder="Project Name" style="width:100%;">
+                <br><br>Description:<br>
+                <textarea froala="froalaOptions" ng-model="myHtml"></textarea>
+                <br><br>Programs:<br>
+                <select class="programList" name="programs[]" multiple="multiple" style="width:100%;">
+                    <option value="EE">Electrical</option>
+                    <option value="SE">Software</option>
+                    <option value="CE">Communications</option>
+                    <option value="BME">Bio Medical</option>
+                </select>
+                <br><br>Members:<br>
+                <input type="number" name="minMembers" placeholder="Min" min="1">
+                to
+                <input type="number" name="maxMembers" placeholder="Max" min="1">
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+</div>
