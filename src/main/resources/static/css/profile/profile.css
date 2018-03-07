@@ -6,6 +6,11 @@
     margin-bottom: 1em;
 }
 
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
 .h4TileHeader{
     font-weight: bold;
 }
