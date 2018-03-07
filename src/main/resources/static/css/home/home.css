@@ -1,0 +1,157 @@
+body {
+    margin: 0px;
+    min-height: 30rem;
+    background-size: 100%;
+    padding-bottom: 8rem;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("../../img/bg-masthead.jpg");
+    color: white;
+}
+
+@media (min-width: 992px) {
+    body {
+        height: 100vh;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .hometext{
+        padding-top: 10%;
+    }
+}
+.carletonlogo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.mainHeader{
+    font-family: 'Rubik', sans-serif;
+    text-align: center;
+}
+
+.homeHeader{
+    font-family: 'Rubik', sans-serif;
+    text-align: center;
+    font-weight: bold;
+}
+
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+/* entypo */
+[class*="entypo-"]:before {
+    font-family: "entypo", sans-serif;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    margin: 0 auto;
+    padding: 20px 50px;
+    background: white;
+}
+#sticky-social {
+    left: 0;
+    position: fixed;
+    top: 150px;
+}
+#sticky-social a {
+    background: #333;
+    color: #fff;
+    display: block;
+    height: 35px;
+    font: 16px "Open Sans", sans-serif;
+    line-height: 35px;
+    position: relative;
+    text-align: center;
+    width: 35px;
+}
+#sticky-social a span {
+    line-height: 35px;
+    left: -120px;
+    position: absolute;
+    text-align:center;
+    width:120px;
+}
+#sticky-social a:hover span {
+    left: 100%;
+}
+#sticky-social a[class*="legacy"],
+#sticky-social a[class*="legacy"]:hover,
+#sticky-social a[class*="legacy"] span { background: #007bb6; }
+#sticky-social a[class*="legacy"]:before{
+    font-family: FontAwesome;
+    content: "\f0e2";
+}
+
+#sticky-social a[class*="facebook"],
+#sticky-social a[class*="facebook"]:hover,
+#sticky-social a[class*="facebook"] span { background: #3b5998; }
+#sticky-social a[class*="facebook"]:before{
+    font-family: FontAwesome;
+    content: "\f09a";
+}
+
+#sticky-social a[class*="twitter"],
+#sticky-social a[class*="twitter"]:hover,
+#sticky-social a[class*="twitter"] span { background: #00aced; }
+#sticky-social a[class*="twitter"]:before{
+    font-family: FontAwesome;
+    content: "\f099";
+}
+
+#sticky-social a[class*="web"],
+#sticky-social a[class*="web"]:hover,
+#sticky-social a[class*="web"] span { background: #517fa4; }
+#sticky-social a[class*="web"]:before{
+    font-family: FontAwesome;
+    content: "\f0ac";
+}
+
+#sticky-social a[class*="github"],
+#sticky-social a[class*="github"]:hover,
+#sticky-social a[class*="github"] span { background: #eb4924; }
+#sticky-social a[class*="github"]:before{
+    font-family: FontAwesome;
+    content: "\f09b";
+}
+
+#sticky-social a[class*="mail"],
+#sticky-social a[class*="mail"]:hover,
+#sticky-social a[class*="mail"] span { background: #cc2127; }
+#sticky-social a[class*="mail"]:before{
+    font-family: FontAwesome;
+    content: "\f0e0";
+}
+
+#sticky-social a[class*="call"],
+#sticky-social a[class*="call"]:hover,
+#sticky-social a[class*="call"] span { background: #ff0084;}
+#sticky-social a[class*="call"]:before{
+    font-family: FontAwesome;
+    content: "\f095";
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: rgba(211, 211, 211, 0.21);
+    text-align: center;
+    color: white;
+}
+
+.homeicon {
+    color: white;
+}
+
+.homeicon:hover {
+    text-decoration: none;
+}

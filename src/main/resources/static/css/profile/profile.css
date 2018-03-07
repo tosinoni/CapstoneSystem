@@ -1,0 +1,28 @@
+.portalheader{
+    font-family:"Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 2.5em;
+    font-weight: 300;
+    color: #428bca;
+    margin-bottom: 1em;
+}
+
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+.h4TileHeader{
+    font-weight: bold;
+}
+
+.red{
+    color: red;
+}
+
+.blue{
+    color: blue;
+}
+
+.green{
+    color: green;
+}
