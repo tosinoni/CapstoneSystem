@@ -1,9 +1,12 @@
 package com.carleton.CapstoneSystem.Controllers;
 
+import com.carleton.CapstoneSystem.DTO.UserDTO;
+import com.carleton.CapstoneSystem.auth.JWTAuthenticationFilter;
 import com.carleton.CapstoneSystem.models.Role;
 import com.carleton.CapstoneSystem.models.WebUser;
 import com.carleton.CapstoneSystem.repositories.UserRepository;
 import com.carleton.CapstoneSystem.utils.RequestErrorMessages;
+import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,20 +34,20 @@ public class SignUpLogInController {
      * @return a response to whethere the login is successful or no.
      */
     public ResponseEntity logIn(WebUser user){
-        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
         String invalidRequestBody =validateUserLogIn(user);
         if(!invalidRequestBody.isEmpty()){
-            responseEntity=ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidRequestBody);
-            return responseEntity;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidRequestBody);
         }
         String invalidContent =validateUserContent(user);
 
          if (!invalidContent.isEmpty()){
-            responseEntity=ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidContent);
-            return responseEntity;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidContent);
          }
 
-        return responseEntity;
+         UserDTO responseUser = new UserDTO(userRepository.findByUserName(user.getUserName()));
+         responseUser.setToken(JWTAuthenticationFilter.getToken(responseUser.getUsername()));
+
+         return ResponseEntity.status(HttpStatus.OK).body(responseUser);
     }
 
     /**
@@ -93,6 +96,7 @@ public class SignUpLogInController {
             responseEntity=ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidRequestBody);
             return responseEntity;
         }
+
         String invalidContent =validateSignUpInput(user);
 
         if (!invalidContent.isEmpty()){
@@ -115,10 +119,20 @@ public class SignUpLogInController {
         String returnMessage="";
         if (!isEmailValid(user.getEmail())) {
             returnMessage= RequestErrorMessages.INVALID_EMAIL;
-        }
-        if(!Role.contains(user.getRole())) {
+        } else if(user.getRole() == null || !Role.contains(user.getRole())) {
             returnMessage= RequestErrorMessages.INVALID_ROLE;
+        } else if (userRepository.findByUserName(user.getUserName()) != null){
+            returnMessage = RequestErrorMessages.DUPLICATE_USERNAME;
+        } else if (userRepository.findByEmail(user.getEmail()) != null){
+            returnMessage = RequestErrorMessages.DUPLICATE_EMAIL;
+        } else if (StringUtils.isNullOrEmpty(user.getFirstName())) {
+            returnMessage = RequestErrorMessages.NO_FIRST_NAME;
+        } else if (StringUtils.isNullOrEmpty(user.getLastName())) {
+            returnMessage = RequestErrorMessages.NO_LAST_NAME;
+        } else if (userRepository.findByIdentifier(user.getIdentifier()) != null){
+            returnMessage = RequestErrorMessages.NO_IDENTIFIER;
         }
+
         return returnMessage;
 
     }
