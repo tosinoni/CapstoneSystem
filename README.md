@@ -44,5 +44,5 @@ Open intellij and perform the below actions:
 | Milestone       | Description                                                                                                                                                                      | Due        |
 |-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
 | Early Prototype | Preliminary views included, handle authentication and create models. Deployed to Heroku and Using Travis for integration.  Domain currently pointing to kapi.ca                  | March 8th  |
-| Alpha Release   | We plan on finishing the view for coordinators such as email and scheduling. We need to find a good library for a sceduling tool to handle student availabilites. Finish Models. | March 22nd |
+| Alpha Release   | We plan on finishing the view for coordinators such as email and scheduling. We need to find a good library for a sceduling tool to handle student availabilites. Finish Models. Add validations. | March 22nd |
 | Final Demo      |                                                                                                                                                                                  | April 5th  |
