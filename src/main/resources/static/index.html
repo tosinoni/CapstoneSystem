@@ -30,16 +30,37 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Dashboard</a></li>
+                        <li ng-cloak ng-if="isAuthenticated"><a href="/welcome">Dashboard</a></li>
                         <li><a href="/projects">Projects</a></li>
-                        <li><a href="#">Oral Presentation</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="/">Announcements</a></li>
+                        <li ng-cloak ng-if="isAuthenticated"><a href="#">Oral Presentation</a></li>
+                        <li ng-if="isAuthenticated"><a href="/profile">Profile</a></li>
+                        <li ng-cloak class="active" ng-if="!isAuthenticated"><a href="/login">Login</a></li>
+                        <li ng-cloak ng-if="isAuthenticated"><a href="#">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
+        <div class="container-fluid" ng-cloak ng-if="!isHomePage">
+            <div class="">
+                <div class="col-sm-3 sidenav hidden-xs">
+                    <h2><a style="color: black; text-decoration: none" href="/">Capstone System</a></h2>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li ng-cloak ng-if="isAuthenticated"><a href="/welcome">Dashboard</a></li>
+                        <li><a href="/projects">Projects</a></li>
+                        <li><a href="/">Announcements</a></li>
+                        <li ng-cloak ng-if="isAuthenticated"><a href="#">Oral Presentation</a></li>
+                        <li ng-if="isAuthenticated"><a href="/profile">Profile</a></li>
+                        <li ng-cloak class="active" ng-if="!isAuthenticated"><a href="/login">Login</a></li>
+                        <li ng-cloak ng-if="isAuthenticated"><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div class="container" ng-view></div>
+
         <script src="lib/angular/angular.js"></script>
         <script src="lib/angular-route/angular-route.js"></script>
         <script src="lib/angular-resource/angular-resource.js"></script>
@@ -55,6 +76,8 @@
         <script src="js/welcome/welcome-controller.js"></script>
         <script src="js/projects/projects-controller.js"></script>
         <script src="js/profile/profile-controller.js"></script>
+
+        <script src="js/services/Auth.js"></script>
 
         <!-- switching between css -->
         <script src="lib/angular-route/angular-route.min.js"></script>
