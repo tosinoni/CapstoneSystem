@@ -74,7 +74,6 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
             return '/welcome';
         }
 
-
         $rootScope.$on("$locationChangeStart", function(event) {
             $rootScope.isHomePage = $location.path() === "/";
         });
