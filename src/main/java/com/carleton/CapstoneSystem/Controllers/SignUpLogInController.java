@@ -8,11 +8,11 @@ import com.carleton.CapstoneSystem.repositories.UserRepository;
 import com.carleton.CapstoneSystem.utils.RequestErrorMessages;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.regex.Pattern;
 
 @Controller
@@ -33,21 +33,21 @@ public class SignUpLogInController {
      * @param user the user that must be authenticated
      * @return a response to whethere the login is successful or no.
      */
-    public ResponseEntity logIn(WebUser user){
+    public Response logIn(WebUser user){
         String invalidRequestBody =validateUserLogIn(user);
         if(!invalidRequestBody.isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidRequestBody);
+            throw new WebApplicationException(invalidRequestBody, Response.Status.BAD_REQUEST);
         }
         String invalidContent =validateUserContent(user);
 
          if (!invalidContent.isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidContent);
+             throw new WebApplicationException(invalidContent, Response.Status.BAD_REQUEST);
          }
 
          UserDTO responseUser = new UserDTO(userRepository.findByUserName(user.getUserName()));
          responseUser.setToken(JWTAuthenticationFilter.getToken(responseUser.getUsername()));
 
-         return ResponseEntity.status(HttpStatus.OK).body(responseUser);
+         return Response.status(Response.Status.OK).entity(responseUser).build();
     }
 
     /**
@@ -89,24 +89,21 @@ public class SignUpLogInController {
      * @param user to be validate upon siging up
      * @return a descriptive string of the error message that could be caused by the input
      */
-    public ResponseEntity signUp(WebUser user){
-        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
+    public Response signUp(WebUser user){
         String invalidRequestBody = validateUserLogIn(user);
         if(!invalidRequestBody.isEmpty()){
-            responseEntity=ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidRequestBody);
-            return responseEntity;
+            throw new WebApplicationException(invalidRequestBody, Response.Status.BAD_REQUEST);
         }
 
         String invalidContent =validateSignUpInput(user);
 
         if (!invalidContent.isEmpty()){
-            responseEntity=ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidContent);
-            return responseEntity;
+            throw new WebApplicationException(invalidContent, Response.Status.BAD_REQUEST);
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
-        return responseEntity;
+        return Response.status(Response.Status.CREATED).build();
 
     }
 

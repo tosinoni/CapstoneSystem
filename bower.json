@@ -17,6 +17,7 @@
     "datatables.net-select": "^1.2.3",
     "datatables.net-select-jqui": "^1.2.3",
     "froala-wysiwyg-editor": "^2.7.5",
-    "angular-froala": "^2.7.5"
+    "angular-froala": "^2.7.5",
+    "sweetalert2": "^6.11.2"
   }
 }
