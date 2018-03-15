@@ -14,6 +14,14 @@ angular.module('CapstoneSystem')
             $(this).addClass('active');
             e.preventDefault();
         });
+        $('#noaccount-form-link').click(function(e) {
+            $("#register-form").delay(100).fadeIn(100);
+            $("#login-form").fadeOut(100);
+            $('#login-form-link').removeClass('active');
+            $('#register-form-link').addClass('active');
+            e.preventDefault();
+        });
+
         $('.programList').select2({
             placeholder: 'Program'
         });

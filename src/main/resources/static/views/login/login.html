@@ -25,7 +25,7 @@
                                 <div class="col-lg-12">
                                     <form id="login-form" ng-submit="login()" role="form" style="display: block;">
                                         <div class="form-group">
-                                            <input type="text" required name="username" ng-model="loginUser.userName" tabindex="1" class="form-control" placeholder="Email" value="">
+                                            <input type="text" required name="username" ng-model="loginUser.userName" tabindex="1" class="form-control" placeholder="Username" value="">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" required name="password" ng-model="loginUser.password" tabindex="2" class="form-control" placeholder="Password">
@@ -45,7 +45,7 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="text-center">
-                                                        <a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                        <a href="#" tabindex="5" class="forgot-password" id="noaccount-form-link">Don't have an account?</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,7 +65,7 @@
                                             <input type="text" required name="username" ng-model="registerUser.userName" tabindex="1" class="form-control" placeholder="Username" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" required name="studentNumber" ng-model="registerUser.identifier" tabindex="2" class="form-control" placeholder="Identification Number">
+                                            <input type="text" required name="studentNumber" ng-model="registerUser.identifier" tabindex="1" class="form-control" placeholder="Identification Number">
                                         </div>
                                         <div class="form-group">
                                             <select tabindex="1" class="form-control programList select2-choice" name="program" style="width: 100%">
