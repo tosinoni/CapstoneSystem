@@ -22,6 +22,7 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public Response signUp(@RequestBody WebUser user) {
+
         return signUpLogInController.signUp(user);
     }
 

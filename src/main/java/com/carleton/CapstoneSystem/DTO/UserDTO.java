@@ -57,30 +57,37 @@ public class UserDTO {
     }
 
     public void setLastname(String lastname) {
+
         this.lastname = lastname;
     }
 
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
     public void setUsername(String username) {
+
         this.username = username;
     }
 
-    public String getToken() {
+    public String getToken()
+    {
         return token;
     }
 
     public void setToken(String token) {
+
         this.token = token;
     }
 
     public long getId() {
+
         return id;
     }
 
     public void setId(long id) {
+
         this.id = id;
     }
 
@@ -89,22 +96,27 @@ public class UserDTO {
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
     public Role getRole() {
+
         return role;
     }
 
     public void setRole(Role role) {
+
         this.role = role;
     }
 
     public long getIdentifier() {
+
         return identifier;
     }
 
-    public void setIdentifier(long identifier) {
+    public void setIdentifier(long identifier)
+    {
         this.identifier = identifier;
     }
 }
