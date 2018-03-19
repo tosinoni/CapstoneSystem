@@ -8,7 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,8 +24,12 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.transaction.Transactional;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -41,25 +48,32 @@ public class SignUpLogInTest {
     private MockHttpServletRequestBuilder request;
     private ObjectMapper mapper;
     private ObjectWriter ow;
+    private WebUser user;
     @Autowired
     private UserController controller;
 
     @Autowired
     private MockMvc mockMvc;
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void contexLoads() throws Exception {
         assertThat(controller).isNotNull();
     }
     @Before
-    public void init()  {
+    @Rollback(true)
+    public void init() throws Exception {
 
         request = post("/users/sign-up");
-        WebUser user = new WebUser();
+        user = new WebUser();
         user.setPassword("password");
         user.setEmail("username@cmail.com");
         user.setUserName("fozitto");
         user.setRole(Role.STUDENT);
+        user.setIdentifier(1223443);
+        user.setFirstName("ali");
+        user.setLastName("hammoud");
         mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ow = mapper.writer().withDefaultPrettyPrinter();
@@ -72,58 +86,109 @@ public class SignUpLogInTest {
         request.contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson);
 
-
+        mockMvc.perform(request);
 
     }
 
 
+
+
+
+
     @Test
     @Rollback(true)
-    public void SignUpLoginWrongPasswordTest() throws Exception {
+    public void LoginSuccessfulTest() throws Exception{
 
 
-        ResultActions result = mockMvc.perform(request);
+        request = post("/users/login");
+        WebUser user1 = new WebUser();
+        user1.setPassword("password");
+        user1.setUserName("fozitto");
+        String requestJson= null;
+        try {
+            requestJson = ow.writeValueAsString(user1);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        request.contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson);
+
+        ResultActions result=mockMvc.perform(request);
         result.andExpect(MockMvcResultMatchers.status().isOk());
 
-        request = get("/users/login");
+
+    }
+    @Test
+    @Rollback(true)
+    public void WrongPasswordLogInTest() {
+
+        request = post("/users/login");
         WebUser user1 = new WebUser();
         user1.setPassword("password2");
         user1.setUserName("fozitto");
-        String requestJson=ow.writeValueAsString(user1);
+
+        String requestJson= null;
+        try {
+            requestJson = ow.writeValueAsString(user1);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         request.contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson);
-        result=mockMvc.perform(request);
-        result.andExpect(MockMvcResultMatchers.status().isBadRequest()).andExpect(MockMvcResultMatchers.content().string(RequestErrorMessages.INCORRECT_PASSWORD));
+
+        try {
+            ResultActions result =mockMvc.perform(request);
+        } catch (Exception e) {
+            WebApplicationException webException=(WebApplicationException)e.getCause();
+            assertEquals(webException.getResponse().getStatus(),400);
+            assertEquals(webException.getMessage(),RequestErrorMessages.INCORRECT_PASSWORD);
+        }
+
+
+
+
+
 
 
     }
+
     @Test
     @Rollback(true)
-    public void SignUpLoginNoUserNameTest() throws Exception {
+    public void LogInNoUserNameTest() throws Exception {
 
 
-        ResultActions result = mockMvc.perform(request);
-        result.andExpect(MockMvcResultMatchers.status().isOk());
 
-        request = get("/users/login");
+        request = post("/users/login");
         WebUser user1 = new WebUser();
         user1.setPassword("password2");
 
-        String requestJson=ow.writeValueAsString(user1);
+        String requestJson= null;
+        try {
+            requestJson = ow.writeValueAsString(user1);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         request.contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson);
-        result=mockMvc.perform(request);
-        result.andExpect(MockMvcResultMatchers.status().isBadRequest()).andExpect(MockMvcResultMatchers.content().string(RequestErrorMessages.NO_USERNAME));
+
+        try {
+            ResultActions result =mockMvc.perform(request);
+        } catch (Exception e) {
+            WebApplicationException webException=(WebApplicationException)e.getCause();
+            assertEquals(webException.getResponse().getStatus(),400);
+            assertEquals(webException.getMessage(),RequestErrorMessages.NO_USERNAME);
+        }
+
 
 
     }
+
     @Test
     @Rollback(true)
-    public void SignUpLoginInvalidUserNameTest() throws Exception {
+    public void LoginInvalidUserNameTest() throws Exception {
 
 
-        ResultActions result = mockMvc.perform(request);
-        result.andExpect(MockMvcResultMatchers.status().isOk());
+
 
         request = get("/users/login");
         WebUser user1 = new WebUser();
@@ -133,36 +198,35 @@ public class SignUpLogInTest {
         String requestJson=ow.writeValueAsString(user1);
         request.contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson);
-
-        result=mockMvc.perform(request);
-        result.andExpect(MockMvcResultMatchers.status().isBadRequest()).andExpect(MockMvcResultMatchers.content().string(RequestErrorMessages.INVALID_USERNAME));
-
-
+        try {
+            ResultActions result =mockMvc.perform(request);
+        } catch (Exception e) {
+            WebApplicationException webException=(WebApplicationException)e.getCause();
+            assertEquals(webException.getResponse().getStatus(),400);
+            assertEquals(webException.getMessage(),RequestErrorMessages.INVALID_USERNAME);
+        }
     }
 
     @Test
     @Rollback(true)
-    public void SignUpLoginInvalidEmailTest() throws Exception {
-
-
-
-
-
-        WebUser user1 = new WebUser();
-        user1.setUserName("lollo");
-        user1.setPassword("password");
-        user1.setEmail("ali@sd");
-        user1.setRole(Role.STUDENT);
-
-        String requestJson=ow.writeValueAsString(user1);
+    public void SignUpInvalidEmailTest() throws Exception {
+        user.setEmail("lala");
+        String requestJson=ow.writeValueAsString(user);
         request.contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson);
+        try {
+            ResultActions result =mockMvc.perform(request);
+        } catch (Exception e) {
+            WebApplicationException webException=(WebApplicationException)e.getCause();
+            assertEquals(webException.getResponse().getStatus(),400);
+            assertEquals(webException.getMessage(),RequestErrorMessages.INVALID_EMAIL);
+        }
 
-        ResultActions result = mockMvc.perform(request);;
-        result.andExpect(MockMvcResultMatchers.status().isBadRequest()).andExpect(MockMvcResultMatchers.content().string(RequestErrorMessages.INVALID_EMAIL));
+
 
 
     }
+
 
 
 }

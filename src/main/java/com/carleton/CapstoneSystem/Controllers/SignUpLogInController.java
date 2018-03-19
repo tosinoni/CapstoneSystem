@@ -1,15 +1,18 @@
 package com.carleton.CapstoneSystem.Controllers;
 
+import com.carleton.CapstoneSystem.DTO.UserDTO;
+import com.carleton.CapstoneSystem.auth.JWTAuthenticationFilter;
 import com.carleton.CapstoneSystem.models.Role;
 import com.carleton.CapstoneSystem.models.WebUser;
 import com.carleton.CapstoneSystem.repositories.UserRepository;
 import com.carleton.CapstoneSystem.utils.RequestErrorMessages;
+import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.regex.Pattern;
 
 @Controller
@@ -30,21 +33,21 @@ public class SignUpLogInController {
      * @param user the user that must be authenticated
      * @return a response to whethere the login is successful or no.
      */
-    public ResponseEntity logIn(WebUser user){
-        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
+    public Response logIn(WebUser user){
         String invalidRequestBody =validateUserLogIn(user);
         if(!invalidRequestBody.isEmpty()){
-            responseEntity=ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidRequestBody);
-            return responseEntity;
+            throw new WebApplicationException(invalidRequestBody, Response.Status.BAD_REQUEST);
         }
         String invalidContent =validateUserContent(user);
 
          if (!invalidContent.isEmpty()){
-            responseEntity=ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidContent);
-            return responseEntity;
+             throw new WebApplicationException(invalidContent, Response.Status.BAD_REQUEST);
          }
 
-        return responseEntity;
+         UserDTO responseUser = new UserDTO(userRepository.findByUserName(user.getUserName()));
+         responseUser.setToken(JWTAuthenticationFilter.getToken(responseUser.getUsername()));
+
+         return Response.status(Response.Status.OK).entity(responseUser).build();
     }
 
     /**
@@ -86,23 +89,21 @@ public class SignUpLogInController {
      * @param user to be validate upon siging up
      * @return a descriptive string of the error message that could be caused by the input
      */
-    public ResponseEntity signUp(WebUser user){
-        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
+    public Response signUp(WebUser user){
         String invalidRequestBody = validateUserLogIn(user);
         if(!invalidRequestBody.isEmpty()){
-            responseEntity=ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidRequestBody);
-            return responseEntity;
+            throw new WebApplicationException(invalidRequestBody, Response.Status.BAD_REQUEST);
         }
+
         String invalidContent =validateSignUpInput(user);
 
         if (!invalidContent.isEmpty()){
-            responseEntity=ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidContent);
-            return responseEntity;
+            throw new WebApplicationException(invalidContent, Response.Status.BAD_REQUEST);
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
-        return responseEntity;
+        return Response.status(Response.Status.CREATED).build();
 
     }
 
@@ -115,10 +116,20 @@ public class SignUpLogInController {
         String returnMessage="";
         if (!isEmailValid(user.getEmail())) {
             returnMessage= RequestErrorMessages.INVALID_EMAIL;
-        }
-        if(!Role.contains(user.getRole())) {
+        } else if(user.getRole() == null || !Role.contains(user.getRole())) {
             returnMessage= RequestErrorMessages.INVALID_ROLE;
+        } else if (userRepository.findByUserName(user.getUserName()) != null){
+            returnMessage = RequestErrorMessages.DUPLICATE_USERNAME;
+        } else if (userRepository.findByEmail(user.getEmail()) != null){
+            returnMessage = RequestErrorMessages.DUPLICATE_EMAIL;
+        } else if (StringUtils.isNullOrEmpty(user.getFirstName())) {
+            returnMessage = RequestErrorMessages.NO_FIRST_NAME;
+        } else if (StringUtils.isNullOrEmpty(user.getLastName())) {
+            returnMessage = RequestErrorMessages.NO_LAST_NAME;
+        } else if (userRepository.findByIdentifier(user.getIdentifier()) != null){
+            returnMessage = RequestErrorMessages.NO_IDENTIFIER;
         }
+
         return returnMessage;
 
     }

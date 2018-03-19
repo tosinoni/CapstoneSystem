@@ -72,6 +72,12 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
         //side nav height css changes
         $('.sidenav').css("height",$(document).height() + "px");
 
+        $rootScope.getHomeUrl = function() {
+            if(Auth.isTokenExpired()) {
+                return '/login';
+            }
+            return '/welcome';
+        }
 
         $rootScope.$on("$locationChangeStart", function(event) {
             $rootScope.isHomePage = $location.path() === "/";

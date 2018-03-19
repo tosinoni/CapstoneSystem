@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * @author Ibrahim ALi Fawaz
@@ -17,6 +18,10 @@ public  class WebUser {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(unique=true,name="id",nullable = false)
     private long id;
+
+    @Column(unique=true, name="identifier", nullable = false)
+    private long identifier;
+
     @Email
     @Column(unique=true,nullable=false)
     private String email;
@@ -25,12 +30,17 @@ public  class WebUser {
     @Size(min=4)
     private String password;
 
-
-
     @Column(nullable=false)
     private Role role;
+
     @Column(name="user_name",nullable=false,unique = true)
     private String userName;
+
+    @Column(name="first_name",nullable=false)
+    private String firstName;
+
+    @Column(name="last_name",nullable=false)
+    private String lastName;
 
 
 
@@ -124,6 +134,42 @@ public  class WebUser {
         this.password = password;
     }
 
+    public long getIdentifier() {
+        return identifier;
+    }
 
+    public void setIdentifier(long identifier) {
+        this.identifier = identifier;
+    }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WebUser)) return false;
+        WebUser webUser = (WebUser) o;
+        return id == webUser.id && userName.equals(webUser.userName) && firstName.equals(webUser.firstName) &&
+                lastName.equals(webUser.lastName) && identifier == webUser.identifier && role.equals(webUser.getRole())
+                && password.equals(webUser.password) && email.equals(webUser.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, userName, email, password, identifier, role, identifier);
+    }
 }
