@@ -1,0 +1,60 @@
+<body>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-9">
+            <h1 class="portalheader">
+                <i class="icon-envelope" aria-hidden="true"></i> Email
+            </h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="well well-sm">
+                            <form class="form-horizontal" action="" method="post">
+                                <fieldset>
+                                    <legend class="text-center">Send Email</legend>
+
+                                    <!-- Name input-->
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="to">To</label>
+                                        <div class="col-md-9">
+                                            <select required="required" id="to" class="form-control" name="to" style="width: 100%">
+                                                <option value="">Students</option>
+                                                <option value="ALL">All Students</option>
+                                                <option value="SWP">Students With Projects</option>
+                                                <option value="SWOP">Students Without Projects</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Email input-->
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="email">Subject</label>
+                                        <div class="col-md-9">
+                                            <input required="required" id="email" name="email" type="text" placeholder="Subject" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <!-- Message body -->
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="message">Your message</label>
+                                        <div class="col-md-9">
+                                            <textarea required="required" class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Form actions -->
+                                    <div class="form-group">
+                                        <div class="col-md-12 text-right">
+                                            <button type="submit" class="btn btn-primary btn-lg">Send</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

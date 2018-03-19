@@ -49,6 +49,11 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 css: 'css/profile/profile.css',
                 requiresLogin: true
             })
+            .when('/email', {
+                templateUrl: 'views/email/email.html',
+                controller: 'EmailController',
+                css: 'css/email/email.css',
+            })
             .otherwise({
                 templateUrl: 'views/error/error.html'
             });
