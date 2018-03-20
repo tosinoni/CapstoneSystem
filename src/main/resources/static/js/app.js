@@ -58,7 +58,6 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 templateUrl: 'views/home/announcements.html',
                 controller: 'AnnouncementsController',
                 css: 'css/home/announcements.css',
-                requiresLogin: true
             })
             .otherwise({
                 templateUrl: 'views/error/error.html'
