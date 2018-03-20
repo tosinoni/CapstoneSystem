@@ -85,11 +85,34 @@ public class WebUserTest {
         Column c = ReflectTool.getFieldAnnotation(WebUser.class, "lastName", Column.class);
         assertEquals("column lastName: nullable is true", false, c.nullable());
     }
+
     @Test
-    public void testUserForProgram() {
-        AssertAnnotations.assertField( WebUser.class, "program", Column.class);
-        Column c = ReflectTool.getFieldAnnotation(WebUser.class, "program", Column.class);
-        assertEquals("column program: nullable is true", false, c.nullable());
+    public void testGettersAndSetters(){
+        WebUser user = new WebUser();
+        String email="alialsaaidi@cmail.carleton.ca";
+        String firstName ="ali";
+        String lastName="alsaaidi";
+        long identifier =12345;
+        Role role = Role.STUDENT;
+        String userName="chelseaFan";
+        String password ="password";
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setIdentifier(identifier);
+        user.setRole(role);
+        user.setUserName(userName);
+        user.setPassword(password);
+
+        assertEquals(user.getUserName(),userName);
+        assertEquals(user.getFirstName(),firstName);
+        assertEquals(user.getLastName(),lastName);
+        assertEquals(user.getEmail(),email);
+        assertEquals(user.getIdentifier(),identifier);
+        assertEquals(user.getRole(),role);
+        assertEquals(user.getPassword(),password);
+
+
     }
 
 

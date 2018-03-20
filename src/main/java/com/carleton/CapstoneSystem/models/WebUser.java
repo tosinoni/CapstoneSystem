@@ -20,32 +20,31 @@ public  class WebUser {
     private long id;
 
     @Column(unique=true, name="identifier", nullable = false)
-    private long identifier;
+    protected long identifier;
 
     @Email
     @Column(unique=true,nullable=false)
-    private String email;
+    protected String email;
 
     @Column(nullable = false)
     @Size(min=4)
-    private String password;
+    protected String password;
 
     @Column(nullable=false)
-    private Role role;
+    protected Role role;
 
     @Column(name="user_name",nullable=false,unique = true)
-    private String userName;
+    protected String userName;
 
     @Column(name="first_name",nullable=false)
-    private String firstName;
+    protected String firstName;
 
     @Column(name="last_name",nullable=false)
-    private String lastName;
+    protected String lastName;
 
 
 
-    @Column(name="program",nullable=false)
-    private Program program;
+
 
 
 
@@ -85,12 +84,7 @@ public  class WebUser {
         return role;
     }
 
-    public Program getProgram() {
-        return program;
-    }
-    public void setProgram(Program program) {
-        this.program = program;
-    }
+
 
     /**
      *

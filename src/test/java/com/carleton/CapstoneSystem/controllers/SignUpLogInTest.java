@@ -75,7 +75,7 @@ public class SignUpLogInTest {
         user.setIdentifier(1223443);
         user.setFirstName("ali");
         user.setLastName("hammoud");
-        user.setProgram(Program.BIOMEDICAL_ENGINEERNG);
+
         mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ow = mapper.writer().withDefaultPrettyPrinter();
