@@ -44,8 +44,7 @@ public  class WebUser {
 
 
 
-    @Column(name="program",nullable=false)
-    private Program program;
+
 
 
 
@@ -85,12 +84,7 @@ public  class WebUser {
         return role;
     }
 
-    public Program getProgram() {
-        return program;
-    }
-    public void setProgram(Program program) {
-        this.program = program;
-    }
+
 
     /**
      *
