@@ -25,6 +25,18 @@ public class StudentTest {
         assertEquals("column program: nullable is false", true, c.nullable());
 
     }
+    @Test
+    public void testProjectAddition() {
+        Student student = new Student();
+        Project project = new Project();
+        student.setProject(project);
+        student.applyForProject(project);
+        assertEquals(student.getProject(),project);
+
+        assertEquals(student.appliedForProject(project),true);
+
+    }
+
 
 
 }

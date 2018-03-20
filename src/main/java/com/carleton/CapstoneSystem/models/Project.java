@@ -147,12 +147,8 @@ public class Project {
     }
 
 
-
-
-
-
-
-
-
+    public boolean containMember(Student student) {
+        return members.contains(student);
+    }
 }
 

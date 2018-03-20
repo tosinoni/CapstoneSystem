@@ -2,12 +2,10 @@ package com.carleton.CapstoneSystem.models;
 
 
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import org.springframework.security.access.method.P;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Inheritance
@@ -21,6 +19,12 @@ public class Student extends WebUser{
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Project> appliedProjects;
 
+
+
+
+    public Student(){
+        appliedProjects = new LinkedHashSet<Project>();
+    }
     /**
      *
      * @return the program of this student
@@ -60,6 +64,9 @@ public class Student extends WebUser{
     }
     public void removeAppliedProject(Project project){
         appliedProjects.remove(project);
+    }
+    public boolean appliedForProject(Project project){
+        return appliedProjects.contains(project);
     }
 
     @Override

@@ -97,6 +97,13 @@ public class ProjectTest {
         assertEquals(project.getMinCapacity(),min_Capacity);
         assertEquals(project.isArchive(),archive);
 
+    }
+    @Test
+    public void testMembersAdditios(){
+        Student student = new Student();
+        Project project =new Project();
+        project.addMember(student);
+        assertEquals(project.containMember(student),true);
 
     }
 }
