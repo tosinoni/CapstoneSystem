@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -67,7 +68,10 @@ public class Student extends WebUser{
         return super.equals(o);
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, userName, email, password, identifier, role, identifier,program);
+    }
 
 
 }
