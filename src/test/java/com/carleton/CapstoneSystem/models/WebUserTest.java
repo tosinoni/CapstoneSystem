@@ -86,6 +86,34 @@ public class WebUserTest {
         assertEquals("column lastName: nullable is true", false, c.nullable());
     }
 
+    @Test
+    public void testGettersAndSetters(){
+        WebUser user = new WebUser();
+        String email="alialsaaidi@cmail.carleton.ca";
+        String firstName ="ali";
+        String lastName="alsaaidi";
+        long identifier =12345;
+        Role role = Role.STUDENT;
+        String userName="chelseaFan";
+        String password ="password";
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setIdentifier(identifier);
+        user.setRole(role);
+        user.setUserName(userName);
+        user.setPassword(password);
+
+        assertEquals(user.getUserName(),userName);
+        assertEquals(user.getFirstName(),firstName);
+        assertEquals(user.getLastName(),lastName);
+        assertEquals(user.getEmail(),email);
+        assertEquals(user.getIdentifier(),identifier);
+        assertEquals(user.getRole(),role);
+        assertEquals(user.getPassword(),password);
+
+
+    }
 
 
 }

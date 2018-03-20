@@ -27,10 +27,8 @@ public class Project {
     @ElementCollection(targetClass=Program.class)
     @Enumerated(EnumType.STRING)
     private Set<Program> programsAllowed;
-
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Student> members;
-
     public Project(){
         this(null,null);
     }

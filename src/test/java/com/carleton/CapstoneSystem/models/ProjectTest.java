@@ -78,4 +78,25 @@ public class ProjectTest {
         assertEquals("column"+fieldName+": nullable is true", false, c.nullable());
 
     }
+    @Test
+    public void testGettersAndSetters(){
+        Project project = new Project();
+        String description="description";
+        String name ="name";
+        boolean archive = true;
+        int max_Capacity=5;
+        int min_Capacity=2;
+        project.setDescription(description);
+        project.setName(name);
+        project.setArchive(archive);
+        project.setMaxCapacity(max_Capacity);
+        project.setMinCapacity(min_Capacity);
+        assertEquals(project.getDescription(),description);
+        assertEquals(project.getName(),name);
+        assertEquals(project.getMaxCapacity(),max_Capacity);
+        assertEquals(project.getMinCapacity(),min_Capacity);
+        assertEquals(project.isArchive(),archive);
+
+
+    }
 }

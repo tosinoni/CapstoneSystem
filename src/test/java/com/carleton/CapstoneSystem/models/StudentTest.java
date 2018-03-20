@@ -24,8 +24,7 @@ public class StudentTest {
         assertEquals("column program:  name is not equal", "program", c.name());
         assertEquals("column program: nullable is false", true, c.nullable());
 
-
-
     }
+
 
 }
