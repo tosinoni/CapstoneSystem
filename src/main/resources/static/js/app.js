@@ -54,6 +54,11 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 controller: 'EmailController',
                 css: 'css/email/email.css',
             })
+            .when('/announcements', {
+                templateUrl: 'views/home/announcements.html',
+                controller: 'AnnouncementsController',
+                css: 'css/home/announcements.css',
+            })
             .otherwise({
                 templateUrl: 'views/error/error.html'
             });
