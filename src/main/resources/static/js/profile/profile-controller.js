@@ -1,4 +1,5 @@
 angular.module('CapstoneSystem')
     .controller('ProfileController', ['$scope', function ($scope) {
-        $('.sidenav').css("height",$(document).height() + "px");
+        $scope.user = JSON.parse(localStorage.getItem("user"));
+        console.log($scope.user);
     }]);

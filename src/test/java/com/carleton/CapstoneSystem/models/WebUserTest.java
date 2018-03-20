@@ -64,7 +64,32 @@ public class WebUserTest {
     public void testUserForRole() {
         AssertAnnotations.assertField( WebUser.class, "role", Column.class);
         Column c = ReflectTool.getFieldAnnotation(WebUser.class, "role", Column.class);
-        assertEquals("column publicKey: nullable is true", false, c.nullable());
+        assertEquals("column role: nullable is true", false, c.nullable());
+    }
+    @Test
+    public void testUserForIdentificationNumber() {
+        AssertAnnotations.assertField( WebUser.class, "identifier", Column.class);
+        Column c = ReflectTool.getFieldAnnotation(WebUser.class, "identifier", Column.class);
+        assertEquals("column identifier: nullable is true", false, c.nullable());
+        assertEquals("column identifier: unique is false", true, c.unique());
+    }
+    @Test
+    public void testUserForFirstName() {
+        AssertAnnotations.assertField( WebUser.class, "firstName", Column.class);
+        Column c = ReflectTool.getFieldAnnotation(WebUser.class, "firstName", Column.class);
+        assertEquals("column firstName: nullable is true", false, c.nullable());
+    }
+    @Test
+    public void testUserForLastName() {
+        AssertAnnotations.assertField( WebUser.class, "lastName", Column.class);
+        Column c = ReflectTool.getFieldAnnotation(WebUser.class, "lastName", Column.class);
+        assertEquals("column lastName: nullable is true", false, c.nullable());
+    }
+    @Test
+    public void testUserForProgram() {
+        AssertAnnotations.assertField( WebUser.class, "program", Column.class);
+        Column c = ReflectTool.getFieldAnnotation(WebUser.class, "program", Column.class);
+        assertEquals("column program: nullable is true", false, c.nullable());
     }
 
 
