@@ -14,4 +14,5 @@ public interface RequestErrorMessages {
     String NO_FIRST_NAME ="Request failed. Please provide your first name.";
     String NO_LAST_NAME ="Request failed. Please provide your last name.";
     String NO_IDENTIFIER ="Request failed. Please provide your identification number.";
+    String INVALID_PROGRAM = "Request failed. Please provide a valid program.";
 }
