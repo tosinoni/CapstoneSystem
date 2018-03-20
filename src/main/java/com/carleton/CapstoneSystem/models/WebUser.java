@@ -41,6 +41,13 @@ public  class WebUser {
 
     @Column(name="last_name",nullable=false)
     private String lastName;
+    @Column(name="program",nullable=false)
+    private Program program;
+
+    public Program getProgram() {
+        return program;
+    }
+
 
 
 

@@ -2,6 +2,7 @@ package com.carleton.CapstoneSystem.Controllers;
 
 import com.carleton.CapstoneSystem.DTO.UserDTO;
 import com.carleton.CapstoneSystem.auth.JWTAuthenticationFilter;
+import com.carleton.CapstoneSystem.models.Program;
 import com.carleton.CapstoneSystem.models.Role;
 import com.carleton.CapstoneSystem.models.WebUser;
 import com.carleton.CapstoneSystem.repositories.UserRepository;
@@ -126,8 +127,10 @@ public class SignUpLogInController {
             returnMessage = RequestErrorMessages.NO_FIRST_NAME;
         } else if (StringUtils.isNullOrEmpty(user.getLastName())) {
             returnMessage = RequestErrorMessages.NO_LAST_NAME;
-        } else if (userRepository.findByIdentifier(user.getIdentifier()) != null){
+        } else if (StringUtils.isNullOrEmpty(user.getLastName()) || userRepository.findByIdentifier(user.getIdentifier()) != null){
             returnMessage = RequestErrorMessages.NO_IDENTIFIER;
+        } else if (user.getProgram()==null || !Program.contains(user.getProgram())) {
+            returnMessage= RequestErrorMessages.INVALID_PROGRAM;
         }
 
         return returnMessage;
