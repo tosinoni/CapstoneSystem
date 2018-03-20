@@ -42,16 +42,12 @@ public  class WebUser {
     @Column(name="last_name",nullable=false)
     private String lastName;
 
-    public void setProgram(Program program) {
-        this.program = program;
-    }
+
 
     @Column(name="program",nullable=false)
     private Program program;
 
-    public Program getProgram() {
-        return program;
-    }
+
 
 
 
@@ -87,6 +83,13 @@ public  class WebUser {
      */
     public Role getRole() {
         return role;
+    }
+
+    public Program getProgram() {
+        return program;
+    }
+    public void setProgram(Program program) {
+        this.program = program;
     }
 
     /**

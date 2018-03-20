@@ -1,4 +1,5 @@
 package com.carleton.CapstoneSystem.controllers;
+import com.carleton.CapstoneSystem.models.Program;
 import com.carleton.CapstoneSystem.models.Role;
 import com.carleton.CapstoneSystem.models.WebUser;
 import com.carleton.CapstoneSystem.restfulControllers.UserController;
@@ -74,6 +75,7 @@ public class SignUpLogInTest {
         user.setIdentifier(1223443);
         user.setFirstName("ali");
         user.setLastName("hammoud");
+        user.setProgram(Program.BIOMEDICAL_ENGINEERNG);
         mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ow = mapper.writer().withDefaultPrettyPrinter();
