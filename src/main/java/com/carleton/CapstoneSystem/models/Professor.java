@@ -39,4 +39,9 @@ public class Professor extends WebUser {
         p.setArchive(true);
     }
 
+    @Override
+    public boolean equals(Object o){
+        return super.equals(o);
+    }
+
 }

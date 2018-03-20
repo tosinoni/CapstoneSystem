@@ -61,7 +61,11 @@ public class Student extends WebUser{
         appliedProjects.remove(project);
     }
 
+    @Override
+    public boolean equals(Object o){
 
+        return super.equals(o);
+    }
 
 
 
