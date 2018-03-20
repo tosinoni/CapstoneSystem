@@ -88,7 +88,7 @@ public class WebUserTest {
     @Test
     public void testUserForProgram() {
         AssertAnnotations.assertField( WebUser.class, "program", Column.class);
-        Column c = ReflectTool.getFieldAnnotation(WebUser.class, "prgoram", Column.class);
+        Column c = ReflectTool.getFieldAnnotation(WebUser.class, "program", Column.class);
         assertEquals("column program: nullable is true", false, c.nullable());
     }
 
