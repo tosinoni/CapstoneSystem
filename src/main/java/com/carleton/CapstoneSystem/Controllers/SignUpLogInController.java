@@ -127,7 +127,7 @@ public class SignUpLogInController {
             returnMessage = RequestErrorMessages.NO_FIRST_NAME;
         } else if (StringUtils.isNullOrEmpty(user.getLastName())) {
             returnMessage = RequestErrorMessages.NO_LAST_NAME;
-        } else if (StringUtils.isNullOrEmpty(user.getLastName()) || userRepository.findByIdentifier(user.getIdentifier()) != null){
+        } else if (userRepository.findByIdentifier(user.getIdentifier()) != null){
             returnMessage = RequestErrorMessages.NO_IDENTIFIER;
         } else if (user.getProgram()==null || !Program.contains(user.getProgram())) {
             returnMessage= RequestErrorMessages.INVALID_PROGRAM;
