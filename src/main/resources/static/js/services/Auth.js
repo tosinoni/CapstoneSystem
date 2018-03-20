@@ -8,14 +8,25 @@ angular.module('CapstoneSystem')
 
         return {
             COORDINATOR: 'COORDINATOR',
+
             login: function (user) {
-                return $http.post("/SECP/login", user, config)
+                return $http.post("/users/login", user, config)
                     .then(function (res) {
-                        var user = res.data;
-                        localStorage.setItem('token', user.token);
-                        localStorage.setItem('userID', user.userID);
-                        localStorage.setItem('loginRole', user.loginRole);
-                        localStorage.setItem('username', user.username);
+                        console.log(res);
+                        if(res.status == 200 && res.data && res.data.entity) {
+                            var user = res.data.entity;
+                            localStorage.setItem('token', user.token);
+                            localStorage.setItem('user', JSON.stringify(user));
+                        }
+                        return res;
+                    }, function (err) {
+                        return err;
+                    });
+            },
+
+            register: function (user) {
+                return $http.post("/users/sign-up", user, config)
+                    .then(function (res) {
                         return res;
                     }, function (err) {
                         return err;

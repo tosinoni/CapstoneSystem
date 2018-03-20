@@ -1,4 +1,4 @@
-angular.module('SECP')
+angular.module('CapstoneSystem')
   .directive("select2", function($timeout, $parse) {
   return {
     restrict: 'AC',
