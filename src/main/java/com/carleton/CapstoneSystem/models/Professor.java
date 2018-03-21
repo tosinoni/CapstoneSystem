@@ -19,6 +19,13 @@ public class Professor extends WebUser {
 
     }
 
+    public Set<Project> getProjectsSupervised() {
+        return projectsSupervised;
+    }
+
+    public void setProjectsSupervised(Set<Project> projectsSupervised) {
+        this.projectsSupervised = projectsSupervised;
+    }
 
     /**
      *

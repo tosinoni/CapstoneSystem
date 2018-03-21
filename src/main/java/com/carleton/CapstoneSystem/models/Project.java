@@ -146,6 +146,21 @@ public class Project {
         this.name = name;
     }
 
+    public Set<Program> getProgramsAllowed() {
+        return programsAllowed;
+    }
+
+    public void setProgramsAllowed(Set<Program> programsAllowed) {
+        this.programsAllowed = programsAllowed;
+    }
+
+    public Set<Student> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Set<Student> members) {
+        this.members = members;
+    }
 
     public boolean containMember(Student student) {
         return members.contains(student);

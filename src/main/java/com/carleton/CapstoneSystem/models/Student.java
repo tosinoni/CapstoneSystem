@@ -69,6 +69,14 @@ public class Student extends WebUser{
         return appliedProjects.contains(project);
     }
 
+    public Set<Project> getAppliedProjects() {
+        return appliedProjects;
+    }
+
+    public void setAppliedProjects(Set<Project> appliedProjects) {
+        this.appliedProjects = appliedProjects;
+    }
+
     @Override
     public boolean equals(Object o){
 
