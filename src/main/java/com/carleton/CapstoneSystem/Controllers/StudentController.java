@@ -8,12 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class StudentController extends SignUpLogInController {
+public class StudentController {
 
 
-    public StudentController(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        super(bCryptPasswordEncoder);
-    }
+
 
     public String validateStudent(UserDTO user) {
         if(user.getProgram()==null || Program.contains(user.getProgram())){

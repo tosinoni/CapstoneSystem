@@ -33,6 +33,8 @@ public class SignUpLogInController {
     CoordinatorRepository coordinatorRepository;
 
     UserRepository userRepository;
+    @Autowired
+    StudentController studentController;
 
     protected BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -166,6 +168,8 @@ public class SignUpLogInController {
             returnMessage = RequestErrorMessages.NO_FIRST_NAME;
         } else if (StringUtils.isNullOrEmpty(user.getLastname())) {
             returnMessage = RequestErrorMessages.NO_LAST_NAME;
+        }else if(user.getRole()==Role.STUDENT){
+            returnMessage=studentController.validateStudent(user);
         }
 
 

@@ -229,6 +229,25 @@ public class SignUpLogInTest {
 
 
     }
+    @Test
+    @Rollback(true)
+    public void SignUpInvalidStudentProgramTest() throws Exception {
+        user.setRole(Role.STUDENT);
+        String requestJson=ow.writeValueAsString(user);
+        request.contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson);
+        try {
+            ResultActions result =mockMvc.perform(request);
+        } catch (Exception e) {
+            WebApplicationException webException=(WebApplicationException)e.getCause();
+            assertEquals(webException.getResponse().getStatus(),400);
+            assertEquals(webException.getMessage(),RequestErrorMessages.INVALID_PROGRAM);
+        }
+
+
+
+
+    }
 
 
 
