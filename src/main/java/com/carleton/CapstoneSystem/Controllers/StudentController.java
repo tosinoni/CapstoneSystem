@@ -14,7 +14,7 @@ public class StudentController {
 
 
     public String validateStudent(UserDTO user) {
-        if(user.getProgram()==null || Program.contains(user.getProgram())){
+        if(user.getProgram()==null || !Program.contains(user.getProgram())){
             return RequestErrorMessages.INVALID_PROGRAM;
 
         }

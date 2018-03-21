@@ -82,8 +82,15 @@ public class Student extends WebUser{
 
     @Override
     public Student copyUser(UserDTO user){
-         Student student=(Student)super.copyUser(user);
-         student.setProgram(user.getProgram());
-         return student;
+        Student subUser = new Student();
+        subUser.setUserName(user.getUsername());
+        subUser.setRole(user.getRole());
+        subUser.setFirstName(user.getFirstname());
+        subUser.setLastName(user.getLastname());
+        subUser.setIdentifier(user.getIdentifier());
+        subUser.setEmail(user.getEmail());
+        subUser.setPassword(user.getPassword());
+        subUser.setProgram(user.getProgram());
+        return subUser;
     }
 }

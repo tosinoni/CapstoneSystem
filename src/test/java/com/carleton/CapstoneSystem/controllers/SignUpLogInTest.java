@@ -1,8 +1,6 @@
 package com.carleton.CapstoneSystem.controllers;
 import com.carleton.CapstoneSystem.DTO.UserDTO;
-import com.carleton.CapstoneSystem.models.Program;
-import com.carleton.CapstoneSystem.models.Role;
-import com.carleton.CapstoneSystem.models.WebUser;
+import com.carleton.CapstoneSystem.models.*;
 import com.carleton.CapstoneSystem.restfulControllers.UserController;
 import com.carleton.CapstoneSystem.utils.RequestErrorMessages;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,6 +24,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.transaction.Transactional;
+import javax.ws.rs.GET;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
@@ -358,6 +357,89 @@ public class SignUpLogInTest {
             assertEquals(webException.getResponse().getStatus(),400);
             assertEquals(webException.getMessage(),RequestErrorMessages.NO_IDENTIFIER);
         }
+
+
+
+
+    }
+    @Test
+    @Rollback(true)
+    public void SignUpLogInCoordinatorTest() throws Exception {
+        user = new UserDTO();
+        user.setPassword("password");
+        user.setEmail("username2@cmail.com");
+        user.setUsername("fozitto4");
+        user.setRole(Role.COORDINATOR);
+        user.setIdentifier(12234443);
+        user.setFirstname("ali");
+        user.setLastname("hammoud");
+
+        String requestJson=ow.writeValueAsString(user);
+        request.contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson);
+        ResultActions result=null;
+        try {
+             result =mockMvc.perform(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        result.andExpect(MockMvcResultMatchers.status().isOk());
+        request = post("/users/login");
+        Coordinator coordinator = new Coordinator();
+        coordinator.setUserName("fozitto3");
+        coordinator.setPassword("password");
+        requestJson=ow.writeValueAsString(coordinator);
+        request.contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson);
+        try {
+            result =mockMvc.perform(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        result.andExpect(MockMvcResultMatchers.status().isOk());
+
+
+
+
+
+    }
+    @Test
+    @Rollback(true)
+    public void SignUpLogInStudentTest() throws Exception {
+        user = new UserDTO();
+        user.setPassword("password");
+        user.setEmail("username3@cmail.com");
+        user.setUsername("fozitto5");
+        user.setRole(Role.STUDENT);
+        user.setIdentifier(12134443);
+        user.setFirstname("ali");
+        user.setLastname("hammoud");
+        user.setProgram(Program.ELECTRICAL_ENGINEERING);
+
+        String requestJson=ow.writeValueAsString(user);
+        request.contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson);
+        ResultActions result=null;
+        try {
+            result =mockMvc.perform(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        result.andExpect(MockMvcResultMatchers.status().isOk());
+        request = post("/users/login");
+        Coordinator coordinator = new Coordinator();
+        coordinator.setUserName("fozitto5");
+        coordinator.setPassword("password");
+        requestJson=ow.writeValueAsString(coordinator);
+        request.contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson);
+        try {
+            result =mockMvc.perform(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        result.andExpect(MockMvcResultMatchers.status().isOk());
+
 
 
 
