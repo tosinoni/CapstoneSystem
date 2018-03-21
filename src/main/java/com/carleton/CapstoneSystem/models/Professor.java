@@ -13,13 +13,17 @@ import java.util.*;
 @Inheritance
 public class Professor extends WebUser {
     @OneToMany(fetch = FetchType.EAGER)
-    private Set<Project> projectsSupervised;
+    private Set<Project> projectsSupervised = new HashSet<>();
 
 
     public Professor(){
-        projectsSupervised= new HashSet<Project>();
 
     }
+
+    public Professor(UserDTO userDTO){
+        super(userDTO);
+    }
+
 
     public Set<Project> getProjectsSupervised() {
         return projectsSupervised;

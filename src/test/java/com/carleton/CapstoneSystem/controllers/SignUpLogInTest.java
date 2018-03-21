@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,9 +23,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.transaction.Transactional;
-import javax.ws.rs.GET;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -385,7 +382,7 @@ public class SignUpLogInTest {
         }
         result.andExpect(MockMvcResultMatchers.status().isOk());
         request = post("/users/login");
-        Coordinator coordinator = new Coordinator();
+        Coordinator coordinator = new Coordinator(user);
         coordinator.setUserName("fozitto3");
         coordinator.setPassword("password");
         requestJson=ow.writeValueAsString(coordinator);
@@ -427,7 +424,7 @@ public class SignUpLogInTest {
         }
         result.andExpect(MockMvcResultMatchers.status().isOk());
         request = post("/users/login");
-        Coordinator coordinator = new Coordinator();
+        Coordinator coordinator = new Coordinator(user);
         coordinator.setUserName("fozitto5");
         coordinator.setPassword("password");
         requestJson=ow.writeValueAsString(coordinator);

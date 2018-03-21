@@ -45,6 +45,8 @@ public class ProjectController {
     private String validateProjectDTO(ProjectDTO projectDTO) {
         if(projectDTO == null || StringUtils.isNullOrEmpty(projectDTO.getName())) {
             return ProjectErrorMessages.NO_NAME;
+        } else if(projectRepository.findProjectByName(projectDTO.getName()) != null) {
+            return ProjectErrorMessages.INVALID_NAME;
         } else if(StringUtils.isNullOrEmpty(projectDTO.getDescription())) {
             return ProjectErrorMessages.NO_DESCRIPTION;
         } else if(!StringUtils.isStrictlyNumeric(projectDTO.getMinCapacity())) {

@@ -10,7 +10,6 @@ import com.carleton.CapstoneSystem.repositories.UserRepository;
 import com.carleton.CapstoneSystem.utils.RequestErrorMessages;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
@@ -190,21 +189,15 @@ public class SignUpLogInController {
         return returnMessage;
     }
     private void saveUser(UserDTO user){
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
         if(user.getRole()==Role.STUDENT){
-            Student subUser = (Student) user.getRole().createUser(user);
-            subUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            studentRepository.save(subUser);
+            studentRepository.save(new Student(user));
 
         }else if(user.getRole()==Role.PROFESSOR){
-            Professor subUser = (Professor) user.getRole().createUser(user);
-            subUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            professorRepository.save(subUser);
-
-
+            professorRepository.save(new Professor(user));
         }else {
-            Coordinator subUser = (Coordinator) user.getRole().createUser(user);
-            subUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            coordinatorRepository.save(subUser);
+            coordinatorRepository.save(new Coordinator(user));
         }
     }
 
