@@ -2,13 +2,13 @@ package com.carleton.CapstoneSystem.models;
 
 
 
+import com.carleton.CapstoneSystem.DTO.UserDTO;
 import org.springframework.security.access.method.P;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Inheritance
 public class Student extends WebUser{
     @OneToOne(fetch = FetchType.EAGER)
     private Project project;
@@ -80,5 +80,17 @@ public class Student extends WebUser{
         return Objects.hash(firstName, lastName, userName, email, password, identifier, role, identifier,program);
     }
 
-
+    @Override
+    public Student copyUser(UserDTO user){
+        Student subUser = new Student();
+        subUser.setUserName(user.getUsername());
+        subUser.setRole(user.getRole());
+        subUser.setFirstName(user.getFirstname());
+        subUser.setLastName(user.getLastname());
+        subUser.setIdentifier(user.getIdentifier());
+        subUser.setEmail(user.getEmail());
+        subUser.setPassword(user.getPassword());
+        subUser.setProgram(user.getProgram());
+        return subUser;
+    }
 }

@@ -2,13 +2,15 @@ package com.carleton.CapstoneSystem.repositories;
 
 import com.carleton.CapstoneSystem.models.WebUser;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
-public interface UserRepository
-        extends CrudRepository<WebUser, Long> {
+@NoRepositoryBean
+public interface UserRepository<T extends WebUser>
+        extends CrudRepository<T, Long> {
 
-    WebUser findByEmail(String email);
+    T findByEmail(String email);
 
-    WebUser findByUserName(String userName);
+    T findByUserName(String userName);
 
-    WebUser findByIdentifier(long identifier);
+    T findByIdentifier(long identifier);
 }

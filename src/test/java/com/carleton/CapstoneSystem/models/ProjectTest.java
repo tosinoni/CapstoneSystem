@@ -99,11 +99,13 @@ public class ProjectTest {
 
     }
     @Test
-    public void testMembersAdditios(){
+    public void testMembersAdditionsRemove(){
         Student student = new Student();
         Project project =new Project();
         project.addMember(student);
         assertEquals(project.containMember(student),true);
+        project.removeMember(student);
+        assertEquals(project.containMember(student),false);
 
     }
 }
