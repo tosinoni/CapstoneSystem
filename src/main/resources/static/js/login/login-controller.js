@@ -1,5 +1,15 @@
 angular.module('CapstoneSystem')
     .controller('LoginController', function ($scope, Auth, $location) {
+        $('#userRole').change(function () {
+            $(this).css("color", "black");
+            if ($(this).val()== "STUDENT") {
+                $("#studentProgram").show();
+            }
+            else{
+                $("#studentProgram").hide();
+            }
+            }
+        );
         $('#login-form-link').click(function(e) {
             $("#login-form").delay(100).fadeIn(100);
             $("#register-form").fadeOut(100);

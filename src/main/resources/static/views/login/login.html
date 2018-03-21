@@ -68,20 +68,21 @@
                                             <input type="text" required name="studentNumber" ng-model="registerUser.identifier" tabindex="1" class="form-control" placeholder="Identification Number">
                                         </div>
                                         <div class="form-group">
-                                            <select tabindex="1" class="form-control programList select2-choice" name="program" style="width: 100%">
-                                                <option value="">Program</option>
-                                                <option value="EE">Electrical</option>
-                                                <option value="SE">Software</option>
-                                                <option value="CE">Communications</option>
-                                                <option value="BME">Bio Medical</option>
+                                            <select required tabindex="1" id="userRole" ng-model="registerUser.role" class="form-control select2-choice" name="userRole" style="width: 100%;color: grey">
+                                                <option value="">Role</option>
+                                                <option value="STUDENT">Student</option>
+                                                <option value="PROFESSOR">Professor</option>
+                                                <option value="COORDINATOR">Coordinator</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <select required tabindex="1" id="roles" ng-model="registerUser.role" class="form-control select2-choice" name="roles" style="width: 100%">
-                                                <option value="">---Please select---</option>
-                                                <option value="STUDENT">STUDENT</option>
-                                                <option value="PROFESSOR">PROFESSOR</option>
-                                                <option value="COORDINATOR">COORDINATOR</option>
+                                        <div id="studentProgram" style="display: none;" class="form-group">
+                                            <select tabindex="1" id="studentProgramSelect" class="form-control programList select2-choice" name="program" style="width: 100%">
+                                                <option value="">Engineering Program</option>
+                                                <option value="CSE">Computer Systems</option>
+                                                <option value="SE">Software</option>
+                                                <option value="Comm">Communications</option>
+                                                <option value="Biomed">Biomedical</option>
+                                                <option value="EE">Electrical</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
