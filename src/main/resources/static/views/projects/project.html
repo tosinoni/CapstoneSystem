@@ -13,7 +13,7 @@
                         <button title="Apply" type="button" class="btn btn-success"><i class="icon-check"></i> Apply</button>
                         <button title="Cancel" type="button" class="btn btn-danger"><i class="icon-close"></i> Cancel</button>
                         <button title="Edit" type="button" class="btn btn-warning"><i class="icon-pencil"></i> Edit</button>
-                        <button title="Members" type="button" class="btn btn-primary"><i class="icon-plus"></i> Members</button>
+                        <button data-toggle="modal" data-target="#addStudentsModal" title="Students" type="button" class="btn btn-primary"><i class="icon-plus"></i> Students</button>
                         <button title="Archive" type="button" class="btn btn-success"><i class="icon-pin"></i> Archive</button>
                         <button title="Delete" type="button" class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
                     </div>
@@ -44,3 +44,34 @@
     </div>
 </div>
 </body>
+
+<!-- Modal -->
+<div class="modal fade" id="addStudentsModal" role="dialog">
+    <div class="modal-dialog" style="width: 90%; height : 80%">
+
+        <!-- Modal content-->
+        <form class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="icon-plus" aria-hidden="true"></i> Add Students to {{Project Name}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success">
+                    <strong>Please note:</strong> Only the students who have applied to the project are visible below.
+                </div>
+                <p><strong>Students:</strong></p>
+                <select class="studentList" name="students[]" multiple="multiple" style="width:100%;">
+                    <option value="1">Ali Fawaz</option>
+                    <option value="2">Ali Saidi</option>
+                    <option value="3">Mohamed Dahrouj</option>
+                    <option value="4">Tosin Oni</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+</div>
