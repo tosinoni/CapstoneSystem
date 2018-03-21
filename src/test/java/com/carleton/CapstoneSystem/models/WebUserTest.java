@@ -12,7 +12,7 @@ import static org.junit.Assert.assertFalse;
 public class WebUserTest {
     @Test
     public void testUserForEntityAttribute() {
-        AssertAnnotations.assertType(WebUser.class, Entity.class);
+        AssertAnnotations.assertType(WebUser.class, Entity.class,Inheritance.class);
     }
 
     @Test

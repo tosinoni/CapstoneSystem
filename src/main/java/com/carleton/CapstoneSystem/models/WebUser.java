@@ -1,5 +1,6 @@
 package com.carleton.CapstoneSystem.models;
 
+import com.carleton.CapstoneSystem.DTO.UserDTO;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.Objects;
  * this abstract class represents a general user of the fourth year project website. more specific roles of the user should be shown in the subclasses of the class
  */
 @Entity
+@Inheritance
 public  class WebUser {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -180,5 +182,9 @@ public  class WebUser {
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName, userName, email, password, identifier, role, identifier);
+    }
+
+    public WebUser copyUser(UserDTO user){
+        return null;
     }
 }
