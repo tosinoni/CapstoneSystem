@@ -286,6 +286,56 @@ public class SignUpLogInTest {
 
 
     }
+    @Test
+    @Rollback(true)
+    public void SignUpDuplicateUserNameTest() throws Exception {
+        user = new UserDTO();
+        user.setPassword("password");
+        user.setEmail("usernam2e@cmail.com");
+        user.setUsername("fozitto");
+        user.setRole(Role.PROFESSOR);
+        user.setIdentifier(12232443);
+        user.setFirstname("ali");
+        user.setLastname("hammoud");
+
+        String requestJson = ow.writeValueAsString(user);
+        request.contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson);
+        try {
+            ResultActions result = mockMvc.perform(request);
+        } catch (Exception e) {
+            WebApplicationException webException = (WebApplicationException) e.getCause();
+            assertEquals(webException.getResponse().getStatus(), 400);
+            assertEquals(webException.getMessage(), RequestErrorMessages.DUPLICATE_USERNAME);
+        }
+    }
+        @Test
+        @Rollback(true)
+        public void SignUpDuplicateEmailTest() throws Exception {
+            user = new UserDTO();
+            user.setPassword("password");
+            user.setEmail("username@cmail.com");
+            user.setUsername("fozitto3");
+            user.setRole(Role.PROFESSOR);
+            user.setIdentifier(12232443);
+            user.setFirstname("ali");
+            user.setLastname("hammoud");
+
+            String requestJson=ow.writeValueAsString(user);
+            request.contentType(APPLICATION_JSON_UTF8)
+                    .content(requestJson);
+            try {
+                ResultActions result =mockMvc.perform(request);
+            } catch (Exception e) {
+                WebApplicationException webException=(WebApplicationException)e.getCause();
+                assertEquals(webException.getResponse().getStatus(),400);
+                assertEquals(webException.getMessage(),RequestErrorMessages.DUPLICATE_EMAIL);
+            }
+
+
+
+
+    }
 
 
 
