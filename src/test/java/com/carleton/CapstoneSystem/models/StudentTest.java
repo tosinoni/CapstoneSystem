@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class StudentTest {
     @Test
     public void testStudentForEntityAttribute() {
-        AssertAnnotations.assertType(Student.class, Entity.class, Inheritance.class);
+        AssertAnnotations.assertType(Student.class, Entity.class);
     }
 
     @Test
