@@ -248,7 +248,44 @@ public class SignUpLogInTest {
 
 
     }
+    @Test
+    @Rollback(true)
+    public void SignUpInvalidFirstNameTest() throws Exception {
+        user.setFirstname(null);
+        String requestJson=ow.writeValueAsString(user);
+        request.contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson);
+        try {
+            ResultActions result =mockMvc.perform(request);
+        } catch (Exception e) {
+            WebApplicationException webException=(WebApplicationException)e.getCause();
+            assertEquals(webException.getResponse().getStatus(),400);
+            assertEquals(webException.getMessage(),RequestErrorMessages.NO_FIRST_NAME);
+        }
 
+
+
+
+    }
+    @Test
+    @Rollback(true)
+    public void SignUpInvalidLastNameTest() throws Exception {
+        user.setLastname(null);
+        String requestJson=ow.writeValueAsString(user);
+        request.contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson);
+        try {
+            ResultActions result =mockMvc.perform(request);
+        } catch (Exception e) {
+            WebApplicationException webException=(WebApplicationException)e.getCause();
+            assertEquals(webException.getResponse().getStatus(),400);
+            assertEquals(webException.getMessage(),RequestErrorMessages.NO_LAST_NAME);
+        }
+
+
+
+
+    }
 
 
 
