@@ -1,4 +1,5 @@
 package com.carleton.CapstoneSystem.controllers;
+import com.carleton.CapstoneSystem.DTO.UserDTO;
 import com.carleton.CapstoneSystem.models.Program;
 import com.carleton.CapstoneSystem.models.Role;
 import com.carleton.CapstoneSystem.models.WebUser;
@@ -49,7 +50,7 @@ public class SignUpLogInTest {
     private MockHttpServletRequestBuilder request;
     private ObjectMapper mapper;
     private ObjectWriter ow;
-    private WebUser user;
+    private UserDTO user;
     @Autowired
     private UserController controller;
 
@@ -67,14 +68,14 @@ public class SignUpLogInTest {
     public void init() throws Exception {
 
         request = post("/users/sign-up");
-        user = new WebUser();
+        user = new UserDTO();
         user.setPassword("password");
         user.setEmail("username@cmail.com");
-        user.setUserName("fozitto");
-        user.setRole(Role.STUDENT);
+        user.setUsername("fozitto");
+        user.setRole(Role.PROFESSOR);
         user.setIdentifier(1223443);
-        user.setFirstName("ali");
-        user.setLastName("hammoud");
+        user.setFirstname("ali");
+        user.setLastname("hammoud");
 
         mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -103,9 +104,9 @@ public class SignUpLogInTest {
 
 
         request = post("/users/login");
-        WebUser user1 = new WebUser();
+        UserDTO user1 = new UserDTO();
         user1.setPassword("password");
-        user1.setUserName("fozitto");
+        user1.setUsername("fozitto");
         String requestJson= null;
         try {
             requestJson = ow.writeValueAsString(user1);
@@ -125,9 +126,9 @@ public class SignUpLogInTest {
     public void WrongPasswordLogInTest() {
 
         request = post("/users/login");
-        WebUser user1 = new WebUser();
+        UserDTO user1 = new UserDTO();
         user1.setPassword("password2");
-        user1.setUserName("fozitto");
+        user1.setUsername("fozitto");
 
         String requestJson= null;
         try {
@@ -228,6 +229,7 @@ public class SignUpLogInTest {
 
 
     }
+
 
 
 

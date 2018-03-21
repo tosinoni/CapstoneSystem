@@ -1,5 +1,6 @@
 package com.carleton.CapstoneSystem.DTO;
 
+import com.carleton.CapstoneSystem.models.Program;
 import com.carleton.CapstoneSystem.models.Role;
 import com.carleton.CapstoneSystem.models.WebUser;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,6 +31,12 @@ public class UserDTO {
     @JsonProperty
     private long identifier;
 
+    @JsonProperty
+    private String password;
+
+    @JsonProperty
+    private Program program;
+
     public UserDTO() {
 
     }
@@ -42,6 +49,7 @@ public class UserDTO {
         this.lastname = user.getLastName();
         this.identifier = user.getIdentifier();
         this.email = user.getEmail();
+
     }
 
     public String getFirstname() {
@@ -118,5 +126,21 @@ public class UserDTO {
     public void setIdentifier(long identifier)
     {
         this.identifier = identifier;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Program getProgram() {
+        return program;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
     }
 }

@@ -2,6 +2,8 @@ package com.carleton.CapstoneSystem.models;
 
 
 
+import com.carleton.CapstoneSystem.DTO.UserDTO;
+
 import javax.persistence.*;
 
 
@@ -14,11 +16,13 @@ import java.util.List;
  * students who do not have any projects.
  */
 @Entity
-@Inheritance
 public class Coordinator extends Professor {
 
 
-
+    @Override
+    public Coordinator copyUser(UserDTO user){
+        return (Coordinator) super.copyUser(user);
+    }
 
 
 
