@@ -16,4 +16,9 @@ public class CapstoneSystemConfiguration extends WebMvcConfigurerAdapter {
     public String redirect() {
         return "forward:/";
     }
+
+    @RequestMapping(value = "/{[path:[^\\.]*}/{[id:[^\\.]*}")
+    public String redirectById() {
+        return "forward:/";
+    }
 }

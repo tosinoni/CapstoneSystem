@@ -16,7 +16,7 @@ public class Project {
     private String description;
     @Column(nullable = false, unique = true)
     private String name;
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Professor supervisor;
     @Column(nullable = false,name="max_Capacity")
     private int maxCapacity;

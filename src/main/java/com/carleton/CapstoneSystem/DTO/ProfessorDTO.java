@@ -19,10 +19,12 @@ public class ProfessorDTO extends UserDTO{
     public ProfessorDTO(Professor professor) {
         super(professor);
 
-        if (professor.getProjectsSupervised() != null) {
-           this.projectsSupervised = professor.getProjectsSupervised().stream().map(project -> {
-               return new ProjectDTO(project);
-           }).collect(Collectors.toSet());
+        if(professor != null) {
+            if (professor.getProjectsSupervised() != null) {
+                this.projectsSupervised = professor.getProjectsSupervised().stream().map(project -> {
+                    return new ProjectDTO(project);
+                }).collect(Collectors.toSet());
+            }
         }
     }
 }

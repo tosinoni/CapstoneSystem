@@ -1,0 +1,17 @@
+td {
+    text-align: center;
+}
+
+th {
+    text-align: center;
+    cursor: pointer;
+}
+
+tr {
+    cursor: pointer;
+}
+.colorbox {
+    width: 100%;
+    height: 1.2em;
+    border-radius: 8px;
+}

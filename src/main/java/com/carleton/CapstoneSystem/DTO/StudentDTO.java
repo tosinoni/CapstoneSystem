@@ -28,10 +28,12 @@ public class StudentDTO extends UserDTO{
         this.project = new ProjectDTO(student.getProject());
         this.program = student.getProgram();
 
-        if(student.getAppliedProjects() != null) {
-            this.appliedProjects = student.getAppliedProjects().stream().map(appliedProject -> {
-                return new ProjectDTO(appliedProject);
-            }).collect(Collectors.toSet());
+        if(student != null) {
+            if (student.getAppliedProjects() != null) {
+                this.appliedProjects = student.getAppliedProjects().stream().map(appliedProject -> {
+                    return new ProjectDTO(appliedProject);
+                }).collect(Collectors.toSet());
+            }
         }
     }
 }

@@ -3,13 +3,13 @@ package com.carleton.CapstoneSystem.restfulControllers;
 import com.carleton.CapstoneSystem.Controllers.ProjectController;
 import com.carleton.CapstoneSystem.DTO.ProjectDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.core.Response;
+import java.security.Principal;
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping("/api/projects")
 public class ProjectResource {
 
     @Autowired
@@ -21,8 +21,13 @@ public class ProjectResource {
     }
 
     @PostMapping
-    public Response createProject(@RequestBody ProjectDTO projectDTO) {
+    public Response createProject(Principal principal, @RequestBody ProjectDTO projectDTO) {
 
-        return projectController.createProject(projectDTO);
+        return projectController.createProject(projectDTO, principal);
+    }
+
+    @GetMapping("/{id}")
+    public Response getProjectById(@PathVariable("id") String id){
+        return projectController.getProjectById(id);
     }
 }

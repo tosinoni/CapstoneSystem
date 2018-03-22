@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ProjectDTO {
 
@@ -31,7 +32,7 @@ public class ProjectDTO {
     private boolean isArchive;
 
     @JsonProperty
-    private Set<Program> programsAllowed = new LinkedHashSet<>();
+    private Set<String> programsAllowed = new LinkedHashSet<>();
 
     @JsonProperty
     private Set<StudentDTO> members = new LinkedHashSet<>();
@@ -50,9 +51,15 @@ public class ProjectDTO {
         this.supervisor = new ProfessorDTO(project.getSupervisor());
 
         if(project.getMembers() != null) {
-            project.getMembers().stream().map(student -> {
+           this.members = project.getMembers().stream().map(student -> {
                 return new StudentDTO(student);
-            });
+            }).collect(Collectors.toSet());
+        }
+
+        if(project.getProgramsAllowed() != null) {
+            this.programsAllowed = project.getProgramsAllowed().stream().map(program -> {
+                return program.getShortcut();
+            }).collect(Collectors.toSet());
         }
     }
 
@@ -112,11 +119,11 @@ public class ProjectDTO {
         isArchive = archive;
     }
 
-    public Set<Program> getProgramsAllowed() {
+    public Set<String> getProgramsAllowed() {
         return programsAllowed;
     }
 
-    public void setProgramsAllowed(Set<Program> programsAllowed) {
+    public void setProgramsAllowed(Set<String> programsAllowed) {
         this.programsAllowed = programsAllowed;
     }
 

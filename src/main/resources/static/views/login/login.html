@@ -76,13 +76,8 @@
                                             </select>
                                         </div>
                                         <div id="studentProgram" style="display: none;" class="form-group">
-                                            <select tabindex="1" id="studentProgramSelect" class="form-control programList select2-choice" name="program" style="width: 100%">
-                                                <option value="">Engineering Program</option>
-                                                <option value="CSE">Computer Systems</option>
-                                                <option value="SE">Software</option>
-                                                <option value="Comm">Communications</option>
-                                                <option value="Biomed">Biomedical</option>
-                                                <option value="EE">Electrical</option>
+                                            <select select2 ng-model="registerUser.program" ng-options="program for program in programs"
+                                                    class="form-control programList select2-choice" name="program" style="width: 100%">
                                             </select>
                                         </div>
                                         <div class="form-group">

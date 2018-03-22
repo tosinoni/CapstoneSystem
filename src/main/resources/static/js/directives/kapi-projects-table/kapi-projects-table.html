@@ -1,0 +1,21 @@
+<button ng-cloak ng-show="isproforcoordinator" class="btn btn-success" data-toggle="modal" data-target="#{{modalname}}" style="float: right; margin-bottom: 20px;">
+    {{buttonname}} <i class="icon-plus" aria-hidden="true"></i>
+</button>
+<table id="{{name}}" datatable="ng" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th ng-repeat="header in headers">{{header}}</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr ng-click="projectClicked(row)" ng-repeat="row in data">
+            <td>{{row.id}}</td>
+            <td>{{row.name}}</td>
+            <td ng-if="row.supervisor">{{row.supervisor.firstname}} {{row.supervisor.lastname}}</td>
+            <td >{{row.minCapacity}} - {{row.maxCapacity}}</td>
+            <td>{{getProgramsAllowed(row.programsAllowed)}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<link type="text/css" rel="stylesheet" href="/js/directives/kapi-projects-table/kapi-projects-table.css"/>

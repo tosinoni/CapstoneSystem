@@ -1,5 +1,17 @@
 angular.module('CapstoneSystem')
-    .controller('LoginController', function ($scope, Auth, $location) {
+    .controller('LoginController', function ($scope, Auth, $location, User) {
+        $scope.programs = [];
+
+        User.getPrograms().then(function (programs) {
+            if(programs) {
+                $scope.programs = programs;
+            }
+        });
+        
+        $scope.unitChanged = function () {
+            console.log("here")
+        }
+
         $('#userRole').change(function () {
             $(this).css("color", "black");
             if ($(this).val()== "STUDENT") {
@@ -49,6 +61,7 @@ angular.module('CapstoneSystem')
         }
 
         $scope.register = function () {
+            console.log($scope.registerUser);
             Auth.register($scope.registerUser).then(function (res) {
                 console.log(res);
                 if (res.status == 200) {

@@ -10,7 +10,7 @@ angular.module('CapstoneSystem')
             COORDINATOR: 'COORDINATOR',
 
             login: function (user) {
-                return $http.post("/users/login", user, config)
+                return $http.post("/api/users/login", user, config)
                     .then(function (res) {
                         console.log(res);
                         if(res.status == 200 && res.data && res.data.entity) {
@@ -25,7 +25,7 @@ angular.module('CapstoneSystem')
             },
 
             register: function (user) {
-                return $http.post("/users/sign-up", user, config)
+                return $http.post("/api/users/sign-up", user, config)
                     .then(function (res) {
                         return res;
                     }, function (err) {

@@ -23,4 +23,14 @@ public enum Program {
 
         return false;
     }
+
+    public static Program getProgram(String program) {
+        for (Program existingProgram : Program.values()) {
+            if (existingProgram.name().equals(program) || existingProgram.getShortcut().equals(program)) {
+                return existingProgram;
+            }
+        }
+
+        return null;
+    }
 }

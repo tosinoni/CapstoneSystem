@@ -25,11 +25,16 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll()
                 .antMatchers(SecurityConstants.LOGIN_URL).permitAll()
+                .antMatchers(HttpMethod.GET, SecurityConstants.PROGRAMS_URL).permitAll()
+                .antMatchers(HttpMethod.GET, SecurityConstants.PROJECTS_URL).permitAll()
+                .antMatchers(HttpMethod.GET, SecurityConstants.GET_PROJECT_BY_ID_URL).permitAll()
+                .antMatchers("/api/*").authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
