@@ -46,3 +46,10 @@ Open intellij and perform the below actions:
 | Early Prototype | Preliminary views included, handle authentication and create models. Password encrypted in database. Created models and tests. Deployed to Heroku and Using Travis for integration.  Domain currently pointing to kapi.ca | March 8th  |
 | Alpha Release   | Ability to add projects for profs. Students can apply to projects. All users have a customized dashboard. Profs and coordinators can send emails to students. Projects catalogue is dynamic and can view individual project information by ID in route. Added static announcements page. Updated registration page.  | March 22nd |
 | Final Demo      | We need to find a good library for a sceduling tool to handle student availabilites. We will also implement the ability to upload a final report. Finally, we will implement all project actions such as edit, delete and add users. | April 5th  |
+
+ ## Diagrams
+ 
+UML for Models:
+![uml](https://user-images.githubusercontent.com/14824913/37755639-b10ff1aa-2d7c-11e8-9d1b-cb3c65d0462e.png)
+
+Please refer to phpMyAdmin for the database tables. 
