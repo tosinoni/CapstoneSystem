@@ -1,14 +1,19 @@
 package com.carleton.CapstoneSystem.Controllers;
 
 import com.carleton.CapstoneSystem.DTO.EmailDTO;
+import com.carleton.CapstoneSystem.models.Coordinator;
 import com.carleton.CapstoneSystem.models.Student;
+import com.carleton.CapstoneSystem.repositories.CoordinatorRepository;
 import com.carleton.CapstoneSystem.repositories.StudentRepository;
 import com.carleton.CapstoneSystem.services.EmailService;
+import com.carleton.CapstoneSystem.utils.EmailSendingError;
 import com.carleton.CapstoneSystem.utils.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import java.security.Principal;
 
 import javax.validation.constraints.Max;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
@@ -17,12 +22,19 @@ public class CoordinatorController {
 
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    CoordinatorRepository coordinatorRepository;
 
     @Autowired
     EmailService emailService;
 
 
-    public Response sendEmails(EmailDTO email) {
+    public Response sendEmails(EmailDTO email,Principal principal) {
+        String notACoordinator ="";
+        notACoordinator = checkIfCoordinator(principal);
+        if(!notACoordinator.isEmpty()){
+            throw new WebApplicationException(notACoordinator, Response.Status.BAD_REQUEST);
+        }
         Mail mail = new Mail();
         mail.setFrom(email.getFrom());
         mail.setContent(email.getContent());
@@ -34,6 +46,13 @@ public class CoordinatorController {
         }
         return Response.status(Response.Status.CREATED).build();
 
+    }
+
+    private String checkIfCoordinator(Principal principal) {
+        if(coordinatorRepository.findByUserName(principal.getName())==null){
+            return EmailSendingError.NOT_COORDINATOR;
+        }
+        return "";
     }
 
     private ArrayList<String> getRecipients(String recipients) {
