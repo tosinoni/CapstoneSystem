@@ -27,4 +27,12 @@ public class ProfessorDTO extends UserDTO{
             }
         }
     }
+
+    public Set<ProjectDTO> getProjectsSupervised() {
+        return projectsSupervised;
+    }
+
+    public void setProjectsSupervised(Set<ProjectDTO> projectsSupervised) {
+        this.projectsSupervised = projectsSupervised;
+    }
 }

@@ -91,9 +91,10 @@ public class SignUpLogInController {
     }
 
     private UserDTO getUserDTOResponse(WebUser user) {
-        Role userRole = user.getRole();
         if(user == null)
             return null;
+
+        Role userRole = user.getRole();
 
         if (userRole.equals(Role.STUDENT)) {
             return new StudentDTO(studentRepository.findByUserName(user.getUserName()));
