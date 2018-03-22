@@ -3,8 +3,6 @@ package com.carleton.CapstoneSystem.models;
 
 
 import com.carleton.CapstoneSystem.DTO.UserDTO;
-import org.springframework.security.access.method.P;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -17,13 +15,18 @@ public class Student extends WebUser{
     private Program program;
 
     @OneToMany(fetch = FetchType.EAGER)
-    private Set<Project> appliedProjects;
+    private Set<Project> appliedProjects = new LinkedHashSet<Project>();
 
 
 
 
     public Student(){
-        appliedProjects = new LinkedHashSet<Project>();
+
+    }
+
+    public Student(UserDTO userDTO) {
+        super(userDTO);
+        this.program = userDTO.getProgram();
     }
     /**
      *
@@ -67,6 +70,14 @@ public class Student extends WebUser{
     }
     public boolean appliedForProject(Project project){
         return appliedProjects.contains(project);
+    }
+
+    public Set<Project> getAppliedProjects() {
+        return appliedProjects;
+    }
+
+    public void setAppliedProjects(Set<Project> appliedProjects) {
+        this.appliedProjects = appliedProjects;
     }
 
     @Override

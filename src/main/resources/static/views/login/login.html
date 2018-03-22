@@ -25,7 +25,7 @@
                                 <div class="col-lg-12">
                                     <form id="login-form" ng-submit="login()" role="form" style="display: block;">
                                         <div class="form-group">
-                                            <input type="text" required name="username" ng-model="loginUser.userName" tabindex="1" class="form-control" placeholder="Username" value="">
+                                            <input type="text" required name="username" ng-model="loginUser.username" tabindex="1" class="form-control" placeholder="Username" value="">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" required name="password" ng-model="loginUser.password" tabindex="2" class="form-control" placeholder="Password">
@@ -53,16 +53,16 @@
                                     </form>
                                     <form id="register-form" ng-submit="register()" role="form" style="display: none;">
                                         <div class="form-group">
-                                            <input type="text" required name="firstName" ng-model="registerUser.firstName" tabindex="1" class="form-control" placeholder="First Name" value="">
+                                            <input type="text" required name="firstName" ng-model="registerUser.firstname" tabindex="1" class="form-control" placeholder="First Name" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" required name="lastName" ng-model="registerUser.lastName" tabindex="1" class="form-control" placeholder="Last Name" value="">
+                                            <input type="text" required name="lastName" ng-model="registerUser.lastname" tabindex="1" class="form-control" placeholder="Last Name" value="">
                                         </div>
                                         <div class="form-group">
                                             <input type="email" required name="email" ng-model="registerUser.email" tabindex="1" class="form-control" placeholder="Email Address" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" required name="username" ng-model="registerUser.userName" tabindex="1" class="form-control" placeholder="Username" value="">
+                                            <input type="text" required name="username" ng-model="registerUser.username" tabindex="1" class="form-control" placeholder="Username" value="">
                                         </div>
                                         <div class="form-group">
                                             <input type="text" required name="studentNumber" ng-model="registerUser.identifier" tabindex="1" class="form-control" placeholder="Identification Number">
@@ -76,13 +76,8 @@
                                             </select>
                                         </div>
                                         <div id="studentProgram" style="display: none;" class="form-group">
-                                            <select tabindex="1" id="studentProgramSelect" class="form-control programList select2-choice" name="program" style="width: 100%">
-                                                <option value="">Engineering Program</option>
-                                                <option value="CSE">Computer Systems</option>
-                                                <option value="SE">Software</option>
-                                                <option value="Comm">Communications</option>
-                                                <option value="Biomed">Biomedical</option>
-                                                <option value="EE">Electrical</option>
+                                            <select select2 ng-model="registerUser.program" ng-options="program for program in programs"
+                                                    class="form-control programList select2-choice" name="program" style="width: 100%">
                                             </select>
                                         </div>
                                         <div class="form-group">

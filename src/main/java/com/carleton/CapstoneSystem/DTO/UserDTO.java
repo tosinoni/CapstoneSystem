@@ -42,14 +42,15 @@ public class UserDTO {
     }
 
     public UserDTO(WebUser user) {
-        this.username = user.getUserName();
-        this.id = user.getId();
-        this.role = user.getRole();
-        this.firstname = user.getFirstName();
-        this.lastname = user.getLastName();
-        this.identifier = user.getIdentifier();
-        this.email = user.getEmail();
-
+        if(user !=null) {
+            this.username = user.getUserName();
+            this.id = user.getId();
+            this.role = user.getRole();
+            this.firstname = user.getFirstName();
+            this.lastname = user.getLastName();
+            this.identifier = user.getIdentifier();
+            this.email = user.getEmail();
+        }
     }
 
     public String getFirstname() {

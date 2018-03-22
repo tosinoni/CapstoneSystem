@@ -2,14 +2,14 @@ package com.carleton.CapstoneSystem.restfulControllers;
 
 import com.carleton.CapstoneSystem.Controllers.SignUpLogInController;
 import com.carleton.CapstoneSystem.DTO.UserDTO;
-import com.carleton.CapstoneSystem.models.WebUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.core.Response;
+import java.security.Principal;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
 
@@ -31,5 +31,10 @@ public class UserController {
     public Response logIn(@RequestBody UserDTO user){
             return signUpLogInController.logIn(user);
 
+    }
+
+    @GetMapping("/currentUser")
+    public Response getCurrentUser(Principal principal ) {
+        return signUpLogInController.getCurrentUser(principal);
     }
 }

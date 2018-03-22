@@ -1,11 +1,11 @@
 // Declare app level module which depends on filters, and services
-angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala', 'angular-jwt'])
+angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala', 'angular-jwt', 'datatables'])
     .config(function ($routeProvider, $locationProvider, jwtOptionsProvider, $httpProvider) {
 
         //configuring authentication
         jwtOptionsProvider.config({
             unauthenticatedRedirectPath: '/login',
-            authPrefix: '',
+            authPrefix: 'Bearer ',
             tokenGetter: ['Auth', function(Auth) {
                 if (Auth.isTokenExpired()) {
                     return null;
@@ -38,9 +38,9 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 controller: 'ProjectsController',
                 css: 'css/projects/projects.css',
             })
-            .when('/project', {
+            .when('/project/:id', {
                 templateUrl: 'views/projects/project.html',
-                controller: 'ProjectsController',
+                controller: 'ProjectController',
                 css: 'css/projects/projects.css',
             })
             .when('/profile', {

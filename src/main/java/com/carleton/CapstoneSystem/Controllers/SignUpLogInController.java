@@ -1,5 +1,8 @@
 package com.carleton.CapstoneSystem.Controllers;
 
+import com.carleton.CapstoneSystem.DTO.CoordinatorDTO;
+import com.carleton.CapstoneSystem.DTO.ProfessorDTO;
+import com.carleton.CapstoneSystem.DTO.StudentDTO;
 import com.carleton.CapstoneSystem.DTO.UserDTO;
 import com.carleton.CapstoneSystem.auth.JWTAuthenticationFilter;
 import com.carleton.CapstoneSystem.models.*;
@@ -10,12 +13,12 @@ import com.carleton.CapstoneSystem.repositories.UserRepository;
 import com.carleton.CapstoneSystem.utils.RequestErrorMessages;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+import java.security.Principal;
 import java.util.regex.Pattern;
 
 @Controller
@@ -32,7 +35,9 @@ public class SignUpLogInController {
     @Autowired
     CoordinatorRepository coordinatorRepository;
 
+    @Autowired
     UserRepository userRepository;
+
     @Autowired
     StudentController studentController;
 
@@ -63,6 +68,41 @@ public class SignUpLogInController {
          responseUser.setToken(JWTAuthenticationFilter.getToken(responseUser.getUsername()));
 
          return Response.status(Response.Status.OK).entity(responseUser).build();
+    }
+
+    public Response getCurrentUser(Principal principal) {
+        if(principal == null) {
+            return Response.status(Response.Status.OK).build();
+        }
+
+        String username = principal.getName();
+
+        if(StringUtils.isNullOrEmpty(username)) {
+            return Response.status(Response.Status.OK).build();
+        }
+
+        WebUser user = userRepository.findByUserName(username);
+
+        if (user == null) {
+            return Response.status(Response.Status.OK).build();
+        }
+
+        return Response.status(Response.Status.OK).entity(getUserDTOResponse(user)).build();
+    }
+
+    private UserDTO getUserDTOResponse(WebUser user) {
+        if(user == null)
+            return null;
+
+        Role userRole = user.getRole();
+
+        if (userRole.equals(Role.STUDENT)) {
+            return new StudentDTO(studentRepository.findByUserName(user.getUserName()));
+        } else if (userRole.equals(Role.PROFESSOR)) {
+            return new ProfessorDTO(professorRepository.findByUserName(user.getUserName()));
+        }
+
+        return new CoordinatorDTO(coordinatorRepository.findByUserName(user.getUserName()));
     }
 
     /**
@@ -190,21 +230,15 @@ public class SignUpLogInController {
         return returnMessage;
     }
     private void saveUser(UserDTO user){
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
         if(user.getRole()==Role.STUDENT){
-            Student subUser = (Student) user.getRole().createUser(user);
-            subUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            studentRepository.save(subUser);
+            studentRepository.save(new Student(user));
 
         }else if(user.getRole()==Role.PROFESSOR){
-            Professor subUser = (Professor) user.getRole().createUser(user);
-            subUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            professorRepository.save(subUser);
-
-
+            professorRepository.save(new Professor(user));
         }else {
-            Coordinator subUser = (Coordinator) user.getRole().createUser(user);
-            subUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            coordinatorRepository.save(subUser);
+            coordinatorRepository.save(new Coordinator(user));
         }
     }
 

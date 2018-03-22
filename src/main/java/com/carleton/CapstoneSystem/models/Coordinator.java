@@ -18,22 +18,7 @@ import java.util.List;
 @Entity
 public class Coordinator extends Professor {
 
-
-    @Override
-    public Coordinator copyUser(UserDTO user){
-        Coordinator subUser = new Coordinator();
-        subUser.setUserName(user.getUsername());
-        subUser.setRole(user.getRole());
-        subUser.setFirstName(user.getFirstname());
-        subUser.setLastName(user.getLastname());
-        subUser.setIdentifier(user.getIdentifier());
-        subUser.setEmail(user.getEmail());
-        subUser.setPassword(user.getPassword());
-        return subUser;
+    public Coordinator(UserDTO userDTO) {
+        super(userDTO);
     }
-
-
-
-
-
 }

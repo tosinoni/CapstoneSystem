@@ -4,7 +4,6 @@ import com.carleton.CapstoneSystem.models.WebUser;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
-@NoRepositoryBean
 public interface UserRepository<T extends WebUser>
         extends CrudRepository<T, Long> {
 

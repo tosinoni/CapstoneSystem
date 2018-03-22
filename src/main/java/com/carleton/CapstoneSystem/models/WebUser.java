@@ -61,6 +61,16 @@ public  class WebUser {
         this.password=password;
     }
 
+    public WebUser(UserDTO userDTO) {
+        this.firstName = userDTO.getFirstname();
+        this.lastName = userDTO.getLastname();
+        this.email = userDTO.getEmail();
+        this.identifier = userDTO.getIdentifier();
+        this.password = userDTO.getPassword();
+        this.role = userDTO.getRole();
+        this.userName = userDTO.getUsername();
+    }
+
     /**
      *
      * @return the user name of the user
