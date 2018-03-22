@@ -1,5 +1,5 @@
 // Declare app level module which depends on filters, and services
-angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala', 'angular-jwt'])
+angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala', 'angular-jwt', 'angularFileUpload' ])
     .config(function ($routeProvider, $locationProvider, jwtOptionsProvider, $httpProvider) {
 
         //configuring authentication
@@ -58,6 +58,11 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 templateUrl: 'views/home/announcements.html',
                 controller: 'AnnouncementsController',
                 css: 'css/home/announcements.css',
+            })
+            .when('/upload', {
+                templateUrl: 'views/upload/upload.html',
+                controller: 'UploadController',
+                css: 'css/upload/upload.css',
             })
             .otherwise({
                 templateUrl: 'views/error/error.html'
