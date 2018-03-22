@@ -17,6 +17,7 @@ public class Project {
     @Column(nullable = false, unique = true)
     private String name;
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "supervisor_id", nullable = false)
     private Professor supervisor;
     @Column(nullable = false,name="max_Capacity")
     private int maxCapacity;
@@ -27,8 +28,10 @@ public class Project {
     @ElementCollection(targetClass=Program.class)
     @Enumerated(EnumType.STRING)
     private Set<Program> programsAllowed;
-    @OneToMany(fetch = FetchType.EAGER)
+
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private Set<Student> members;
+
     public Project(){
         this(null,null);
     }

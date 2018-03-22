@@ -18,6 +18,9 @@ import java.util.List;
 @Entity
 public class Coordinator extends Professor {
 
+    public Coordinator() {
+
+    }
     public Coordinator(UserDTO userDTO) {
         super(userDTO);
     }

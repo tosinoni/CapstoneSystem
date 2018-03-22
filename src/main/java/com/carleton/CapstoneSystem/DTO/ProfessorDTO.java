@@ -22,7 +22,24 @@ public class ProfessorDTO extends UserDTO{
         if(professor != null) {
             if (professor.getProjectsSupervised() != null) {
                 this.projectsSupervised = professor.getProjectsSupervised().stream().map(project -> {
-                    return new ProjectDTO(project);
+                    ProjectDTO projectDTO = new ProjectDTO();
+                    projectDTO.setId(project.getId());
+                    projectDTO.setName(project.getName());
+                    projectDTO.setDescription(project.getDescription());
+                    projectDTO.setMinCapacity(Integer.toString(project.getMinCapacity()));
+                    projectDTO.setMaxCapacity(Integer.toString(project.getMaxCapacity()));
+
+                    ProfessorDTO professorDTO = new ProfessorDTO();
+                    professorDTO.setFirstname(this.getFirstname());
+                    professorDTO.setLastname(this.getLastname());
+
+                    projectDTO.setSupervisor(professorDTO);
+
+                    projectDTO.setProgramsAllowed(project.getProgramsAllowed().stream().map(program -> {
+                        return program.getShortcut();
+                    }).collect(Collectors.toSet()));
+
+                    return projectDTO;
                 }).collect(Collectors.toSet());
             }
         }

@@ -8,7 +8,8 @@ import java.util.*;
 
 @Entity
 public class Student extends WebUser{
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "project_id", nullable = true)
     private Project project;
 
     @Column(name="program",nullable=true)

@@ -48,11 +48,23 @@ public class ProjectDTO {
         this.minCapacity = Integer.toString(project.getMinCapacity());
         this.maxCapacity = Integer.toString(project.getMaxCapacity());
         this.isArchive = project.isArchive();
-        this.supervisor = new ProfessorDTO(project.getSupervisor());
+
+        if(project.getSupervisor() != null) {
+            ProfessorDTO professorDTO = new ProfessorDTO();
+            professorDTO.setId(project.getSupervisor().getId());
+            professorDTO.setUsername(project.getSupervisor().getUserName());
+            professorDTO.setFirstname(project.getSupervisor().getFirstName());
+            professorDTO.setLastname(project.getSupervisor().getLastName());
+
+            this.supervisor = professorDTO;
+        }
 
         if(project.getMembers() != null) {
            this.members = project.getMembers().stream().map(student -> {
-                return new StudentDTO(student);
+               StudentDTO studentDTO = new StudentDTO();
+               studentDTO.setId(student.getId());
+               studentDTO.setUsername(student.getUserName());
+                return studentDTO;
             }).collect(Collectors.toSet());
         }
 
