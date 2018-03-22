@@ -81,7 +81,7 @@ public class ProjectController {
     public Response applyForProject(ProjectDTO projectDTO, Principal principal) {
 
         if(projectDTO == null) {
-            Response.status(Response.Status.BAD_REQUEST).entity(ProjectErrorMessages.EMPTY_PROJECT_INFO).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(ProjectErrorMessages.EMPTY_PROJECT_INFO).build();
         }
 
         Project project = getProjectFromId(Long.toString(projectDTO.getId()));
