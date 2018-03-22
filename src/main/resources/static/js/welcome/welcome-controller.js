@@ -10,13 +10,15 @@ angular.module('CapstoneSystem')
             if(user) {
                 var isUserAprofOrCoordinator = user.role == User.PROFESSOR || user.role == User.COORDINATOR;
                 $scope.isProfOrCoordinator = $scope.isAuthenticated && isUserAprofOrCoordinator;
-                if(user) {
-                    $scope.studentHasProject =false;
+                if(user.project && !isUserAprofOrCoordinator) {
+                    $scope.studentHasProject =true;
                 }
+
                 if(user.projectsSupervised) {
                     $scope.projects = user.projectsSupervised;
+                } else if(user.appliedProjects) {
+                    $scope.projects = user.appliedProjects;
                 }
-                console.log(user);
             }
         });
 
