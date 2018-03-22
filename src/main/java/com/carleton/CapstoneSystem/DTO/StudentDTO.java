@@ -26,7 +26,9 @@ public class StudentDTO extends UserDTO{
         super(student);
 
         if(student != null) {
-            this.project = new ProjectDTO(student.getProject());
+            if(student.getProject()!=null) {
+                this.project = new ProjectDTO(student.getProject());
+            }
             this.program = student.getProgram();
 
 

@@ -12,7 +12,8 @@ import java.util.*;
 @Entity
 @Inheritance
 public class Professor extends WebUser {
-    @OneToMany(fetch = FetchType.EAGER)
+
+    @OneToMany(mappedBy = "supervisor", fetch = FetchType.LAZY)
     private Set<Project> projectsSupervised = new HashSet<>();
 
 
