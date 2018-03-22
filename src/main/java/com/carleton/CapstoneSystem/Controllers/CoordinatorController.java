@@ -8,6 +8,7 @@ import com.carleton.CapstoneSystem.repositories.StudentRepository;
 import com.carleton.CapstoneSystem.services.EmailService;
 import com.carleton.CapstoneSystem.utils.EmailSendingError;
 import com.carleton.CapstoneSystem.utils.Mail;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import java.security.Principal;
@@ -40,6 +41,11 @@ public class CoordinatorController {
         mail.setContent(email.getContent());
         mail.setSubject(email.getSubject());
         ArrayList<String> emails = getRecipients(email.getRecipients());
+
+        if(emails == null || emails.isEmpty()) {
+            throw new WebApplicationException(EmailSendingError.NOT_RECIPIENTS, Response.Status.BAD_REQUEST);
+        }
+
         for(String sendTo: emails){
             mail.setTo(sendTo);
             emailService.sendSimpleMessage(mail);
