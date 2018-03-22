@@ -1,7 +1,8 @@
 angular.module('CapstoneSystem')
-    .controller('EmailController', ['$scope', function ($scope) {
-        $('.sidenav').css("height",$(document).height() + "px");
-        $('#to').select2({
-            placeholder: 'Students'
-        });
-    }]);
+    .controller('EmailController', function ($scope) {
+        $scope.recipients = ["ALL_STUDENTS", "STDUENTS_WITHOUT_PROJECT"];
+
+        $scope.sendEmail = function () {
+            console.log($scope.email);
+        }
+    });
