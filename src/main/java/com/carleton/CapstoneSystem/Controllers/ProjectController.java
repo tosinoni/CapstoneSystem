@@ -1,10 +1,13 @@
 package com.carleton.CapstoneSystem.Controllers;
 
 import com.carleton.CapstoneSystem.DTO.ProjectDTO;
+import com.carleton.CapstoneSystem.DTO.StudentDTO;
 import com.carleton.CapstoneSystem.models.Program;
 import com.carleton.CapstoneSystem.models.Project;
+import com.carleton.CapstoneSystem.models.Student;
 import com.carleton.CapstoneSystem.repositories.ProfessorRepository;
 import com.carleton.CapstoneSystem.repositories.ProjectRepository;
+import com.carleton.CapstoneSystem.repositories.StudentRepository;
 import com.carleton.CapstoneSystem.utils.ProjectErrorMessages;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,9 @@ public class ProjectController {
 
     @Autowired
     ProfessorRepository professorRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
 
     public Response getAllProjects() {
         Set<ProjectDTO> allProjects = new LinkedHashSet<>();
@@ -72,6 +78,27 @@ public class ProjectController {
         return Response.status(Response.Status.OK).entity(new ProjectDTO(projectFromDB)).build();
     }
 
+    public Response applyForProject(ProjectDTO projectDTO, Principal principal) {
+
+        if(projectDTO == null) {
+            Response.status(Response.Status.BAD_REQUEST).entity(ProjectErrorMessages.EMPTY_PROJECT_INFO).build();
+        }
+
+        Project project = getProjectFromId(Long.toString(projectDTO.getId()));
+        validatePrincipal(principal);
+
+        Student student = studentRepository.findByUserName(principal.getName());
+
+        if(student == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(ProjectErrorMessages.INVALID_USER).build();
+        }
+
+        student.applyForProject(project);
+        Student studentFromDb = studentRepository.save(student);
+
+        return  Response.status(Response.Status.OK).entity(new StudentDTO(studentFromDb)).build();
+    }
+
     private String validateProjectDTO(ProjectDTO projectDTO) {
         if(projectDTO == null || StringUtils.isNullOrEmpty(projectDTO.getName())) {
             return ProjectErrorMessages.NO_NAME;
@@ -83,8 +110,30 @@ public class ProjectController {
             return ProjectErrorMessages.INVALID_MIN_CAPACITY;
         } else if(!StringUtils.isStrictlyNumeric(projectDTO.getMaxCapacity())) {
             return ProjectErrorMessages.INVALID_MAX_CAPACITY;
+        } else if(Integer.parseInt(projectDTO.getMaxCapacity()) <= Integer.parseInt(projectDTO.getMinCapacity())) {
+            return ProjectErrorMessages.INVALID_CAPACITY;
         }
 
         return "";
+    }
+
+    private Project getProjectFromId(String id) {
+        if(!StringUtils.isStrictlyNumeric(id)) {
+            throw new WebApplicationException(ProjectErrorMessages.INVALID_ID, Response.Status.BAD_REQUEST);
+        }
+
+        Project project = projectRepository.findProjectById(Long.parseLong(id));
+
+        if(project == null) {
+            throw new WebApplicationException(ProjectErrorMessages.INVALID_ID, Response.Status.BAD_REQUEST);
+        }
+
+        return project;
+    }
+
+    private void validatePrincipal(Principal principal) {
+        if(principal == null) {
+            throw new WebApplicationException(ProjectErrorMessages.INVALID_USER, Response.Status.BAD_REQUEST);
+        }
     }
 }

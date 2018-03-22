@@ -27,7 +27,7 @@ public class Student extends WebUser{
 
     public Student(UserDTO userDTO) {
         super(userDTO);
-        this.program = userDTO.getProgram();
+        this.program = Program.getProgram(userDTO.getProgram());
     }
     /**
      *
@@ -90,19 +90,5 @@ public class Student extends WebUser{
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName, userName, email, password, identifier, role, identifier,program);
-    }
-
-    @Override
-    public Student copyUser(UserDTO user){
-        Student subUser = new Student();
-        subUser.setUserName(user.getUsername());
-        subUser.setRole(user.getRole());
-        subUser.setFirstName(user.getFirstname());
-        subUser.setLastName(user.getLastname());
-        subUser.setIdentifier(user.getIdentifier());
-        subUser.setEmail(user.getEmail());
-        subUser.setPassword(user.getPassword());
-        subUser.setProgram(user.getProgram());
-        return subUser;
     }
 }

@@ -13,9 +13,6 @@ public class StudentDTO extends UserDTO{
     private ProjectDTO project;
 
     @JsonProperty
-    private Program program;
-
-    @JsonProperty
     private Set<ProjectDTO> appliedProjects;
 
     public StudentDTO() {
@@ -29,7 +26,7 @@ public class StudentDTO extends UserDTO{
             if(student.getProject()!=null) {
                 this.project = new ProjectDTO(student.getProject());
             }
-            this.program = student.getProgram();
+            this.setProgram(student.getProgram().getShortcut());
 
 
             if (student.getAppliedProjects() != null) {
@@ -48,15 +45,6 @@ public class StudentDTO extends UserDTO{
         this.project = project;
     }
 
-    @Override
-    public Program getProgram() {
-        return program;
-    }
-
-    @Override
-    public void setProgram(Program program) {
-        this.program = program;
-    }
 
     public Set<ProjectDTO> getAppliedProjects() {
         return appliedProjects;

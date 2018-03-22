@@ -35,7 +35,7 @@ public class UserDTO {
     private String password;
 
     @JsonProperty
-    private Program program;
+    private String program;
 
     public UserDTO() {
 
@@ -137,11 +137,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public Program getProgram() {
+    public String getProgram() {
         return program;
     }
 
-    public void setProgram(Program program) {
+    public void setProgram(String program) {
         this.program = program;
     }
 }

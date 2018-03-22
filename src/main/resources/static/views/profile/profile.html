@@ -8,10 +8,10 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="well">
-                        <p><strong>Student Number:</strong> {{user.identifier}}</p>
+                        <p><strong>Identification Number:</strong> {{user.identifier}}</p>
                         <p><strong>Name:</strong> {{user.firstname}} {{user.lastname}}</p>
                         <p><strong>Email:</strong> {{user.email}}</p>
-                        <p><strong>Program:</strong> Software</p>
+                        <p ng-cloak ng-if="user.program"><strong>Program:</strong> {{user.program}}</p>
                     </div>
                 </div>
             </div>
