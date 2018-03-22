@@ -26,6 +26,12 @@ public class ProjectResource {
         return projectController.createProject(projectDTO, principal);
     }
 
+    @PostMapping("/apply/{id}")
+    public Response applyForProject(Principal principal, @PathVariable("id") String id) {
+
+        return projectController.applyForProject(id, principal);
+    }
+
     @GetMapping("/{id}")
     public Response getProjectById(@PathVariable("id") String id){
         return projectController.getProjectById(id);
