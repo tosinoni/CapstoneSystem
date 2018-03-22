@@ -55,4 +55,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new User(webUser.getUserName(), webUser.getPassword(),
                 Arrays.asList(new SimpleGrantedAuthority(webUser.getRole().toString())));
     }
+
 }

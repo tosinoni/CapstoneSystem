@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="well well-sm">
-                            <form class="form-horizontal" action="" method="post">
+                            <form class="form-horizontal" name="frm" ng-submit="sendEmail()">
                                 <fieldset>
                                     <legend class="text-center">Send Email</legend>
 
@@ -17,11 +17,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="to">To</label>
                                         <div class="col-md-9">
-                                            <select required="required" id="to" class="form-control" name="to" style="width: 100%">
-                                                <option value="">Students</option>
-                                                <option value="ALL">All Students</option>
-                                                <option value="SWP">Students With Projects</option>
-                                                <option value="SWOP">Students Without Projects</option>
+                                            <select select2 required id="to" ng-model="email.recipients" class="form-control" name="to" style="width: 100%"
+                                                    ng-options="recipient for recipient in recipients">
                                             </select>
                                         </div>
                                     </div>
@@ -30,7 +27,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="email">Subject</label>
                                         <div class="col-md-9">
-                                            <input required="required" id="email" name="email" type="text" placeholder="Subject" class="form-control">
+                                            <input required ng-model="email.subject" id="email" name="email" type="text" placeholder="Subject" class="form-control">
                                         </div>
                                     </div>
 
@@ -38,7 +35,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="message">Your message</label>
                                         <div class="col-md-9">
-                                            <textarea required="required" class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
+                                            <textarea required ng-model="email.content"  class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
                                         </div>
                                     </div>
 

@@ -6,5 +6,6 @@ public class CoordinatorDTO extends UserDTO{
 
     public CoordinatorDTO(Coordinator coordinator) {
         super(coordinator);
+
     }
 }
