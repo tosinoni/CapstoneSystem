@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
+import javax.jws.soap.SOAPBinding;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.security.Principal;
@@ -35,7 +36,6 @@ public class SignUpLogInController {
     @Autowired
     CoordinatorRepository coordinatorRepository;
 
-    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -81,6 +81,8 @@ public class SignUpLogInController {
             return Response.status(Response.Status.OK).build();
         }
 
+
+        UserRepository userRepository = getUserRepository(username);
         WebUser user = userRepository.findByUserName(username);
 
         if (user == null) {
@@ -190,6 +192,20 @@ public class SignUpLogInController {
 
 
         return Response.status(Response.Status.CREATED).build();
+
+    }
+
+    private UserRepository getUserRepository(String username) {
+        Student studentdb=studentRepository.findByUserName(username);
+        Professor professordb = professorRepository.findByUserName(username);
+
+        if(studentdb!=null){
+            return studentRepository;
+        }else if (professordb!=null){
+            return professorRepository;
+        }
+
+        return coordinatorRepository;
 
     }
 

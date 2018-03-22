@@ -411,7 +411,7 @@ public class SignUpLogInTest {
         user.setIdentifier(12134443);
         user.setFirstname("ali");
         user.setLastname("hammoud");
-        user.setProgram(Program.ELECTRICAL_ENGINEERING);
+        user.setProgram(Program.ELECTRICAL_ENGINEERING.getShortcut());
 
         String requestJson=ow.writeValueAsString(user);
         request.contentType(APPLICATION_JSON_UTF8)

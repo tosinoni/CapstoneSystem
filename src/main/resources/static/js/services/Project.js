@@ -32,6 +32,15 @@ angular.module('CapstoneSystem')
                 }, function (err) {
                     return err;
                 });
+            },
+
+            applyForProject: function (project) {
+                return $http.post("/api/projects/apply", project)
+                .then(function (res) {
+                    return res;
+                }, function (err) {
+                    return err;
+                });
             }
         }
     });
