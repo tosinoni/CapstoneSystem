@@ -59,6 +59,11 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 controller: 'AnnouncementsController',
                 css: 'css/home/announcements.css',
             })
+            .when('/schedule', {
+                templateUrl: 'views/projects/schedule.html',
+                controller: 'ScheduleController',
+                css: 'css/projects/schedule.css',
+            })
             .otherwise({
                 templateUrl: 'views/error/error.html'
             });
@@ -90,4 +95,5 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
 
         authManager.checkAuthOnRefresh();
         authManager.redirectWhenUnauthenticated();
+        $('.sidenav').css("height",$(document).height() + "px");
     });
