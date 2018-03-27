@@ -5,7 +5,7 @@
             <h1 class="portalheader">
                 <i class="icon-drawer" aria-hidden="true"></i> Dashboard
             </h1>
-            <div ng-cloak ng-show="studentHasProject">
+            <div ng-cloak ng-show="!studentHasProject">
                 <h4 class="h4TileHeader"><i class="icon-home"></i> Project Information</h4>
                 <div class="row">
                     <div class="col-sm-7">
@@ -14,7 +14,7 @@
                             <p><strong>Project ID:</strong> 24</p>
                             <p><strong>Title:</strong> Secure Electronic Communication Platform</p>
                             <p><strong>Supervisor:</strong> Jason Jaskolka</p>
-                            <p><strong>Second Reader:</strong> David Huang</p>
+                            <p><strong>Oral Presentation:</strong> Monday March 12 from 1:00PM to 2:00PM.</p>
                         </div>
                     </div>
                     <div class="col-sm-5">
@@ -29,6 +29,13 @@
                 </div>
             </div>
             <h4 class="h4TileHeader"><i class="icon-rocket"></i> My Projects</h4>
+            <div class="alert alert-info" ng-cloak ng-show="isProfOrCoordinator">
+                <strong>Oral Presentations:</strong>
+                <ul>
+                    <li><strong>SECP</strong> scheduled for Monday March 12 from 1:00PM to 2:00PM.</li>
+                    <li><strong>Apple Sauce Robots</strong> scheduled for Tuesday March 13 from 4:00PM to 5:00PM.</li>
+                </ul>
+            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="well">
