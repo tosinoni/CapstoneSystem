@@ -7,6 +7,9 @@
             </h1>
             <div ng-cloak ng-show="!studentHasProject">
                 <h4 class="h4TileHeader"><i class="icon-home"></i> Project Information</h4>
+                <div class="alert alert-danger" ng-cloak ng-show="!isProfOrCoordinator">
+                    Your oral presentation is scheduled for <strong>Monday March 12 from 1:00PM to 2:00PM.</strong>
+                </div>
                 <div class="row">
                     <div class="col-sm-7">
                         <div class="well">
@@ -29,7 +32,7 @@
                 </div>
             </div>
             <h4 class="h4TileHeader"><i class="icon-rocket"></i> My Projects</h4>
-            <div class="alert alert-info" ng-cloak ng-show="isProfOrCoordinator">
+            <div class="alert alert-danger" ng-cloak ng-show="isProfOrCoordinator">
                 <strong>Oral Presentations:</strong>
                 <ul>
                     <li><strong>SECP</strong> scheduled for Monday March 12 from 1:00PM to 2:00PM.</li>
