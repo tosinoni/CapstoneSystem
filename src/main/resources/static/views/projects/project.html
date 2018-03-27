@@ -8,16 +8,8 @@
                     </h1>
                 </div>
                 <div class="col-sm-12">
-                    <div class="actionsbar dropdown">
+                    <div class="actionsbar">
                         <div ng-cloak ng-if="isUserAStudent">
-                            <button class="btn btn-basic dropdown-toggle" type="button" data-toggle="dropdown"><i class="icon-docs" aria-hidden="true"></i> Submissions (2)
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">1. <strong>Proposal.pdf</strong> - September 10, 2017 14:56</a></li>
-                                <li><a href="#">2. <strong>FinalReport.pdf</strong> - March 26, 2018 22:13</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#"><i class="icon-cloud-upload" aria-hidden="true"></i> Submit Document</a></li>
-                            </ul>
                             <button title="Apply" ng-cloak ng-if="isApply" ng-click="applyForProject()" type="button" class="btn btn-success"><i class="icon-check"></i> Apply</button>
                             <button title="Cancel" ng-cloak ng-if="isCancel" type="button" class="btn btn-danger"><i class="icon-close"></i> Cancel</button>
                         </div>
@@ -27,12 +19,6 @@
                             <button data-toggle="modal" data-target="#addStudentsModal" title="Students" type="button" class="btn btn-primary"><i class="icon-plus"></i> Students</button>
                             <button title="Archive" type="button" class="btn btn-success"><i class="icon-pin"></i> Archive</button>
                             <button title="Delete" type="button" class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
-                            <button class="btn btn-basic dropdown-toggle" type="button" data-toggle="dropdown"><i class="icon-docs" aria-hidden="true"></i> Submissions (2)
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">1. <strong>Proposal.pdf</strong> - September 10, 2017 14:56</a></li>
-                                <li><a href="#">2. <strong>FinalReport.pdf</strong> - March 26, 2018 22:13</a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
