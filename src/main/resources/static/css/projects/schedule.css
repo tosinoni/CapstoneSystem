@@ -83,3 +83,18 @@
     background: inherit;
     left: 20px;
 }
+
+.h4TileHeader{
+    font-weight: bold;
+}
+
+.actionsbar {
+    margin-top: 20px;
+    float: right;
+}
+@media only screen and (max-width: 768px) {
+    .actionsbar {
+        float: none;
+        text-align: center;
+    }
+}
