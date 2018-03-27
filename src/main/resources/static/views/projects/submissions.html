@@ -1,0 +1,99 @@
+<body>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-9">
+            <h1 class="portalheader">
+                <i class="icon-cloud-upload" aria-hidden="true"></i> Submissions
+            </h1>
+            <br>
+            <div class="alert alert-warning" ng-cloak ng-show="!isProfOrCoordinator">
+                <strong>Note:</strong> The final report is due Wednesday April 11!
+            </div>
+            <table id="submissionsTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Project</th>
+                    <th>Submission</th>
+                    <th>Date</th>
+                    <th style="text-align: right">Grade</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Secure Electronic Communication Platform</td>
+                    <td>ProgressReport.pdf</td>
+                    <td>3/1/2018 5:48PM</td>
+                    <td style="text-align: right">
+                        <button data-target="#grades"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Secure Electronic Communication Platform</td>
+                    <td>FinalReport.pdf</td>
+                    <td>3/19/2018 10:12PM</td>
+                    <td style="text-align: right">
+                        <button data-target="#grades"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Autonomous Vehicles</td>
+                    <td>FinalReport.pdf</td>
+                    <td>3/18/2018 7:42PM</td>
+                    <td style="text-align: right">
+                        <button data-target="#grades"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+<!-- Modal -->
+<div class="modal fade" id="grades" role="dialog">
+    <div class="modal-dialog" style="width: 90%; height : 80%">
+
+        <!-- Modal content-->
+        <form class="modal-content" ng-submit="editGrade()" name="frm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="icon-pencil" aria-hidden="true"></i> Edit Grades for SECP</h4>
+            </div>
+            <div class="modal-body">
+                <h4><strong><i class="icon-doc" aria-hidden="true"></i> FinalReport.pdf</strong></h4>
+                <form class="form-horizontal" action="/">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Password:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="remember"> Remember me</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </form>
+
+    </div>
+</div>
