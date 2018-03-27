@@ -53,6 +53,7 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 templateUrl: 'views/email/email.html',
                 controller: 'EmailController',
                 css: 'css/email/email.css',
+                requiresLogin: true
             })
             .when('/announcements', {
                 templateUrl: 'views/home/announcements.html',
@@ -63,6 +64,7 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 templateUrl: 'views/projects/schedule.html',
                 controller: 'ScheduleController',
                 css: 'css/projects/schedule.css',
+                requiresLogin: true
             })
             .otherwise({
                 templateUrl: 'views/error/error.html'
