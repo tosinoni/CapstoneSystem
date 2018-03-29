@@ -16,8 +16,6 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
         });
         $httpProvider.interceptors.push('jwtInterceptor');
 
-        $('.sidenav').css("height",$(document).height() + "px");
-
         $routeProvider
             .when('/', {
                 templateUrl: 'views/home/home.html',
@@ -55,6 +53,7 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 templateUrl: 'views/email/email.html',
                 controller: 'EmailController',
                 css: 'css/email/email.css',
+                requiresLogin: true
             })
             .when('/announcements', {
                 templateUrl: 'views/home/announcements.html',
@@ -65,6 +64,12 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 templateUrl: 'views/projects/submissions.html',
                 controller: 'SubmissionsController',
                 css: 'css/projects/submissions.css',
+                requiresLogin: true
+            })
+            .when('/schedule', {
+                templateUrl: 'views/projects/schedule.html',
+                controller: 'ScheduleController',
+                css: 'css/projects/schedule.css',
                 requiresLogin: true
             })
             .otherwise({
@@ -98,4 +103,5 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
 
         authManager.checkAuthOnRefresh();
         authManager.redirectWhenUnauthenticated();
+        $('.sidenav').css("height",$(document).height() + "px");
     });
