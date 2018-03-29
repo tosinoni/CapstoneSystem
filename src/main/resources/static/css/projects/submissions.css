@@ -1,0 +1,46 @@
+.portalheader{
+    font-family:"Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 2.5em;
+    font-weight: 300;
+    color: #428bca;
+    margin-bottom: 1em;
+    margin-bottom: 0px;
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+.h4TileHeader{
+    font-weight: bold;
+}
+
+.red{
+    color: red;
+}
+
+.blue{
+    color: blue;
+}
+
+.green{
+    color: green;
+}
+.actionsbar {
+    margin-top: 20px;
+    float: right;
+}
+@media only screen and (max-width: 768px) {
+    .actionsbar {
+        float: none;
+        text-align: center;
+    }
+}
+
+.studentLabel {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+}​

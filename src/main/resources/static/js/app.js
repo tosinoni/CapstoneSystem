@@ -60,6 +60,12 @@ angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala
                 controller: 'AnnouncementsController',
                 css: 'css/home/announcements.css',
             })
+            .when('/submissions', {
+                templateUrl: 'views/projects/submissions.html',
+                controller: 'SubmissionsController',
+                css: 'css/projects/submissions.css',
+                requiresLogin: true
+            })
             .when('/schedule', {
                 templateUrl: 'views/projects/schedule.html',
                 controller: 'ScheduleController',
