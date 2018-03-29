@@ -1,8 +1,5 @@
 angular.module('CapstoneSystem')
     .controller('SubmissionsController', function ($scope, User, Project) {
-        var table = $('#submissionsTable').DataTable( {
-            responsive: true
-        } );
         $scope.isProfOrCoordinator = false;
 
         User.getCurrentUser().then(function (user) {
@@ -41,9 +38,9 @@ angular.module('CapstoneSystem')
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Output the result in an element with id="demo"
-            document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-                + minutes + "m " + seconds + "s ";
-
+            if(document.getElementById("demo")){
+                document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            }
             // If the count down is over, write some text
             if (distance < 0) {
                 clearInterval(x);
