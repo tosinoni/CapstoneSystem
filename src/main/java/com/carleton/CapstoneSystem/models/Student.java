@@ -15,7 +15,7 @@ public class Student extends WebUser{
     @Column(name="program",nullable=true)
     private Program program;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Project> appliedProjects = new LinkedHashSet<Project>();
 
 
