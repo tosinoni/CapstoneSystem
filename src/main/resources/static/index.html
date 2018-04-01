@@ -34,11 +34,12 @@
                         <li ng-cloak ng-if="isAuthenticated"><a href="/welcome">Dashboard</a></li>
                         <li><a href="/projects">Projects</a></li>
                         <li><a href="/announcements">Announcements</a></li>
-                        <li ng-cloak ng-if="isAuthenticated"><a href="#">Oral Presentation</a></li>
+                        <li ng-cloak ng-if="isAuthenticated"><a href="/schedule">Schedule Availability</a></li>
+                        <li ng-cloak ng-if="isAuthenticated"><a href="/submissions">Submissions</a></li>
                         <li ng-if="isAuthenticated"><a href="/email">Email</a></li>
                         <li ng-if="isAuthenticated"><a href="/profile">Profile</a></li>
                         <li ng-cloak class="active" ng-if="!isAuthenticated"><a href="/login">Login</a></li>
-                        <li ng-cloak ng-if="isAuthenticated"><a href="#">Logout</a></li>
+                        <li ng-cloak ng-if="isAuthenticated" ng-click="logout()"><a href="#">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -52,7 +53,8 @@
                         <li ng-cloak ng-if="isAuthenticated"><a href="/welcome">Dashboard</a></li>
                         <li><a href="/projects">Projects</a></li>
                         <li><a href="/announcements">Announcements</a></li>
-                        <li ng-cloak ng-if="isAuthenticated"><a href="#">Oral Presentation</a></li>
+                        <li ng-cloak ng-if="isAuthenticated"><a href="/schedule">Schedule Availability</a></li>
+                        <li ng-cloak ng-if="isAuthenticated"><a href="/submissions">Submissions</a></li>
                         <li ng-if="isAuthenticated"><a href="/email">Email</a></li>
                         <li ng-if="isAuthenticated"><a href="/profile">Profile</a></li>
                         <li ng-cloak class="active" ng-if="!isAuthenticated"><a href="/login">Login</a></li>
@@ -92,6 +94,8 @@
         <script src="js/profile/profile-controller.js"></script>
         <script src="js/home/announcements-controller.js"></script>
         <script src="js/email/email-controller.js"></script>
+        <script src="js/projects/submissions-controller.js"></script>
+        <script src="js/projects/schedule-controller.js"></script>
 
         <script src="js/services/Auth.js"></script>
         <script src="js/services/User.js"></script>
