@@ -171,7 +171,7 @@ public class ProjectController {
             return ProjectErrorMessages.INVALID_STUDENT_PROVIDED_FOR_ADD_STUDENTS;
         } else if (!project.getAppliedStudents().contains(student)) {
             return String.format(ProjectErrorMessages.STUDENT_NOT_APPLIED_FOR_PROJECT, student.getUserName());
-        } else if(student.getProject() != null) {
+        } else if(student.getProject() != null && !student.getProject().equals(project)) {
             return String.format(ProjectErrorMessages.STUDENT_REGISTERED_FOR_PROJECT_ALREADY, student.getUserName());
         }
 
