@@ -11,7 +11,7 @@
                     <div class="actionsbar">
                         <div ng-cloak ng-if="isUserAStudent">
                             <button title="Apply" ng-cloak ng-if="isApply" ng-click="applyForProject()" type="button" class="btn btn-success"><i class="icon-check"></i> Apply</button>
-                            <button title="Cancel" ng-cloak ng-if="isCancel" type="button" class="btn btn-danger"><i class="icon-close"></i> Cancel</button>
+                            <button title="Cancel" ng-cloak ng-if="isCancel" ng-click="cancelApplicationForProject()" type="button" class="btn btn-danger"><i class="icon-close"></i> Cancel</button>
                         </div>
 
                         <div ng-cloak ng-if="isProjectForProf">
