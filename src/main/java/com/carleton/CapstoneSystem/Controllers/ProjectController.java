@@ -79,21 +79,23 @@ public class ProjectController {
     }
 
     public Response applyForProject(ProjectDTO projectDTO, Principal principal) {
-
-        if(projectDTO == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(ProjectErrorMessages.EMPTY_PROJECT_INFO).build();
-        }
-
-        Project project = getProjectFromId(Long.toString(projectDTO.getId()));
+        Project project = getProjectFromId(projectDTO);
         validatePrincipal(principal);
 
-        Student student = studentRepository.findByUserName(principal.getName());
-
-        if(student == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(ProjectErrorMessages.INVALID_USER).build();
-        }
+        Student student = getStudentFromUsername(principal.getName());
 
         student.applyForProject(project);
+        Student studentFromDb = studentRepository.save(student);
+
+        return  Response.status(Response.Status.OK).entity(new StudentDTO(studentFromDb)).build();
+    }
+
+    public Response cancelApplicationForProject(ProjectDTO projectDTO, Principal principal) {
+        Project project = getProjectFromId(projectDTO);
+        validatePrincipal(principal);
+
+        Student student = getStudentFromUsername(principal.getName());
+        student.removeAppliedProject(project);
         Student studentFromDb = studentRepository.save(student);
 
         return  Response.status(Response.Status.OK).entity(new StudentDTO(studentFromDb)).build();
@@ -117,12 +119,27 @@ public class ProjectController {
         return "";
     }
 
-    private Project getProjectFromId(String id) {
-        if(!StringUtils.isStrictlyNumeric(id)) {
-            throw new WebApplicationException(ProjectErrorMessages.INVALID_ID, Response.Status.BAD_REQUEST);
+
+    private Project getProjectFromId(ProjectDTO projectDTO) {
+        if(projectDTO == null) {
+            throw new WebApplicationException(ProjectErrorMessages.EMPTY_PROJECT_INFO, Response.Status.BAD_REQUEST);
         }
 
-        Project project = projectRepository.findProjectById(Long.parseLong(id));
+        return getProjectFromId(projectDTO.getId());
+    }
+
+    private Student getStudentFromUsername(String username) {
+        Student student = studentRepository.findByUserName(username);
+
+        if(student == null) {
+            throw new WebApplicationException(ProjectErrorMessages.INVALID_USER, Response.Status.BAD_REQUEST);
+        }
+
+        return student;
+    }
+
+    private Project getProjectFromId(long id) {
+        Project project = projectRepository.findProjectById(id);
 
         if(project == null) {
             throw new WebApplicationException(ProjectErrorMessages.INVALID_ID, Response.Status.BAD_REQUEST);

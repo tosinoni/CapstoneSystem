@@ -14,6 +14,7 @@ angular.module('CapstoneSystem')
                     $scope.studentHasProject =true;
                 }
 
+                console.log(user);
                 if(user.projectsSupervised) {
                     $scope.projects = user.projectsSupervised;
                 } else if(user.appliedProjects) {

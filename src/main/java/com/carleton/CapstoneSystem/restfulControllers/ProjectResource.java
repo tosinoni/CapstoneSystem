@@ -32,6 +32,12 @@ public class ProjectResource {
         return projectController.applyForProject(projectDTO, principal);
     }
 
+    @PostMapping("/cancelApplication")
+    public Response cancelApplicationForProject(Principal principal, @RequestBody ProjectDTO projectDTO) {
+
+        return projectController.cancelApplicationForProject(projectDTO, principal);
+    }
+
     @GetMapping("/{id}")
     public Response getProjectById(@PathVariable("id") String id){
         return projectController.getProjectById(id);
