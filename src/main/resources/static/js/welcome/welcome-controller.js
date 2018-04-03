@@ -12,6 +12,7 @@ angular.module('CapstoneSystem')
                 $scope.isProfOrCoordinator = $scope.isAuthenticated && isUserAprofOrCoordinator;
                 if(user.project && !isUserAprofOrCoordinator) {
                     $scope.studentHasProject =true;
+                    $scope.project = user.project;
                 }
 
                 if(user.projectsSupervised) {

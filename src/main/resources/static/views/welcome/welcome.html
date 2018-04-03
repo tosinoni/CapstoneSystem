@@ -5,7 +5,7 @@
             <h1 class="portalheader">
                 <i class="icon-drawer" aria-hidden="true"></i> Dashboard
             </h1>
-            <div ng-cloak ng-show="!studentHasProject">
+            <div ng-cloak ng-if="studentHasProject">
                 <h4 class="h4TileHeader"><i class="icon-home"></i> Project Information</h4>
                 <div class="alert alert-danger" ng-cloak ng-show="!isProfOrCoordinator">
                     Your oral presentation is scheduled for <strong>Monday March 12 from 1:00PM to 2:00PM.</strong>
@@ -14,24 +14,23 @@
                     <div class="col-sm-7">
                         <div class="well">
                             <h4 class="h4TileHeader"><i class="icon-notebook"></i> Project Details</h4>
-                            <p><strong>Project ID:</strong> 24</p>
-                            <p><strong>Title:</strong> Secure Electronic Communication Platform</p>
-                            <p><strong>Supervisor:</strong> Jason Jaskolka</p>
+                            <p><strong>Project ID:</strong> {{project.id}}</p>
+                            <p><strong>Title:</strong> {{project.name}}</p>
+                            <p><strong>Supervisor:</strong> {{project.supervisor.firstname}} {{project.supervisor.lastname}}</p>
                             <p><strong>Oral Presentation:</strong> Monday March 12 from 1:00PM to 2:00PM.</p>
                         </div>
                     </div>
                     <div class="col-sm-5">
                         <div class="well">
                             <h4 class="h4TileHeader"><i class="icon-people"></i> Project Members</h4>
-                            <p><i class="icon-user"></i> Ali Farah</p>
-                            <p><i class="icon-user"></i> Lava Tahir</p>
-                            <p><i class="icon-user"></i> Tosin Oni</p>
-                            <p><i class="icon-user"></i> Vincent Vu</p>
+                            <p ng-repeat="member in project.members">
+                                <i class="icon-user"></i> {{member.firstname}} {{member.lastname}}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <h4 class="h4TileHeader"><i class="icon-rocket"></i> My Projects</h4>
+            <h4 class="h4TileHeader" ng-if="!studentHasProject"><i class="icon-rocket"></i> My Projects</h4>
             <div class="alert alert-danger" ng-cloak ng-show="isProfOrCoordinator">
                 <strong>Oral Presentations:</strong>
                 <ul>
@@ -39,7 +38,7 @@
                     <li><strong>Apple Sauce Robots</strong> scheduled for Tuesday March 13 from 4:00PM to 5:00PM.</li>
                 </ul>
             </div>
-            <div class="row">
+            <div class="row" ng-if="!studentHasProject">
                 <div class="col-sm-12">
                     <div class="well">
                         <div class="alert alert-success" ng-cloak ng-show="!isProfOrCoordinator">

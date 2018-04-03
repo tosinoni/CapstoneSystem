@@ -84,10 +84,10 @@ public class ProjectController {
 
         Student student = getStudentFromUsername(principal.getName());
 
-        student.applyForProject(project);
-        Student studentFromDb = studentRepository.save(student);
+        project.addStudentToAppliedList(student);
+        Project projectFromDb = projectRepository.save(project);
 
-        return  Response.status(Response.Status.OK).entity(new StudentDTO(studentFromDb)).build();
+        return  Response.status(Response.Status.OK).entity(new ProjectDTO(projectFromDb)).build();
     }
 
     public Response cancelApplicationForProject(ProjectDTO projectDTO, Principal principal) {
@@ -95,10 +95,33 @@ public class ProjectController {
         validatePrincipal(principal);
 
         Student student = getStudentFromUsername(principal.getName());
-        student.removeAppliedProject(project);
-        Student studentFromDb = studentRepository.save(student);
 
-        return  Response.status(Response.Status.OK).entity(new StudentDTO(studentFromDb)).build();
+        project.removeStudentFromAppliedList(student);
+        Project projectFromDb = projectRepository.save(project);
+
+        return  Response.status(Response.Status.OK).entity(new ProjectDTO(projectFromDb)).build();
+    }
+
+    public Response addStudents(ProjectDTO projectDTO){
+        if(projectDTO == null) {
+            throw new WebApplicationException(ProjectErrorMessages.EMPTY_PROJECT_INFO, Response.Status.BAD_REQUEST);
+        }
+
+        Project project = getProjectFromId(projectDTO);
+
+        String error = validateProjectDTOForAddStudents(projectDTO, project);
+        if (!StringUtils.isNullOrEmpty(error)) {
+            throw new WebApplicationException(error, Response.Status.BAD_REQUEST);
+        }
+
+        Set<StudentDTO> projectMembers = projectDTO.getMembers().stream().map(studentDTO -> {
+            Student student = studentRepository.findByUserName(studentDTO.getUsername());
+            student.setProject(project);
+            Student studentFromDb = studentRepository.save(student);
+            return new StudentDTO(studentFromDb);
+        }).collect(Collectors.toSet());
+
+        return  Response.status(Response.Status.OK).entity(projectMembers).build();
     }
 
     private String validateProjectDTO(ProjectDTO projectDTO) {
@@ -114,6 +137,42 @@ public class ProjectController {
             return ProjectErrorMessages.INVALID_MAX_CAPACITY;
         } else if(Integer.parseInt(projectDTO.getMaxCapacity()) <= Integer.parseInt(projectDTO.getMinCapacity())) {
             return ProjectErrorMessages.INVALID_CAPACITY;
+        }
+
+        return "";
+    }
+
+    private String validateProjectDTOForAddStudents(ProjectDTO projectDTO, Project project) {
+
+        if(projectDTO.getMembers() == null ||
+                projectDTO.getMembers().size() < project.getMinCapacity()) {
+            return String.format(ProjectErrorMessages.INVALID_MIN_CAPACITY_ADD_STUDENTS, project.getMinCapacity());
+        } else if(projectDTO.getMembers().size() > project.getMaxCapacity()) {
+            return String.format(ProjectErrorMessages.INVALID_MAX_CAPACITY_ADD_STUDENTS, project.getMaxCapacity());
+        }
+
+        for (StudentDTO studentDTO : projectDTO.getMembers()) {
+            String errorFromValidateStudentDTO = validateStudentDTOForAddStudents(studentDTO, project);
+
+            if(!StringUtils.isNullOrEmpty(errorFromValidateStudentDTO)) {
+                return errorFromValidateStudentDTO;
+            }
+        }
+        return "";
+    }
+
+    private String validateStudentDTOForAddStudents(StudentDTO studentDTO, Project project) {
+        if (studentDTO == null) {
+            return ProjectErrorMessages.EMPTY_STUDENT_FOR_ADD_STUDENTS;
+        }
+
+        Student student = studentRepository.findByUserName(studentDTO.getUsername());
+        if(student == null) {
+            return ProjectErrorMessages.INVALID_STUDENT_PROVIDED_FOR_ADD_STUDENTS;
+        } else if (!project.getAppliedStudents().contains(student)) {
+            return String.format(ProjectErrorMessages.STUDENT_NOT_APPLIED_FOR_PROJECT, student.getUserName());
+        } else if(student.getProject() != null) {
+            return String.format(ProjectErrorMessages.STUDENT_REGISTERED_FOR_PROJECT_ALREADY, student.getUserName());
         }
 
         return "";

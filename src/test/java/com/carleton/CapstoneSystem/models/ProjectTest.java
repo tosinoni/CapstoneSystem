@@ -108,4 +108,23 @@ public class ProjectTest {
         assertEquals(project.containMember(student),false);
 
     }
+
+    @Test
+    public void testAppliedStudents() {
+        AssertAnnotations.assertField( Project.class, "appliedStudents", ManyToMany.class, JoinTable.class);
+
+        //testing the @JoinTable annotation
+        JoinTable j = ReflectTool.getFieldAnnotation(Project.class, "appliedStudents", JoinTable.class);
+        assertEquals("JoinTable appliedStudents:  name is not equal", "project_applied_students", j.name());
+        assertEquals("JoinTable appliedStudents:  joinColumns size is not 1", 1, j.joinColumns().length);
+        assertEquals("JoinTable appliedStudents:  inverseJoinColumns size is not 1", 1, j.inverseJoinColumns().length);
+
+        //testing the joincolumn inside JoinColumns
+        JoinColumn joinColumn = j.joinColumns()[0];
+        assertEquals("JoinColumn appliedStudents: name is not equal", "project_id", joinColumn.name());
+
+        //testing the joincolumn inside inverseJoinColumns
+        joinColumn = j.inverseJoinColumns()[0];
+        assertEquals("JoinColumn appliedStudents: name is not equal", "student_id", joinColumn.name());
+    }
 }

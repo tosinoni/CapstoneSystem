@@ -50,6 +50,15 @@ angular.module('CapstoneSystem')
                 }, function (err) {
                     return err;
                 });
+            },
+
+            addStudents: function (project) {
+                return $http.post("/api/projects/addStudents", project)
+                .then(function (res) {
+                    return res;
+                }, function (err) {
+                    return err;
+                });
             }
         }
     });

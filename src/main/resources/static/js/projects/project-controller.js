@@ -68,4 +68,29 @@ angular.module('CapstoneSystem')
             }
             SwalService.delete(callbackForCancelProject, 'Yes, Cancel Application!');
         }
+
+        $scope.openAddStudentToProjectModal = function () {
+            $scope.appliedStudents = [];
+
+            //obtaining the list of students real time
+            Project.getProjectById(projectId).then(function (project) {
+                if (project.appliedStudents) {
+                    $scope.appliedStudents = project.appliedStudents;
+                    $scope.project.members = project.members;
+                }
+                $('#addStudentsModal').modal('toggle');
+            });
+        }
+
+        $scope.addStudentsToProject = function () {
+            Project.addStudents($scope.project).then(function (res) {
+                if (res.status == 200) {
+                    swal('Yaah!', 'Students successfully added.', 'success');
+                } else {
+                    swal('Oops..!', res.data.message, 'error');
+                }
+
+                $('#addStudentsModal').modal('toggle');
+            });
+        }
     });

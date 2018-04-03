@@ -4,6 +4,7 @@ import com.carleton.CapstoneSystem.models.Program;
 import com.carleton.CapstoneSystem.models.Project;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,6 +38,9 @@ public class ProjectDTO {
     @JsonProperty
     private Set<StudentDTO> members = new LinkedHashSet<>();
 
+    @JsonProperty
+    private Set<StudentDTO> appliedStudents = new HashSet<>();
+
     public ProjectDTO() {
 
     }
@@ -64,6 +68,8 @@ public class ProjectDTO {
                StudentDTO studentDTO = new StudentDTO();
                studentDTO.setId(student.getId());
                studentDTO.setUsername(student.getUserName());
+               studentDTO.setFirstname(student.getFirstName());
+               studentDTO.setLastname(student.getLastName());
                 return studentDTO;
             }).collect(Collectors.toSet());
         }
@@ -71,6 +77,17 @@ public class ProjectDTO {
         if(project.getProgramsAllowed() != null) {
             this.programsAllowed = project.getProgramsAllowed().stream().map(program -> {
                 return program.getShortcut();
+            }).collect(Collectors.toSet());
+        }
+
+        if(project.getAppliedStudents() != null) {
+            this.appliedStudents = project.getAppliedStudents().stream().map(student -> {
+                StudentDTO studentDTO = new StudentDTO();
+                studentDTO.setId(student.getId());
+                studentDTO.setUsername(student.getUserName());
+                studentDTO.setFirstname(student.getFirstName());
+                studentDTO.setLastname(student.getLastName());
+                return studentDTO;
             }).collect(Collectors.toSet());
         }
     }
@@ -145,5 +162,13 @@ public class ProjectDTO {
 
     public void setMembers(Set<StudentDTO> members) {
         this.members = members;
+    }
+
+    public Set<StudentDTO> getAppliedStudents() {
+        return appliedStudents;
+    }
+
+    public void setAppliedStudents(Set<StudentDTO> appliedStudents) {
+        this.appliedStudents = appliedStudents;
     }
 }
