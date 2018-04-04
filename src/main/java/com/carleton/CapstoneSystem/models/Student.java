@@ -15,7 +15,7 @@ public class Student extends WebUser{
     @Column(name="program",nullable=true)
     private Program program;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "appliedStudents", fetch = FetchType.EAGER)
     private Set<Project> appliedProjects = new LinkedHashSet<Project>();
 
 

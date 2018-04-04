@@ -42,4 +42,10 @@ public class ProjectResource {
     public Response getProjectById(@PathVariable("id") String id){
         return projectController.getProjectById(id);
     }
+
+    @PostMapping("/addStudents")
+    public Response addStudents(@RequestBody ProjectDTO projectDTO) {
+
+        return projectController.addStudents(projectDTO);
+    }
 }

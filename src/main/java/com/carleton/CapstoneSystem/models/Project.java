@@ -32,6 +32,12 @@ public class Project {
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private Set<Student> members;
 
+    @ManyToMany
+    @JoinTable(name = "project_applied_students",
+            joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "student_id") })
+    private Set<Student> appliedStudents = new HashSet<>();
+
     public Project(){
         this(null,null);
     }
@@ -167,6 +173,22 @@ public class Project {
 
     public boolean containMember(Student student) {
         return members.contains(student);
+    }
+
+    public Set<Student> getAppliedStudents() {
+        return appliedStudents;
+    }
+
+    public void setAppliedStudents(Set<Student> appliedStudents) {
+        this.appliedStudents = appliedStudents;
+    }
+
+    public void addStudentToAppliedList(Student student) {
+        appliedStudents.add(student);
+    }
+
+    public void removeStudentFromAppliedList(Student student) {
+        appliedStudents.remove(student);
     }
 }
 
