@@ -35,7 +35,11 @@ public class ProjectController {
 
     public Response getAllProjects() {
         Set<ProjectDTO> allProjects = new LinkedHashSet<>();
-        projectRepository.findAll().forEach(project -> allProjects.add(new ProjectDTO(project)));
+        projectRepository.findAll().forEach(project -> {
+            if(!project.isArchive()) {
+                allProjects.add(new ProjectDTO(project));
+            }
+        });
 
         return Response.status(Response.Status.OK).entity(allProjects).build();
     }
@@ -131,6 +135,18 @@ public class ProjectController {
         project.removeStudentFromAppliedList(student);
         Project projectFromDb = projectRepository.save(project);
 
+        return  Response.status(Response.Status.OK).entity(new ProjectDTO(projectFromDb)).build();
+    }
+
+    public Response archiveProject(ProjectDTO projectDTO, boolean isArchive) {
+        if(projectDTO == null) {
+            throw new WebApplicationException(ProjectErrorMessages.NO_NAME, Response.Status.BAD_REQUEST);
+        }
+
+        Project project = getProjectFromId(projectDTO);
+        project.setArchive(isArchive);
+
+        Project projectFromDb = projectRepository.save(project);
         return  Response.status(Response.Status.OK).entity(new ProjectDTO(projectFromDb)).build();
     }
 

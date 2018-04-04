@@ -13,6 +13,9 @@ angular.module('CapstoneSystem')
             if(project) {
                 $scope.project = project;
 
+                $scope.isArchive = !project.isArchive;
+                $scope.isUnArchive = project.isArchive;
+
                 User.getCurrentUser().then(function (user) {
                     if(user) {
                         $scope.isUserAStudent = $scope.isAuthenticated && user.role == User.STUDENT;
@@ -110,5 +113,35 @@ angular.module('CapstoneSystem')
                     swal('Oops..!', res.data.message, 'error');
                 }
             })
+        }
+
+        $scope.archiveProject = function () {
+            var callbackForArchiveProject = function() {
+                Project.archiveProject($scope.project).then(function (res) {
+                    if (res.status == 200) {
+                        $scope.isArchive = false;
+                        $scope.isUnArchive = true;
+                        swal('Yaah!', 'Project Archived successfully.', 'success');
+                    } else {
+                        swal('Oops..!', res.data.message, 'error');
+                    }
+                });
+            }
+            SwalService.delete(callbackForArchiveProject, 'Yes, Archive project!');
+        }
+
+        $scope.unArchiveProject = function () {
+            var callbackForUnArchiveProject = function() {
+                Project.unArchiveProject($scope.project).then(function (res) {
+                    if (res.status == 200) {
+                        $scope.isArchive = true;
+                        $scope.isUnArchive = false;
+                        swal('Yaah!', 'Project unarchived successfully.', 'success');
+                    } else {
+                        swal('Oops..!', res.data.message, 'error');
+                    }
+                });
+            }
+            SwalService.delete(callbackForUnArchiveProject, 'Yes, Unarchive project!');
         }
     });

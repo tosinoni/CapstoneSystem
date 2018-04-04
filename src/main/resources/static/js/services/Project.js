@@ -61,6 +61,24 @@ angular.module('CapstoneSystem')
                 });
             },
 
+            archiveProject: function (project) {
+                return $http.post("/api/projects/archive", project)
+                .then(function (res) {
+                    return res;
+                }, function (err) {
+                    return err;
+                });
+            },
+
+            unArchiveProject: function (project) {
+                return $http.post("/api/projects/unarchive", project)
+                .then(function (res) {
+                    return res;
+                }, function (err) {
+                    return err;
+                });
+            },
+
             addStudents: function (project) {
                 return $http.post("/api/projects/addStudents", project)
                 .then(function (res) {

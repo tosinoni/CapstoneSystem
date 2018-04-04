@@ -21,26 +21,30 @@ public class ProfessorDTO extends UserDTO{
 
         if(professor != null) {
             if (professor.getProjectsSupervised() != null) {
-                this.projectsSupervised = professor.getProjectsSupervised().stream().map(project -> {
-                    ProjectDTO projectDTO = new ProjectDTO();
-                    projectDTO.setId(project.getId());
-                    projectDTO.setName(project.getName());
-                    projectDTO.setDescription(project.getDescription());
-                    projectDTO.setMinCapacity(project.getMinCapacity());
-                    projectDTO.setMaxCapacity(project.getMaxCapacity());
+                this.projectsSupervised = professor.getProjectsSupervised().stream()
+                        .filter(project -> !project.isArchive()
+                                || (project.isArchive() && project.getSupervisor().equals(professor)))
+                        .map(project -> {
+                            ProjectDTO projectDTO = new ProjectDTO();
+                            projectDTO.setId(project.getId());
+                            projectDTO.setName(project.getName());
+                            projectDTO.setDescription(project.getDescription());
+                            projectDTO.setMinCapacity(project.getMinCapacity());
+                            projectDTO.setMaxCapacity(project.getMaxCapacity());
 
-                    ProfessorDTO professorDTO = new ProfessorDTO();
-                    professorDTO.setFirstname(this.getFirstname());
-                    professorDTO.setLastname(this.getLastname());
+                            ProfessorDTO professorDTO = new ProfessorDTO();
+                            professorDTO.setFirstname(this.getFirstname());
+                            professorDTO.setLastname(this.getLastname());
 
-                    projectDTO.setSupervisor(professorDTO);
+                            projectDTO.setSupervisor(professorDTO);
 
-                    projectDTO.setProgramsAllowed(project.getProgramsAllowed().stream().map(program -> {
-                        return program.getShortcut();
-                    }).collect(Collectors.toSet()));
+                            projectDTO.setProgramsAllowed(project.getProgramsAllowed().stream().map(program -> {
+                                return program.getShortcut();
+                            }).collect(Collectors.toSet()));
 
-                    return projectDTO;
-                }).collect(Collectors.toSet());
+                            projectDTO.setArchive(project.isArchive());
+                            return projectDTO;
+                        }).collect(Collectors.toSet());
             }
         }
     }

@@ -44,6 +44,18 @@ public class ProjectResource {
         return projectController.cancelApplicationForProject(projectDTO, principal);
     }
 
+    @PostMapping("/archive")
+    public Response archiveProject(@RequestBody ProjectDTO projectDTO) {
+
+        return projectController.archiveProject(projectDTO, true);
+    }
+
+    @PostMapping("/unarchive")
+    public Response unarchiveProject(@RequestBody ProjectDTO projectDTO) {
+
+        return projectController.archiveProject(projectDTO, false);
+    }
+
     @GetMapping("/{id}")
     public Response getProjectById(@PathVariable("id") String id){
         return projectController.getProjectById(id);

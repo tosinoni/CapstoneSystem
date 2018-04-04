@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         <tr ng-click="projectClicked(row)" ng-repeat="row in data">
-            <td>{{row.id}}</td>
+            <td><i ng-class="row.isArchive ? 'icon-pin' : ''"> </i>{{row.id}}</td>
             <td>{{row.name}}</td>
             <td ng-if="row.supervisor">{{row.supervisor.firstname}} {{row.supervisor.lastname}}</td>
             <td >{{row.minCapacity}} - {{row.maxCapacity}}</td>
