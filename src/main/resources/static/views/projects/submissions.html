@@ -197,10 +197,15 @@
                 <h4 class="modal-title"><i class="icon-doc" aria-hidden="true"></i> Upload a Deliverable</h4>
             </div>
             <div class="modal-body">
-                <div class="alert alert-danger">
+                <div class="alert alert-danger" ng-cloak ng-if="project.deliverable">
                     <strong>Time Remaining: </strong><span id="demo"></span>
                 </div>
                 <div class="container">
+                    <span>Deliverable:</span>
+                    <select ng-model="project.deliverable" required name="deliverable" required style="width:100%; margin-bottom: 20px">
+                        <option>Essay 1</option>
+                        <option>Essay 2</option>
+                    </select>
                     <input id="submission-file" name="submission-file" type="file">
                 </div>
             </div>
