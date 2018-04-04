@@ -14,7 +14,6 @@ angular.module('CapstoneSystem')
 
         Project.getAllProjects().then(function (projects) {
             if(projects) {
-                console.log(projects);
                 $scope.projects = projects;
             }
         });
