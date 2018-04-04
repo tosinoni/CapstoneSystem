@@ -94,17 +94,6 @@ public class ProjectDTO {
                 return studentDTO;
             }).collect(Collectors.toSet());
         }
-
-        if(project.getAppliedStudents() != null) {
-            this.appliedStudents = project.getAppliedStudents().stream().map(student -> {
-                StudentDTO studentDTO = new StudentDTO();
-                studentDTO.setId(student.getId());
-                studentDTO.setUsername(student.getUserName());
-                studentDTO.setFirstname(student.getFirstName());
-                studentDTO.setLastname(student.getLastName());
-                return studentDTO;
-            }).collect(Collectors.toSet());
-        }
     }
 
     public long getId() {
