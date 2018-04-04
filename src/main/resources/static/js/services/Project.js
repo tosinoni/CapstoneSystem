@@ -95,6 +95,15 @@ angular.module('CapstoneSystem')
                 }, function (err) {
                     return err;
                 });
+            },
+
+            addDeliverable: function (project) {
+                return $http.post("/api/projects/addDeliverable", project)
+                    .then(function (res) {
+                        return res;
+                    }, function (err) {
+                        return err;
+                    });
             }
         }
     });
