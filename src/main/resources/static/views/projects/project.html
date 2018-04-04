@@ -17,7 +17,8 @@
                         <div ng-cloak ng-if="isProjectForProf">
                             <button title="Edit" ng-click="openEditProjectModal()" type="button" class="btn btn-warning"><i class="icon-pencil"></i> Edit</button>
                             <button ng-click="openAddStudentToProjectModal()" title="Students" type="button" class="btn btn-primary"><i class="icon-plus"></i> Students</button>
-                            <button title="Archive" type="button" class="btn btn-success"><i class="icon-pin"></i> Archive</button>
+                            <button ng-cloak ng-if="isArchive" ng-click="archiveProject()" title="Archive" type="button" class="btn btn-success"><i class="icon-pin"></i> Archive</button>
+                            <button ng-cloak ng-if="isUnArchive" ng-click="unArchiveProject()" title="unArchive" type="button" class="btn btn-success"><i class="icon-pin"></i> UnArchive</button>
                             <button title="Delete" type="button" class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
                         </div>
                     </div>

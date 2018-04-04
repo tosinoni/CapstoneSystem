@@ -20,6 +20,8 @@ angular.module('CapstoneSystem')
                 } else if(user.appliedProjects) {
                     $scope.projects = user.appliedProjects;
                 }
+
+                console.log($scope.projects);
             }
         });
 

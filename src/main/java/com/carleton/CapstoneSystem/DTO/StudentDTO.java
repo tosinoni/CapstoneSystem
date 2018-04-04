@@ -1,6 +1,7 @@
 package com.carleton.CapstoneSystem.DTO;
 
 import com.carleton.CapstoneSystem.models.Program;
+import com.carleton.CapstoneSystem.models.Project;
 import com.carleton.CapstoneSystem.models.Student;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,7 +31,9 @@ public class StudentDTO extends UserDTO{
 
 
             if (student.getAppliedProjects() != null) {
-                this.appliedProjects = student.getAppliedProjects().stream().map(appliedProject -> {
+                this.appliedProjects = student.getAppliedProjects().stream()
+                        .filter(appliedProject -> !appliedProject.isArchive())
+                        .map(appliedProject -> {
                     return new ProjectDTO(appliedProject);
                 }).collect(Collectors.toSet());
             }
