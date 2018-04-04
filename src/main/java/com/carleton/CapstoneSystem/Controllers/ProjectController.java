@@ -188,13 +188,9 @@ public class ProjectController {
     }
 
     public Response addDeliverable(ProjectDTO projectDTO){
-        if(projectDTO == null) {
-            throw new WebApplicationException(ProjectErrorMessages.EMPTY_PROJECT_INFO, Response.Status.BAD_REQUEST);
-        }
+        // UPDATE!!
 
-        Project project = getProjectFromId(projectDTO);
-
-        return null;
+        return Response.status(Response.Status.OK).build();
     }
 
     private String validateProjectDTO(ProjectDTO projectDTO, boolean isEdit) {
