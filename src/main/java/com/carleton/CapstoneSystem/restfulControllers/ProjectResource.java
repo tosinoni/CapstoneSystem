@@ -50,6 +50,12 @@ public class ProjectResource {
         return projectController.archiveProject(projectDTO, true);
     }
 
+    @PostMapping("/delete")
+    public Response deleteProject(@RequestBody ProjectDTO projectDTO) {
+
+        return projectController.deleteProject(projectDTO);
+    }
+
     @PostMapping("/unarchive")
     public Response unarchiveProject(@RequestBody ProjectDTO projectDTO) {
 

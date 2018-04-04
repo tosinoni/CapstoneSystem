@@ -1,5 +1,5 @@
 angular.module('CapstoneSystem')
-    .controller('ProjectController', function ($scope, $routeParams, Project, User, SwalService) {
+    .controller('ProjectController', function ($scope, $routeParams, Project, User, SwalService, $location) {
         var projectId = $routeParams.id;
         var canUserApplyForProject = function (user, project) {
             return $scope.isUserAStudent && project.programsAllowed.includes(user.program);
@@ -143,5 +143,19 @@ angular.module('CapstoneSystem')
                 });
             }
             SwalService.delete(callbackForUnArchiveProject, 'Yes, Unarchive project!');
+        }
+
+        $scope.deleteProject = function () {
+            var callbackForDeleteProject = function() {
+                Project.deleteProject($scope.project).then(function (res) {
+                    if (res.status == 200) {
+                        $location.path("/welcome");
+                        swal('Yaah!', 'Project deleted successfully.', 'success');
+                    } else {
+                        swal('Oops..!', res.data.message, 'error');
+                    }
+                });
+            }
+            SwalService.delete(callbackForDeleteProject, 'Yes, Delete project!', "You won't be able to revert this!");
         }
     });

@@ -17,4 +17,6 @@ public interface ProjectErrorMessages {
     String STUDENT_NOT_APPLIED_FOR_PROJECT =  "Request failed. Student %s has not applied for the project.";
     String STUDENT_REGISTERED_FOR_PROJECT_ALREADY =  "Request failed. Student %s has a project already.";
     String INVALID_MAX_CAPACITY_EDIT_PROJECT =  "Request failed. Invalid max capacity, project has members.";
+
+    String MEMBERS_PRESENT_FOR_DELETE_PROJECT =  "Request failed. Project has members and can not be deleted.";
 }
