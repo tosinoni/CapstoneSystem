@@ -3,9 +3,10 @@
 angular.module('CapstoneSystem')
     .factory('SwalService', function() {
 
-        var deleteSwal = function(callback, confirmButtonText) {
+        var deleteSwal = function(callback, confirmButtonText, subText) {
             swal({
                 title: 'Are you sure?',
+                text: subText,
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

@@ -150,6 +150,21 @@ public class ProjectController {
         return  Response.status(Response.Status.OK).entity(new ProjectDTO(projectFromDb)).build();
     }
 
+    public Response deleteProject(ProjectDTO projectDTO) {
+        if(projectDTO == null) {
+            throw new WebApplicationException(ProjectErrorMessages.NO_NAME, Response.Status.BAD_REQUEST);
+        }
+
+        Project project = getProjectFromId(projectDTO);
+
+        if(!Util.isCollectionEmpty(project.getMembers())) {
+            throw new WebApplicationException(ProjectErrorMessages.MEMBERS_PRESENT_FOR_DELETE_PROJECT, Response.Status.BAD_REQUEST);
+        }
+
+        projectRepository.delete(project);
+        return  Response.status(Response.Status.OK).build();
+    }
+
     public Response addStudents(ProjectDTO projectDTO){
         if(projectDTO == null) {
             throw new WebApplicationException(ProjectErrorMessages.EMPTY_PROJECT_INFO, Response.Status.BAD_REQUEST);
