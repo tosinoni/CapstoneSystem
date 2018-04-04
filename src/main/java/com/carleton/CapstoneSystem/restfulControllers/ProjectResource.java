@@ -72,4 +72,10 @@ public class ProjectResource {
 
         return projectController.addStudents(projectDTO);
     }
+
+    @PostMapping("/addDeliverable")
+    public Response addDeliverable(@RequestBody ProjectDTO projectDTO) {
+
+        return projectController.addDeliverable(projectDTO);
+    }
 }

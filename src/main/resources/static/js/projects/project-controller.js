@@ -97,6 +97,22 @@ angular.module('CapstoneSystem')
             });
         }
 
+        $scope.openAddDeliverableToProjectModal = function () {
+            $('#addDeliverableModal').modal('toggle');
+        }
+
+        $scope.addDeliverableToProject = function () {
+            Project.addDeliverable($scope.project).then(function (res) {
+                if (res.status == 200) {
+                    swal('Yaah!', 'Deliverable created successfully.', 'success');
+                } else {
+                    swal('Oops..!', res.data.message, 'error');
+                }
+
+                $('#addDeliverableModal').modal('toggle');
+            });
+        }
+
         $scope.openEditProjectModal = function () {
             $scope.editProjectData = angular.copy($scope.project);
             $('#editProjectModal').modal('toggle');

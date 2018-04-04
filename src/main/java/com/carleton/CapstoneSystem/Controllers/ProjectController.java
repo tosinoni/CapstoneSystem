@@ -187,6 +187,12 @@ public class ProjectController {
         return  Response.status(Response.Status.OK).entity(projectMembers).build();
     }
 
+    public Response addDeliverable(ProjectDTO projectDTO){
+        // UPDATE!!
+
+        return Response.status(Response.Status.OK).build();
+    }
+
     private String validateProjectDTO(ProjectDTO projectDTO, boolean isEdit) {
         if(projectDTO == null || StringUtils.isNullOrEmpty(projectDTO.getName())) {
             return ProjectErrorMessages.NO_NAME;
