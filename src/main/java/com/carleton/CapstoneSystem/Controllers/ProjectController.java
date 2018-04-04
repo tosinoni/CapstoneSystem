@@ -163,7 +163,7 @@ public class ProjectController {
             return ProjectErrorMessages.INVALID_NAME;
         } else if(StringUtils.isNullOrEmpty(projectDTO.getDescription())) {
             return ProjectErrorMessages.NO_DESCRIPTION;
-        }   else if(projectDTO.getMaxCapacity() <= projectDTO.getMinCapacity()) {
+        } else if(projectDTO.getMaxCapacity() <= projectDTO.getMinCapacity()) {
             return ProjectErrorMessages.INVALID_CAPACITY;
         }
 
