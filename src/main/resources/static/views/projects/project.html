@@ -15,7 +15,7 @@
                         </div>
 
                         <div ng-cloak ng-if="isProjectForProf">
-                            <button title="Edit" type="button" class="btn btn-warning"><i class="icon-pencil"></i> Edit</button>
+                            <button title="Edit" ng-click="openEditProjectModal()" type="button" class="btn btn-warning"><i class="icon-pencil"></i> Edit</button>
                             <button ng-click="openAddStudentToProjectModal()" title="Students" type="button" class="btn btn-primary"><i class="icon-plus"></i> Students</button>
                             <button title="Archive" type="button" class="btn btn-success"><i class="icon-pin"></i> Archive</button>
                             <button title="Delete" type="button" class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
@@ -77,3 +77,7 @@
 
     </div>
 </div>
+
+<!-- edit project modal -->
+<kapi-projects-modal name="editProjectModal" frmname="editProjectForm" title="Edit Project" modal-data="editProjectData"
+                     save-fn="editProject(project)"></kapi-projects-modal>

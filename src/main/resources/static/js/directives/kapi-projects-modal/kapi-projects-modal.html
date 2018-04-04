@@ -1,0 +1,35 @@
+<div class="modal fade" id="{{name}}" role="dialog">
+    <div class="modal-dialog" style="width: 90%; height : 80%">
+
+        <!-- Modal content-->
+        <form class="modal-content" ng-submit="submit()" name="{{frmName}}">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="icon-plus" aria-hidden="true"></i> {{title}} </h4>
+            </div>
+            <div class="modal-body">
+                Name:<br>
+                <input type="text" required ng-model="modalData.name" name="projectName" placeholder="Project Name" style="width:100%;">
+
+                <br><br>Description:<br>
+                <textarea froala="froalaOptions" ng-model="modalData.description" required></textarea>
+
+                <br><br>Programs:<br>
+                <select select2 required class="programList" ng-model="modalData.programsAllowedInFullFrom" name="programs[]" multiple
+                        style="width:100%;" ng-options="program for program in programs">
+                </select>
+
+                <br><br>Members:<br>
+                <input type="number" required name="minMembers" ng-model="modalData.minCapacity" placeholder="Min" min="1">
+                to
+                <input type="number" required name="maxMembers" ng-model="modalData.maxCapacity" placeholder="Max" min="1">
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+</div>

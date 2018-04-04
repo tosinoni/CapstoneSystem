@@ -24,16 +24,18 @@ public class ProjectDTO {
     private ProfessorDTO supervisor;
 
     @JsonProperty
-    private String maxCapacity;
+    private int maxCapacity;
 
     @JsonProperty
-    private String minCapacity;
+    private int minCapacity;
 
     @JsonProperty
     private boolean isArchive;
 
     @JsonProperty
     private Set<String> programsAllowed = new LinkedHashSet<>();
+
+    private Set<Program> programsAllowedInFullFrom = new HashSet<>();
 
     @JsonProperty
     private Set<StudentDTO> members = new LinkedHashSet<>();
@@ -49,8 +51,8 @@ public class ProjectDTO {
         this.id = project.getId();
         this.name = project.getName();
         this.description = project.getDescription();
-        this.minCapacity = Integer.toString(project.getMinCapacity());
-        this.maxCapacity = Integer.toString(project.getMaxCapacity());
+        this.minCapacity = project.getMinCapacity();
+        this.maxCapacity = project.getMaxCapacity();
         this.isArchive = project.isArchive();
 
         if(project.getSupervisor() != null) {
@@ -78,6 +80,8 @@ public class ProjectDTO {
             this.programsAllowed = project.getProgramsAllowed().stream().map(program -> {
                 return program.getShortcut();
             }).collect(Collectors.toSet());
+
+            this.programsAllowedInFullFrom = project.getProgramsAllowed();
         }
 
         if(project.getAppliedStudents() != null) {
@@ -124,19 +128,19 @@ public class ProjectDTO {
         this.supervisor = supervisor;
     }
 
-    public String getMaxCapacity() {
+    public int getMaxCapacity() {
         return maxCapacity;
     }
 
-    public void setMaxCapacity(String maxCapacity) {
+    public void setMaxCapacity(int maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
 
-    public String getMinCapacity() {
+    public int getMinCapacity() {
         return minCapacity;
     }
 
-    public void setMinCapacity(String minCapacity) {
+    public void setMinCapacity(int minCapacity) {
         this.minCapacity = minCapacity;
     }
 
@@ -170,5 +174,13 @@ public class ProjectDTO {
 
     public void setAppliedStudents(Set<StudentDTO> appliedStudents) {
         this.appliedStudents = appliedStudents;
+    }
+
+    public Set<Program> getProgramsAllowedInFullFrom() {
+        return programsAllowedInFullFrom;
+    }
+
+    public void setProgramsAllowedInFullFrom(Set<Program> programsAllowedInFullFrom) {
+        this.programsAllowedInFullFrom = programsAllowedInFullFrom;
     }
 }

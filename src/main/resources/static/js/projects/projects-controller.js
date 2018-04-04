@@ -3,7 +3,7 @@ angular.module('CapstoneSystem')
         $scope.isProfOrCoordinator = false;
         $scope.projects = [];
         $scope.projectHeaders = ['ID', 'NAME', 'SUPERVISOR', 'MEMBERS', 'PROGRAMS'];
-        $scope.programs = [];
+        $scope.createProjectData = {}; //the data sent to the modal for create project
 
         User.getCurrentUser().then(function (user) {
             if(user) {
@@ -12,24 +12,20 @@ angular.module('CapstoneSystem')
             }
         });
 
-        User.getPrograms().then(function (programs) {
-            $scope.programs = programs;
-        });
-
         Project.getAllProjects().then(function (projects) {
             if(projects) {
                 $scope.projects = projects;
             }
         });
 
-        $scope.createProject = function () {
-            if($scope.project) {
-                Project.createProject($scope.project).then(function (res) {
+        $scope.createProject = function (project) {
+            if(project) {
+                Project.createProject(project).then(function (res) {
                     if (res.status == 200) {
                         $scope.projects.push(res.data.entity);
-                        swal('Yaah!', 'Project ' + $scope.project.name + ' added!', 'success');
+                        swal('Yaah!', 'Project ' + project.name + ' added!', 'success');
                         $('#newProjectModal').modal('toggle');
-                        $scope.project = {};
+                        $scope.createProjectData = {};
                     } else {
                         swal('Oops..!', res.data.message, 'error');
                     }
@@ -41,10 +37,6 @@ angular.module('CapstoneSystem')
         $('.studentList').select2({
             placeholder: 'Select student(s)'
         });
-
-        $scope.froalaOptions = {
-            toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo']
-        }
 
         $('.sidenav').css("height",$(document).height() + "px");
     });
