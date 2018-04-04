@@ -13,12 +13,19 @@
                         <div ng-cloak ng-if="!isProfOrCoordinator">
                             <button title="AddSubmission" ng-click="addSubmission()" type="button" class="btn btn-success"><i class="icon-doc"></i> Add Submission</button>
                         </div>
+                        <div ng-cloak ng-if="isProfOrCoordinator">
+                            <button ng-click="openAddDeliverableToProjectModal()" title="Deliverables" type="button" class="btn btn-info"><i class="icon-docs"></i> Add Deliverable</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <br>
             <div class="alert alert-warning" ng-cloak ng-show="!isProfOrCoordinator">
-                <strong>Notification:</strong> The final report is due April 5th at noon.
+                <p><strong>Due Dates:</strong></p>
+                <ul>
+                    <li>{{"Progress Report"}} is due on {{"January 15, 2018 23:59:59."}}</li>
+                    <li>{{"Final Report"}} is due on {{"April 5, 2018 23:59:59."}}</li>
+                </ul>
             </div>
             <table datatable id="submissionsTable" class="display" cellspacing="0" width="100%">
                 <thead>
@@ -214,5 +221,33 @@
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
+    </div>
+</div>
+<div class="modal fade" id="addDeliverableModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form class="modal-content" ng-submit="addDeliverableToProject()" role="form">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="icon-docs" aria-hidden="true"></i> Add deliverable to project</h4>
+            </div>
+            <div class="modal-body">
+                <p><strong>Deliverable Name:</strong></p>
+                <input type="text" name="deliverableName" required style="width:100%; margin-bottom: 20px"/>
+                <p><strong>Project:</strong></p>
+                <select ng-model="project.names"
+                        ng-options="p as (p.name) for p in projectsSupervised track by p.id"
+                        name="name" required style="width:100%; margin-bottom: 20px">
+                </select>
+                <p><strong>Due Date:</strong></p>
+                <input type="datetime-local" name="deliverableTime" required style="width:100%;"/>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Create</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </form>
+
     </div>
 </div>

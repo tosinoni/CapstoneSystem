@@ -19,6 +19,30 @@ angular.module('CapstoneSystem')
             $('#submitModal').modal('show');
         }
 
+        $scope.openAddDeliverableToProjectModal = function () {
+            $scope.projectsSupervised = [];
+
+            //obtaining the list of projects for prof
+            User.getCurrentUser().then(function (user) {
+                if(user) {
+                    $scope.projectsSupervised = user.projectsSupervised;
+                }
+                $('#addDeliverableModal').modal('toggle');
+            });
+        }
+
+        $scope.addDeliverableToProject = function () {
+            Project.addDeliverable($scope.project).then(function (res) {
+                if (res.status == 200) {
+                    swal('Yaah!', 'Deliverable created successfully.', 'success');
+                } else {
+                    swal('Oops..!', res.data.message, 'error');
+                }
+
+                $('#addDeliverableModal').modal('toggle');
+            });
+        }
+
         // Set the date we're counting down to
         var countDownDate = new Date("April 5, 2018 12:00:00").getTime();
 
