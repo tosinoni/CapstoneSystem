@@ -37,6 +37,20 @@
                     </div>
                 </div>
             </div>
+
+            <div ng-cloak ng-if="isProjectForProf && project.members">
+                <h4 class="h4TileHeader"><i class="icon-people"></i> Project Members</h4>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="well">
+                            <p ng-repeat="member in project.members">
+                                <i class="icon-user"></i> {{member.firstname}} {{member.lastname}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <h4 class="h4TileHeader"><i class="icon-list"></i> Description</h4>
             <div class="row">
                 <div class="col-sm-12">
