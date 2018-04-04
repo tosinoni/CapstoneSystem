@@ -93,4 +93,22 @@ angular.module('CapstoneSystem')
                 $('#addStudentsModal').modal('toggle');
             });
         }
+
+        $scope.openEditProjectModal = function () {
+            $scope.editProjectData = angular.copy($scope.project);
+            $('#editProjectModal').modal('toggle');
+        }
+
+        $scope.editProject = function (project) {
+            Project.editProject(project).then(function (res) {
+                if (res.status == 200) {
+                    $scope.project = res.data.entity;
+                    swal('Yaah!', 'Project ' + project.name + ' edited successfully!', 'success');
+                    $('#editProjectModal').modal('toggle');
+                    $scope.editProjectData = {};
+                } else {
+                    swal('Oops..!', res.data.message, 'error');
+                }
+            })
+        }
     });

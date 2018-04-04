@@ -26,8 +26,8 @@ public class ProfessorDTO extends UserDTO{
                     projectDTO.setId(project.getId());
                     projectDTO.setName(project.getName());
                     projectDTO.setDescription(project.getDescription());
-                    projectDTO.setMinCapacity(Integer.toString(project.getMinCapacity()));
-                    projectDTO.setMaxCapacity(Integer.toString(project.getMaxCapacity()));
+                    projectDTO.setMinCapacity(project.getMinCapacity());
+                    projectDTO.setMaxCapacity(project.getMaxCapacity());
 
                     ProfessorDTO professorDTO = new ProfessorDTO();
                     professorDTO.setFirstname(this.getFirstname());

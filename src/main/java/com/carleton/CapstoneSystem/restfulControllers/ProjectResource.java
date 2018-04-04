@@ -26,6 +26,12 @@ public class ProjectResource {
         return projectController.createProject(projectDTO, principal);
     }
 
+    @PostMapping("/edit")
+    public Response editProject(Principal principal, @RequestBody ProjectDTO projectDTO) {
+
+        return projectController.editProject(projectDTO, principal);
+    }
+
     @PostMapping("/apply")
     public Response applyForProject(Principal principal, @RequestBody ProjectDTO projectDTO) {
 

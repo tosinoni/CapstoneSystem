@@ -2,13 +2,14 @@ package com.carleton.CapstoneSystem.Controllers;
 
 import com.carleton.CapstoneSystem.DTO.ProjectDTO;
 import com.carleton.CapstoneSystem.DTO.StudentDTO;
-import com.carleton.CapstoneSystem.models.Program;
+import com.carleton.CapstoneSystem.models.Professor;
 import com.carleton.CapstoneSystem.models.Project;
 import com.carleton.CapstoneSystem.models.Student;
 import com.carleton.CapstoneSystem.repositories.ProfessorRepository;
 import com.carleton.CapstoneSystem.repositories.ProjectRepository;
 import com.carleton.CapstoneSystem.repositories.StudentRepository;
 import com.carleton.CapstoneSystem.utils.ProjectErrorMessages;
+import com.carleton.CapstoneSystem.utils.Util;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,7 +55,7 @@ public class ProjectController {
     }
 
     public Response createProject(ProjectDTO projectDTO, Principal principal) {
-        String invalidRequestBody = validateProjectDTO(projectDTO);
+        String invalidRequestBody = validateProjectDTO(projectDTO, false);
 
         if(!StringUtils.isNullOrEmpty(invalidRequestBody)) {
             throw new WebApplicationException(invalidRequestBody, Response.Status.BAD_REQUEST);
@@ -65,13 +66,44 @@ public class ProjectController {
         }
 
         Project project = new Project(projectDTO.getName(), projectDTO.getDescription());
-        project.setMinCapacity(Integer.parseInt(projectDTO.getMinCapacity()));
-        project.setMaxCapacity(Integer.parseInt(projectDTO.getMaxCapacity()));
+        project.setMinCapacity(projectDTO.getMinCapacity());
+        project.setMaxCapacity(projectDTO.getMaxCapacity());
         project.setSupervisor(professorRepository.findByUserName(principal.getName()));
 
 
-        project.setProgramsAllowed(projectDTO.getProgramsAllowed()
-                .stream().map(program -> { return Program.getProgram(program);}).collect(Collectors.toSet()));
+        project.setProgramsAllowed(projectDTO.getProgramsAllowedInFullFrom());
+
+        Project projectFromDB = projectRepository.save(project);
+
+        return Response.status(Response.Status.OK).entity(new ProjectDTO(projectFromDB)).build();
+    }
+
+    public Response editProject(ProjectDTO projectDTO, Principal principal) {
+        String invalidRequestBody = validateProjectDTO(projectDTO, true);
+
+        if(!StringUtils.isNullOrEmpty(invalidRequestBody)) {
+            throw new WebApplicationException(invalidRequestBody, Response.Status.BAD_REQUEST);
+        }
+
+        if(principal == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(ProjectErrorMessages.INVALID_USER).build();
+        }
+
+        Professor supervisor = professorRepository.findByUserName(principal.getName());
+        Project project = getProjectFromId(projectDTO);
+
+        //project does not belong to the principal
+        if(!project.getSupervisor().equals(supervisor)) {
+            throw new WebApplicationException(ProjectErrorMessages.INVALID_NAME, Response.Status.BAD_REQUEST);
+        } else if(!Util.isCollectionEmpty(project.getMembers()) && project.getMembers().size() > projectDTO.getMaxCapacity() ) {
+            throw new WebApplicationException(ProjectErrorMessages.INVALID_MAX_CAPACITY_EDIT_PROJECT, Response.Status.BAD_REQUEST);
+        }
+        project.setDescription(projectDTO.getDescription());
+        project.setName(projectDTO.getName());
+        project.setMinCapacity(projectDTO.getMinCapacity());
+        project.setMaxCapacity(projectDTO.getMaxCapacity());
+        project.setSupervisor(supervisor);
+        project.setProgramsAllowed(projectDTO.getProgramsAllowedInFullFrom());
 
         Project projectFromDB = projectRepository.save(project);
 
@@ -124,18 +156,14 @@ public class ProjectController {
         return  Response.status(Response.Status.OK).entity(projectMembers).build();
     }
 
-    private String validateProjectDTO(ProjectDTO projectDTO) {
+    private String validateProjectDTO(ProjectDTO projectDTO, boolean isEdit) {
         if(projectDTO == null || StringUtils.isNullOrEmpty(projectDTO.getName())) {
             return ProjectErrorMessages.NO_NAME;
-        } else if(projectRepository.findProjectByName(projectDTO.getName()) != null) {
+        } else if(projectRepository.findProjectByName(projectDTO.getName()) != null && !isEdit) {
             return ProjectErrorMessages.INVALID_NAME;
         } else if(StringUtils.isNullOrEmpty(projectDTO.getDescription())) {
             return ProjectErrorMessages.NO_DESCRIPTION;
-        } else if(!StringUtils.isStrictlyNumeric(projectDTO.getMinCapacity())) {
-            return ProjectErrorMessages.INVALID_MIN_CAPACITY;
-        } else if(!StringUtils.isStrictlyNumeric(projectDTO.getMaxCapacity())) {
-            return ProjectErrorMessages.INVALID_MAX_CAPACITY;
-        } else if(Integer.parseInt(projectDTO.getMaxCapacity()) <= Integer.parseInt(projectDTO.getMinCapacity())) {
+        } else if(projectDTO.getMaxCapacity() <= projectDTO.getMinCapacity()) {
             return ProjectErrorMessages.INVALID_CAPACITY;
         }
 
