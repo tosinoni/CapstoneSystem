@@ -17,7 +17,6 @@
                         <div ng-cloak ng-if="isProjectForProf">
                             <button title="Edit" ng-click="openEditProjectModal()" type="button" class="btn btn-warning"><i class="icon-pencil"></i> Edit</button>
                             <button ng-click="openAddStudentToProjectModal()" title="Students" type="button" class="btn btn-primary"><i class="icon-plus"></i> Students</button>
-                            <button ng-click="openAddDeliverableToProjectModal()" title="Deliverables" type="button" class="btn btn-info"><i class="icon-docs"></i> Add Deliverable</button>
                             <button ng-cloak ng-if="isArchive" ng-click="archiveProject()" title="Archive" type="button" class="btn btn-success"><i class="icon-pin"></i> Archive</button>
                             <button ng-cloak ng-if="isUnArchive" ng-click="unArchiveProject()" title="unArchive" type="button" class="btn btn-success"><i class="icon-pin"></i> UnArchive</button>
                             <button ng-click="deleteProject()" title="Delete" type="button" class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
@@ -93,31 +92,6 @@
 
     </div>
 </div>
-
-<div class="modal fade" id="addDeliverableModal" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <form class="modal-content" ng-submit="addDeliverableToProject()" role="form">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><i class="icon-docs" aria-hidden="true"></i> Add deliverable to {{project.name}}</h4>
-            </div>
-            <div class="modal-body">
-                <p><strong>Deliverable Name:</strong></p>
-                <input type="text" name="deliverableName" required style="width:100%; margin-bottom: 20px"/>
-                <p><strong>Due Date:</strong></p>
-                <input type="datetime-local" name="deliverableTime" required style="width:100%;"/>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Create</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            </div>
-        </form>
-
-    </div>
-</div>
-
 <!-- edit project modal -->
 <kapi-projects-modal name="editProjectModal" frmname="editProjectForm" title="Edit Project" modal-data="editProjectData"
                      save-fn="editProject(project)"></kapi-projects-modal>
