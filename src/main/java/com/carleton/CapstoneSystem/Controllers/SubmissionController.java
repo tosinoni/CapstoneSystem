@@ -11,9 +11,11 @@ import com.carleton.CapstoneSystem.utils.SubmissionErrorMessages;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,26 @@ public class SubmissionController {
         Submission submission = new Submission(submissionDTO.getName(), project, submissionDTO.getDueDate());
         Submission submissionFromDb = submissionRepository.save(submission);
 
+        return Response.status(Response.Status.OK).entity(new SubmissionDTO(submissionFromDb)).build();
+    }
+
+    public Response submitDeliverable(MultipartFile file, long submissionId) {
+        Submission submission = submissionRepository.findOne(submissionId);
+
+        if(submission == null) {
+            throw new WebApplicationException(SubmissionErrorMessages.INVALID_SUBMISSION_NAME, Response.Status.BAD_REQUEST);
+        } else if(file == null) {
+            throw new WebApplicationException(SubmissionErrorMessages.INVALID_SUBMISSION_NAME, Response.Status.BAD_REQUEST);
+        }
+
+        submission.setFileName(file.getOriginalFilename());
+        try {
+            submission.setFile(file.getBytes());
+        } catch (IOException e) {
+            throw new WebApplicationException(SubmissionErrorMessages.INVALID_SUBMISSION_NAME, Response.Status.BAD_REQUEST);
+        }
+
+        Submission submissionFromDb = submissionRepository.save(submission);
         return Response.status(Response.Status.OK).entity(new SubmissionDTO(submissionFromDb)).build();
     }
 

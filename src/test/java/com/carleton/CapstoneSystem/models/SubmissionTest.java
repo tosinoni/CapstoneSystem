@@ -105,6 +105,15 @@ public class SubmissionTest {
         assertNotEquals("file is equal", b, submission.getFile());
     }
 
+    @Test
+    public void testGrade() {
+        //testing all the annotations on the id field
+        AssertAnnotations.assertField( Submission.class, "grade",Column.class);
+        //testing the @column annotation
+        Column c = ReflectTool.getFieldAnnotation(Submission.class, "grade", Column.class);
+        assertEquals("column grade:  name is not equal", "grade", c.name());
+    }
+
     private Submission getDefaultSubmission() {
         Submission submission = new Submission();
         submission.setId(1);

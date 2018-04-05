@@ -1,5 +1,5 @@
 // Declare app level module which depends on filters, and services
-angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala', 'angular-jwt', 'datatables'])
+angular.module('CapstoneSystem', ['ngResource', 'ngRoute', 'routeStyles','froala', 'angular-jwt', 'datatables', 'ngFileUpload'])
     .config(function ($routeProvider, $locationProvider, jwtOptionsProvider, $httpProvider) {
 
         //configuring authentication

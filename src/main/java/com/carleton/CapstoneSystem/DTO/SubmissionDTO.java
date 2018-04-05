@@ -1,5 +1,6 @@
 package com.carleton.CapstoneSystem.DTO;
 
+import com.carleton.CapstoneSystem.models.Grade;
 import com.carleton.CapstoneSystem.models.Project;
 import com.carleton.CapstoneSystem.models.Submission;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,7 +28,10 @@ public class SubmissionDTO {
     private MultipartFile file;
 
     @JsonProperty
-    private byte[] fileInBytes;
+    private byte[] fileInBytes = new byte[100];
+
+    @JsonProperty
+    private Grade grade;
 
     public SubmissionDTO() {
 
@@ -47,7 +51,11 @@ public class SubmissionDTO {
             project.setName(projectForSubmission.getName());
         }
 
-        this.fileInBytes = submission.getFile();
+        if(submission.getFile() != null) {
+            this.fileInBytes = submission.getFile();
+        }
+
+        this.grade = submission.getGrade();
     }
     public long getId() {
         return id;
@@ -103,5 +111,13 @@ public class SubmissionDTO {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
     }
 }
