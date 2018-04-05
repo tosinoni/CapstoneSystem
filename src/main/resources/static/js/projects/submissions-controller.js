@@ -3,9 +3,12 @@ angular.module('CapstoneSystem')
         $scope.isProfOrCoordinator = false;
 
         User.getCurrentUser().then(function (user) {
+            $scope.projectsSupervised = [];
+
             if(user) {
                 var isUserAprofOrCoordinator = user.role == User.PROFESSOR || user.role == User.COORDINATOR;
                 $scope.isProfOrCoordinator = $scope.isAuthenticated && isUserAprofOrCoordinator;
+                $scope.projectsSupervised = user.projectsSupervised;
             }
         });
 
@@ -20,15 +23,7 @@ angular.module('CapstoneSystem')
         }
 
         $scope.openAddDeliverableToProjectModal = function () {
-            $scope.projectsSupervised = [];
-
-            //obtaining the list of projects for prof
-            User.getCurrentUser().then(function (user) {
-                if(user) {
-                    $scope.projectsSupervised = user.projectsSupervised;
-                }
-                $('#addDeliverableModal').modal('toggle');
-            });
+            $('#addDeliverableModal').modal('toggle');
         }
 
         $scope.addDeliverableToProject = function () {
