@@ -27,16 +27,16 @@ public enum Time {
         return (this.ordinal())%vals.length > 0;
     }
 
-    public static Time Mean(Time presentationTime, Time presentationTime1) {
+    public static Time mean(Time presentationTime, Time presentationTime1) {
         if(Math.abs((presentationTime.ordinal()%vals.length)-(presentationTime1.ordinal()%vals.length))==1){
             return presentationTime;
         }
         return vals[((presentationTime.ordinal()%vals.length)+(presentationTime1.ordinal()%vals.length))/2];
     }
 
-    public static Time MergeBias(Time presentationTime, Time presentationTime1) {
+    public static Time mergeBias(Time presentationTime, Time presentationTime1) {
         if(Math.abs((presentationTime.ordinal()%vals.length)-(presentationTime1.ordinal()%vals.length))<3){
-            return Mean(presentationTime,presentationTime1);
+            return mean(presentationTime,presentationTime1);
         }
         int newIndex=(2 * (presentationTime.ordinal() % vals.length) + (presentationTime1.ordinal() % vals.length)) / 3;
             if(newIndex>vals.length){

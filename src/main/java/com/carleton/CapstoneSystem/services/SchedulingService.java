@@ -85,7 +85,7 @@ public class SchedulingService {
 
     private Node mergeBias(Node best_2, Node best) {
         ScheduleDay presentationDay= best.getPresentationDay();
-        presentationDay.setPresentationTime(Time.MergeBias(best.getPresentationDay().getPresentationTime(),best_2.getPresentationDay().getPresentationTime()));
+        presentationDay.setPresentationTime(Time.mergeBias(best.getPresentationDay().getPresentationTime(),best_2.getPresentationDay().getPresentationTime()));
 
         return new Node(best);
 
@@ -127,7 +127,7 @@ public class SchedulingService {
 
     private Node mergeMean(Node best, Node best_2) {
         ScheduleDay presentationDay= best.getPresentationDay();
-        presentationDay.setPresentationTime(Time.Mean(best.getPresentationDay().getPresentationTime(),best_2.getPresentationDay().getPresentationTime()));
+        presentationDay.setPresentationTime(Time.mean(best.getPresentationDay().getPresentationTime(),best_2.getPresentationDay().getPresentationTime()));
 
         return new Node(best);
     }

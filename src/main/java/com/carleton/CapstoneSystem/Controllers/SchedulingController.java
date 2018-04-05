@@ -92,18 +92,20 @@ public class SchedulingController {
             ArrayList<Student> students = studentRepository.findAllByProjectId(project.getId());
             Professor professor = professorRepository.findByProjectsSupervisedId(project.getId());
             ArrayList<ArrayList<ScheduleDay>> usersDays= new ArrayList<ArrayList<ScheduleDay>>();
-            ArrayList<ScheduleDay> scheduleDays= new ArrayList<ScheduleDay>();
-            if(students!=null || !students.isEmpty()){
-                for(Student student:students ){
-                    addScheduleDays(usersDays,student);
+
+            if(students!=null ){
+                if(!students.isEmpty()) {
+                    for (Student student : students) {
+                        addScheduleDays(usersDays, student);
+
+                    }
+                    if (professor != null) {
+                        addScheduleDays(usersDays, professor);
+                    }
+                    ScheduleDay presentationDay = schedulingService.createPresentationTime(usersDays);
+                    project.setPresentationDay(presentationDay);
 
                 }
-                if(professor!=null){
-                    addScheduleDays(usersDays,professor);
-                }
-                ScheduleDay presentationDay=schedulingService.createPresentationTime(usersDays);
-                project.setPresentationDay(presentationDay);
-
             }
 
 

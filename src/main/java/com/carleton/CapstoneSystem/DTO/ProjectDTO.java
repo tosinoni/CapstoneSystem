@@ -44,6 +44,9 @@ public class ProjectDTO {
 
     @JsonProperty
     private Set<StudentDTO> appliedStudents = new HashSet<>();
+
+
+
     @JsonProperty
     private ScheduleDay presentationDay;
 
@@ -183,6 +186,13 @@ public class ProjectDTO {
 
     public Set<Program> getProgramsAllowedInFullFrom() {
         return programsAllowedInFullFrom;
+    }
+    public ScheduleDay getPresentationDay() {
+        return presentationDay;
+    }
+
+    public void setPresentationDay(ScheduleDay presentationDay) {
+        this.presentationDay = presentationDay;
     }
 
     public void setProgramsAllowedInFullFrom(Set<Program> programsAllowedInFullFrom) {

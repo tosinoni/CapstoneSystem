@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 @Entity
 public class ScheduleDay  implements Comparable<ScheduleDay>{
@@ -137,5 +138,10 @@ public class ScheduleDay  implements Comparable<ScheduleDay>{
         }
 
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(month, dayDate, weekDay, presentationTime);
     }
 }
