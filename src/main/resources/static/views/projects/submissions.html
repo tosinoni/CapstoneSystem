@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="actionsbar">
-                        <div ng-cloak ng-if="!isProfOrCoordinator">
+                        <div ng-cloak ng-if="!isProfOrCoordinator && submissions">
                             <button title="AddSubmission" ng-click="addSubmission()" type="button" class="btn btn-success"><i class="icon-doc"></i> Add Submission</button>
                         </div>
                         <div ng-cloak ng-if="isProfOrCoordinator">
@@ -20,6 +20,9 @@
                 </div>
             </div>
             <br>
+            <div class="alert alert-warning" ng-cloak ng-show="!isProfOrCoordinator && !submissions" style="width: 100%;">
+                <p>You must be enrolled into a project before being able to submit anything.</p>
+            </div>
             <div class="alert alert-warning" ng-cloak ng-show="isProfOrCoordinator" style="width: 100%;">
                 <p><strong>Select project below to display deliverable and submissions:</strong></p>
                 <select select2 ng-model="selectedProject"
