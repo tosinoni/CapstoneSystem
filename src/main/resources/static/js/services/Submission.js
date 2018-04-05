@@ -15,7 +15,9 @@ angular.module('CapstoneSystem')
             getSubmissionsForProject: function (projectId) {
                 return $http.get("/api/submissions/project/" + projectId)
                 .then(function (res) {
-                    return res;
+                    if(res.status == 200) {
+                        return res.data.entity;
+                    }
                 }, function (err) {
                     return err;
                 });

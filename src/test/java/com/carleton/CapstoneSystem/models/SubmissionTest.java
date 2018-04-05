@@ -52,7 +52,6 @@ public class SubmissionTest {
         //testing the @column annotation
         Column c = ReflectTool.getFieldAnnotation(Submission.class, "fileName", Column.class);
         assertEquals("column fileName: name is not equal", "file_name", c.name());
-        assertEquals("column fileName: nullable is true", false, c.nullable());
 
         Submission submission = getDefaultSubmission();
         assertEquals("file name is not equal", "report.pdf", submission.getFileName());

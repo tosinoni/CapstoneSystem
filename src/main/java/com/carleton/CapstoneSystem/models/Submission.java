@@ -14,7 +14,7 @@ public class Submission {
     @Column(nullable = false)
     private String name;
 
-    @Column(name="file_name", nullable = false)
+    @Column(name="file_name")
     private String fileName;
 
     @Column

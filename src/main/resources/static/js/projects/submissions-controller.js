@@ -9,6 +9,10 @@ angular.module('CapstoneSystem')
                 var isUserAprofOrCoordinator = user.role == User.PROFESSOR || user.role == User.COORDINATOR;
                 $scope.isProfOrCoordinator = $scope.isAuthenticated && isUserAprofOrCoordinator;
                 $scope.projectsSupervised = user.projectsSupervised;
+                if(!_.isEmpty($scope.projectsSupervised)) {
+                    $scope.selectedProject = $scope.projectsSupervised[0];
+                    $scope.getSubmissionsForProject();
+                }
             }
         });
 
@@ -31,16 +35,41 @@ angular.module('CapstoneSystem')
             $('#addDeliverableModal').modal('toggle');
         }
 
+        $scope.getTime = function(time) {
+            if(time) {
+                var date = new Date(time);
+                return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+            }
+        }
+
         $scope.addDeliverableToProject = function () {
-            SubmissionService.addDeliverable($scope.submission).then(function (res) {
+            $scope.deliverable.project = $scope.selectedProject;
+            SubmissionService.addDeliverable($scope.deliverable).then(function (res) {
                 if (res.status == 200) {
                     swal('Yaah!', 'Deliverable created successfully.', 'success');
-                    $scope.submission = {};
+                    $scope.deliverable = {};
+                    var submissions = res.data.entity;
+
+                    if(_.isEmpty($scope.submissions)) {
+                        $scope.submissions = [submissions];
+                    } else {
+                        $scope.submissions.push(res.data.entity);
+                    }
                 } else {
                     swal('Oops..!', res.data.message, 'error');
                 }
 
                 $('#addDeliverableModal').modal('toggle');
+            });
+        }
+
+        $scope.getSubmissionsForProject = function () {
+            console.log($scope.selectedProject);
+            SubmissionService.getSubmissionsForProject($scope.selectedProject.id).then(function (submissions) {
+                console.log(submissions);
+                if(!_.isEmpty(submissions)) {
+                    $scope.submissions = submissions;
+                }
             });
         }
     });
