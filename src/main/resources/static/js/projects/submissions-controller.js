@@ -69,12 +69,11 @@ angular.module('CapstoneSystem')
         $scope.getSubmissionsForProject = function () {
             SubmissionService.getSubmissionsForProject($scope.selectedProject.id).then(function (submissions) {
                 if(!_.isEmpty(submissions)) {
-                    console.log(submissions);
                     $scope.submissions = submissions;
                 }
             });
         }
-        
+
         $scope.changeSubmitDeliverableModalTime = function () {
             $scope.submitDeliverableModalTime = $scope.getTime($scope.selectedDeliverable.dueDate);
         }
