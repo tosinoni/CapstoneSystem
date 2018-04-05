@@ -21,26 +21,29 @@
             </div>
             <br>
             <div class="alert alert-warning" ng-cloak ng-show="isProfOrCoordinator" style="width: 100%;">
-                <p><strong>Select project below to display submissions:</strong></p>
-                <select select2 ng-model="project.tableProject"
+                <p><strong>Select project below to display deliverable and submissions:</strong></p>
+                <select select2 ng-model="selectedProject"
                         ng-options="p as (p.name) for p in projectsSupervised track by p.id"
-                        name="tableProject" required style="width:100%; margin-bottom: 20px">
+                        ng-change="getSubmissionsForProject()" name="tableProject" required style="width:100%; margin-bottom: 20px">
                 </select>
             </div>
 
-            <h4 class="h4TileHeader"><i class="icon-docs"></i> Project Deliverables</h4>
-            <div class="alert alert-info" style="width: 100%;">
-                <p><i class="icon-doc"></i> <strong>Progress Report</strong> due on <strong>3/1/2018 5:48PM</strong>
-                    <button ng-cloak ng-if="isProfOrCoordinator" ng-click="editDeliverable()" style="float: right"><i class="icon-pencil blue" aria-hidden="true"></i></button>
-                </p>
-                <hr>
-                <p><i class="icon-doc"></i> <strong>Progress Report</strong> due on <strong>3/1/2018 5:48PM</strong>
-                    <button ng-cloak ng-if="isProfOrCoordinator" ng-click="editDeliverable()" style="float: right"><i class="icon-pencil blue" aria-hidden="true"></i></button>
-                </p>
+            <br><h4 ng-cloak ng-if="submissions" class="h4TileHeader"><i class="icon-docs"></i> Project Deliverables</h4>
+            <div ng-cloak ng-if="submissions" class="alert alert-info" style="width: 100%;">
+                <div ng-repeat="submission in submissions">
+                    <p>
+                        <i class="icon-doc"></i> <strong>{{submission.name}}
+                        </strong> due on <strong>{{getTime(submission.dueDate)}}</strong>
+                        <button ng-cloak ng-if="isProfOrCoordinator" ng-click="editDeliverable()" style="float: right">
+                            <i class="icon-pencil blue" aria-hidden="true"></i>
+                        </button>
+                    </p>
+                    <hr>
+                </div>
             </div>
             <br>
-            <h4 class="h4TileHeader" ><i class="icon-pencil"></i> Project Submissions</h4>
-            <table datatable id="submissionsTable" class="display" cellspacing="0" width="100%">
+            <h4 ng-cloak ng-if="submissions" class="h4TileHeader" ><i class="icon-pencil"></i> Project Submissions</h4>
+            <table ng-cloak ng-if="submissions" datatable id="submissionsTable" class="display" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -50,24 +53,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Progress Report</td>
-                    <td>3/1/2018 5:48PM</td>
-                    <td><a href="#">progressreport.pdf</a></td>
-                    <td style="text-align: right">
-                        <button ng-cloak ng-if="isProfOrCoordinator" ng-click="editGrade()"><i class="icon-pencil blue" aria-hidden="true"></i></button>
-                        <span ng-cloak ng-if="!isProfOrCoordinator">A-</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Final Report</td>
-                    <td>3/19/2018 10:12PM</td>
-                    <td><a href="#">final.pdf</a></td>
-                    <td style="text-align: right">
-                        <button ng-cloak ng-if="isProfOrCoordinator" ng-click="editGrade()"><i class="icon-pencil blue" aria-hidden="true"></i></button>
-                        <span ng-cloak ng-if="!isProfOrCoordinator">N/A</span>
-                    </td>
-                </tr>
+                    <tr ng-if="submission.fileName" ng-repeat="submission in submissions">
+                        <td>Progress Report</td>
+                        <td>3/1/2018 5:48PM</td>
+                        <td><a href="#">progressreport.pdf</a></td>
+                        <td style="text-align: right">
+                            <button ng-cloak ng-if="isProfOrCoordinator" ng-click="editGrade()"><i class="icon-pencil blue" aria-hidden="true"></i></button>
+                            <span ng-cloak ng-if="!isProfOrCoordinator">A-</span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -227,21 +221,17 @@
     <div class="modal-dialog">
 
         <!-- Modal content-->
-        <form class="modal-content" ng-submit="addDeliverableToProject()" role="form">
+        <form class="modal-content" name="addDeliverableForm" ng-submit="addDeliverableToProject()" role="form">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"><i class="icon-docs" aria-hidden="true"></i> Project Deliverable</h4>
             </div>
             <div class="modal-body">
                 <p><strong>Deliverable Name:</strong></p>
-                <input type="text" name="deliverableName" required style="width:100%; margin-bottom: 20px"/>
-                <p><strong>Project:</strong></p>
-                <select ng-model="project.names"
-                        ng-options="p as (p.name) for p in projectsSupervised track by p.id"
-                        name="name" required style="width:100%; margin-bottom: 20px">
-                </select>
-                <p><strong>Due Date:</strong></p>
-                <input type="datetime-local" name="deliverableTime" required style="width:100%;"/>
+                <input type="text" name="deliverableName" ng-model="deliverable.name" required style="width:100%; margin-bottom: 20px"/>
+
+                <br><br><p><strong>Due Date:</strong></p>
+                <input type="datetime-local" name="deliverableTime" ng-model="deliverable.dueDate" required style="width:100%;"/>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">Create</button>
