@@ -234,14 +234,14 @@
             </div>
             <div class="modal-body">
                 <p><strong>Deliverable Name:</strong></p>
-                <input type="text" name="deliverableName" required style="width:100%; margin-bottom: 20px"/>
+                <input type="text" name="deliverableName" ng-model="deliverable.name" required style="width:100%; margin-bottom: 20px"/>
                 <p><strong>Project:</strong></p>
-                <select ng-model="project.names"
+                <select select2 ng-model="deliverable.project"
                         ng-options="p as (p.name) for p in projectsSupervised track by p.id"
                         name="name" required style="width:100%; margin-bottom: 20px">
                 </select>
-                <p><strong>Due Date:</strong></p>
-                <input type="datetime-local" name="deliverableTime" required style="width:100%;"/>
+                <br><br><p><strong>Due Date:</strong></p>
+                <input type="datetime-local" name="deliverableTime" ng-model="deliverable.dueDate" required style="width:100%;"/>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">Create</button>

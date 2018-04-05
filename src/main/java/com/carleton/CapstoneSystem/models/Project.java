@@ -38,6 +38,9 @@ public class Project {
             inverseJoinColumns = { @JoinColumn(name = "student_id") })
     private Set<Student> appliedStudents = new HashSet<>();
 
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+    private Set<Submission> projectSubmissions = new HashSet<>();
+
     public Project(){
         this(null,null);
     }
@@ -189,6 +192,14 @@ public class Project {
 
     public void removeStudentFromAppliedList(Student student) {
         appliedStudents.remove(student);
+    }
+
+    public Set<Submission> getProjectSubmissions() {
+        return projectSubmissions;
+    }
+
+    public void setProjectSubmissions(Set<Submission> projectSubmissions) {
+        this.projectSubmissions = projectSubmissions;
     }
 }
 

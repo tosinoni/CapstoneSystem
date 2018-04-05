@@ -1,5 +1,5 @@
 angular.module('CapstoneSystem')
-    .controller('SubmissionsController', function ($scope, User, Project) {
+    .controller('SubmissionsController', function ($scope, User, SubmissionService) {
         $scope.isProfOrCoordinator = false;
 
         User.getCurrentUser().then(function (user) {
@@ -32,9 +32,10 @@ angular.module('CapstoneSystem')
         }
 
         $scope.addDeliverableToProject = function () {
-            Project.addDeliverable($scope.project).then(function (res) {
+            SubmissionService.addDeliverable($scope.submission).then(function (res) {
                 if (res.status == 200) {
                     swal('Yaah!', 'Deliverable created successfully.', 'success');
+                    $scope.submission = {};
                 } else {
                     swal('Oops..!', res.data.message, 'error');
                 }

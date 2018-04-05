@@ -127,4 +127,15 @@ public class ProjectTest {
         joinColumn = j.inverseJoinColumns()[0];
         assertEquals("JoinColumn appliedStudents: name is not equal", "student_id", joinColumn.name());
     }
+
+    @Test
+    public void testProjectSubmissions() {
+        //testing all the annotations on the id field
+        AssertAnnotations.assertField( Project.class, "projectSubmissions", OneToMany.class);
+
+        //testing the @column annotation
+        OneToMany m = ReflectTool.getFieldAnnotation(Project.class, "projectSubmissions", OneToMany.class);
+
+        assertEquals("ManyToMany:  mappedBy is not equal", "project", m.mappedBy());
+    }
 }
