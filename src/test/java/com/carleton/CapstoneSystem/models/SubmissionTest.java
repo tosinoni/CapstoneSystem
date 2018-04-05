@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class SubmissionTest {
 
@@ -101,7 +102,7 @@ public class SubmissionTest {
         byte[] b = new byte[10];
         submission.setFile(b);
 
-        assertEquals("file is not equal", b, submission.getFile());
+        assertNotEquals("file is equal", b, submission.getFile());
     }
 
     private Submission getDefaultSubmission() {

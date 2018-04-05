@@ -56,11 +56,11 @@ public class Submission {
     }
 
     public byte[] getFile() {
-        return file;
+        return file.clone();
     }
 
     public void setFile(byte[] file) {
-        this.file = file;
+        this.file = file.clone();
     }
 
     public Project getProject() {
@@ -85,7 +85,7 @@ public class Submission {
         if (!(s instanceof Submission)) return false;
         Submission submission = (Submission) s;
         return id == submission.id && name.equals(submission.name) && project.equals(submission.project) &&
-                file.equals(submission.file) && dueDate.equals(submission.dueDate) && fileName.equals(submission.fileName);
+                file == submission.file && dueDate.equals(submission.dueDate) && fileName.equals(submission.fileName);
     }
 
     public String getFileName() {

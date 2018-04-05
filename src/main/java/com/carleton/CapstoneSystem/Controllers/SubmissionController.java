@@ -73,8 +73,6 @@ public class SubmissionController {
     private String validateSubmissionDTO(SubmissionDTO submissionDTO) {
         if(submissionDTO == null || StringUtils.isNullOrEmpty(submissionDTO.getName())) {
             return SubmissionErrorMessages.EMPTY_SUBMISSIONDTO_INFO;
-        } else if(submissionDTO.getDueDate() == null) {
-            return SubmissionErrorMessages.NO_DATE;
         } else if(submissionDTO.getProject() == null) {
             return SubmissionErrorMessages.NO_PROJECT;
         }

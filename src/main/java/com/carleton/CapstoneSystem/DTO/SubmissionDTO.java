@@ -90,11 +90,11 @@ public class SubmissionDTO {
     }
 
     public byte[] getFileInBytes() {
-        return fileInBytes;
+        return fileInBytes.clone();
     }
 
     public void setFileInBytes(byte[] fileInBytes) {
-        this.fileInBytes = fileInBytes;
+        this.fileInBytes = fileInBytes.clone();
     }
 
     public String getFileName() {
