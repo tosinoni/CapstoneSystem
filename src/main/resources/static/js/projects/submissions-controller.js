@@ -64,9 +64,7 @@ angular.module('CapstoneSystem')
         }
 
         $scope.getSubmissionsForProject = function () {
-            console.log($scope.selectedProject);
             SubmissionService.getSubmissionsForProject($scope.selectedProject.id).then(function (submissions) {
-                console.log(submissions);
                 if(!_.isEmpty(submissions)) {
                     $scope.submissions = submissions;
                 }
