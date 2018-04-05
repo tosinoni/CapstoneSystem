@@ -17,6 +17,9 @@ public class DayDTO {
     @JsonProperty
     private ArrayList<Time> times;
 
+    public DayDTO(){
+        times= new ArrayList<Time>();
+    }
 
 
     public void addTime(Time time) {

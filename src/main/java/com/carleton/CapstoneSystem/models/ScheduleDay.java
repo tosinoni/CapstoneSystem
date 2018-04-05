@@ -14,7 +14,7 @@ public class ScheduleDay {
     private WeekDay weekDay;
     private Month month;
     private int dayDate;
-    private Time presentationTime;
+
 
 
     private ArrayList<Time> times;
@@ -36,6 +36,7 @@ public class ScheduleDay {
         }
     }
     public ScheduleDay(){
+        times = new ArrayList<Time>();
 
     }
 
@@ -85,11 +86,5 @@ public class ScheduleDay {
         return times;
     }
 
-    public Time getPresentationTime() {
-        return presentationTime;
-    }
 
-    public void setPresentationTime(Time presentationTime) {
-        this.presentationTime = presentationTime;
-    }
 }
