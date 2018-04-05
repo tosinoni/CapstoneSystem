@@ -22,6 +22,11 @@ angular.module('CapstoneSystem')
             $('#submitModal').modal('show');
         }
 
+        $scope.editDeliverable = function() {
+            //open modal
+            $('#addDeliverableModal').modal('show');
+        }
+
         $scope.openAddDeliverableToProjectModal = function () {
             $('#addDeliverableModal').modal('toggle');
         }
