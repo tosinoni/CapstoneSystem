@@ -46,7 +46,7 @@ public  class WebUser {
 
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     protected Schedule schedule;
 
 
