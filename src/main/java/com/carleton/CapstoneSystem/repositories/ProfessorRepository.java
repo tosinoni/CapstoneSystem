@@ -6,4 +6,5 @@ import javax.transaction.Transactional;
 
 @Transactional
 public interface ProfessorRepository extends UserRepository<Professor> {
+    Professor findByProjectsSupervisedId(long id);
 }

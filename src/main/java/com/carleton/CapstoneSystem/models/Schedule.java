@@ -18,8 +18,8 @@ public class Schedule {
         return scheduleDays;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<ScheduleDay> scheduleDays ;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Set<ScheduleDay> scheduleDays= new LinkedHashSet<ScheduleDay>() ;
 
     public Schedule(ScheduleDTO scheduleDTO){
         for(DayDTO day: scheduleDTO.getAllDays()){
@@ -28,7 +28,7 @@ public class Schedule {
         }
     }
     public Schedule(){
-        scheduleDays= new LinkedHashSet<ScheduleDay>() ;
+
     }
 
 
@@ -38,5 +38,9 @@ public class Schedule {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void addScheduleDay(ScheduleDay day){
+            scheduleDays.add(day);
     }
 }

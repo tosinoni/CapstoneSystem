@@ -2,6 +2,8 @@ package com.carleton.CapstoneSystem.DTO;
 
 import com.carleton.CapstoneSystem.models.Program;
 import com.carleton.CapstoneSystem.models.Project;
+import com.carleton.CapstoneSystem.models.Schedule;
+import com.carleton.CapstoneSystem.models.ScheduleDay;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashSet;
@@ -42,6 +44,8 @@ public class ProjectDTO {
 
     @JsonProperty
     private Set<StudentDTO> appliedStudents = new HashSet<>();
+    @JsonProperty
+    private ScheduleDay presentationDay;
 
     public ProjectDTO() {
 
@@ -54,6 +58,7 @@ public class ProjectDTO {
         this.minCapacity = project.getMinCapacity();
         this.maxCapacity = project.getMaxCapacity();
         this.isArchive = project.isArchive();
+        this.presentationDay=project.getPresentationDay();
 
         if(project.getSupervisor() != null) {
             ProfessorDTO professorDTO = new ProfessorDTO();

@@ -1,61 +1,53 @@
 package com.carleton.CapstoneSystem.services.scheduling;
 
+import com.carleton.CapstoneSystem.models.ScheduleDay;
+import com.carleton.CapstoneSystem.models.WeekDay;
+
 import java.util.ArrayList;
 
-public class Node {
-    private ArrayList<WeekDay> rightSide;
-    private ArrayList<WeekDay> leftSide;
-    private Node parent;
-    private ArrayList<Node> children;
-    private int stage;
-    private int cost;
+public class Node implements Comparable<Node>{
 
 
-    public Node(ArrayList<WeekDay> rightSide,ArrayList<WeekDay> leftSide,Node parent){
-        this.setRightSide(rightSide);
-        this.setLeftSide(leftSide);
-        this.parent=parent;
-        children = new ArrayList<Node>();
+        private ScheduleDay presentationDay;
+        private int evaluateNumber;
+
+
+    public Node(){
+
 
 
     }
-    public Node getParent() {
-        return parent;
-    }
-    public void setParent(Node parent) {
-        this.parent = parent;
+    public Node(Node n){
+        this.presentationDay = new ScheduleDay(n.getPresentationDay());
+        this.evaluateNumber= n.getEvaluateNumber();
     }
 
-    public void addChild(Node node){
-        children.add(node);
-    }
-    public ArrayList<Node> getChildren(){
-        return children;
-    }
-    public ArrayList<WeekDay> getLeftSide() {
-        return leftSide;
-    }
-    public void setLeftSide(ArrayList<WeekDay> leftSide) {
-        this.leftSide = leftSide;
-    }
-    public ArrayList<WeekDay> getRightSide() {
-        return rightSide;
-    }
-    public void setRightSide(ArrayList<WeekDay> rightSide) {
-        this.rightSide = rightSide;
+
+    public void setPresentationDay(ScheduleDay presentationDay) {
+        this.presentationDay = presentationDay;
     }
 
-    public int getStage() {
-        return stage;
+    public int getEvaluateNumber() {
+        return evaluateNumber;
     }
-    public void setStage(int stage) {
-        this.stage = stage;
+
+    public void setEvaluateNumber(int evaluationNumber) {
+        this.evaluateNumber = evaluationNumber;
     }
-    public int getCost(){
-        return cost;
+
+    public ScheduleDay getPresentationDay() {
+        return presentationDay;
     }
-    public int setCost(int h){
-        cost= stage+h;
-        return cost;
+
+
+    @Override
+    public int compareTo(Node o) {
+        if(this.getEvaluateNumber()>o.getEvaluateNumber()){
+            return 1;
+        }else if(this.getEvaluateNumber()==o.getEvaluateNumber()){
+            return 0;
+        }else {
+            return -1;
+        }
     }
 }

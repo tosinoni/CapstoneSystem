@@ -17,6 +17,11 @@ public class DayDTO {
     @JsonProperty
     private ArrayList<Time> times;
 
+
+
+    @JsonProperty
+    private Time presentationTime;
+
     public DayDTO(){
         times= new ArrayList<Time>();
     }
@@ -57,5 +62,12 @@ public class DayDTO {
 
     public ArrayList<Time> getTimes() {
         return times;
+    }
+    public Time getPresentationTime() {
+        return presentationTime;
+    }
+
+    public void setPresentationTime(Time presentationTime) {
+        this.presentationTime = presentationTime;
     }
 }

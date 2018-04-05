@@ -31,6 +31,8 @@ public class Project {
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private Set<Student> members;
+    @OneToOne
+    private ScheduleDay presentationDay;
 
     @ManyToMany
     @JoinTable(name = "project_applied_students",
@@ -189,6 +191,14 @@ public class Project {
 
     public void removeStudentFromAppliedList(Student student) {
         appliedStudents.remove(student);
+    }
+
+    public ScheduleDay getPresentationDay() {
+        return presentationDay;
+    }
+
+    public void setPresentationDay(ScheduleDay presentationDay) {
+        this.presentationDay = presentationDay;
     }
 }
 

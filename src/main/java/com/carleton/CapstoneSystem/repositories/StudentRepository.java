@@ -10,4 +10,5 @@ public interface StudentRepository extends UserRepository<Student>{
     ArrayList<Student> findAll();
     ArrayList<Student> findAllByProjectIsNotNull();
     ArrayList<Student> findAllByProjectIsNull();
+    ArrayList<Student> findAllByProjectId(long id);
 }

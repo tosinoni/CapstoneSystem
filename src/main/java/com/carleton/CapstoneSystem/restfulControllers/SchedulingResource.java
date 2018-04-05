@@ -19,9 +19,15 @@ public class SchedulingResource {
 
     @Autowired
     SchedulingController scheduleController;
+
     @PostMapping("/submit")
     public Response editProject(Principal principal, @RequestBody ScheduleDTO scheduleDTO) {
 
         return scheduleController.submitSchedule( principal,scheduleDTO);
+    }
+    @PostMapping("/runAlgorithm")
+    public Response runSchedulingAlgorithm(Principal principal) {
+
+        return scheduleController.runSchedulingAlgorithm(principal);
     }
 }

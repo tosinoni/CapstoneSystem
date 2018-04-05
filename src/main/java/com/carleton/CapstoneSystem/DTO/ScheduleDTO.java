@@ -9,11 +9,12 @@ import java.util.Set;
 
 public class ScheduleDTO {
     @JsonProperty
-    private Set<DayDTO> days;
+    private ArrayList<DayDTO> days;
 
 
     public ScheduleDTO(){
-        days= new LinkedHashSet<DayDTO>();
+        days= new ArrayList<DayDTO>();
+
     }
     public void addDay(DayDTO day){
         days.add(day);
@@ -23,7 +24,7 @@ public class ScheduleDTO {
         days.remove(day);
     }
 
-    public Set<DayDTO> getAllDays() {
+    public ArrayList<DayDTO> getAllDays() {
         return days;
     }
 }

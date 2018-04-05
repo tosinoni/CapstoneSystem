@@ -8,6 +8,7 @@ import com.carleton.CapstoneSystem.repositories.ProfessorRepository;
 import com.carleton.CapstoneSystem.repositories.ProjectRepository;
 import com.carleton.CapstoneSystem.repositories.StudentRepository;
 
+import com.carleton.CapstoneSystem.services.SchedulingService;
 import com.carleton.CapstoneSystem.utils.EmailSendingError;
 import com.carleton.CapstoneSystem.utils.ProjectErrorMessages;
 import com.carleton.CapstoneSystem.utils.SchedulingErrorMessages;
@@ -31,6 +32,8 @@ public class SchedulingController {
     CoordinatorRepository coordinatorRepository;
     @Autowired
     ProjectRepository projectRepository;
+    @Autowired
+    SchedulingService schedulingService;
 
 
 
@@ -70,6 +73,51 @@ public class SchedulingController {
             throw new WebApplicationException(ProjectErrorMessages.INVALID_USER, Response.Status.BAD_REQUEST);
         }
     }
+    public Response runSchedulingAlgorithm(Principal principal) {
+        validatePrincipal(principal);
+        if(coordinatorRepository.findByUserName(principal.getName())==null){
+            return Response.status(Response.Status.BAD_REQUEST).entity(EmailSendingError.NOT_COORDINATOR).build();
+        }
+        ArrayList<Project> projectsDB = getAllProjects();
+        setPresentationTimeForEachProject(projectsDB);
+        return Response.status(Response.Status.OK).build();
+    }
 
+    public ArrayList<Project> getAllProjects() {
+        return projectRepository.findAll();
+    }
+
+    public void setPresentationTimeForEachProject(ArrayList<Project> projects) {
+        for(Project project:projects) {
+            ArrayList<Student> students = studentRepository.findAllByProjectId(project.getId());
+            Professor professor = professorRepository.findByProjectsSupervisedId(project.getId());
+            ArrayList<ArrayList<ScheduleDay>> usersDays= new ArrayList<ArrayList<ScheduleDay>>();
+            ArrayList<ScheduleDay> scheduleDays= new ArrayList<ScheduleDay>();
+            if(students!=null || !students.isEmpty()){
+                for(Student student:students ){
+                    addScheduleDays(usersDays,student);
+
+                }
+                if(professor!=null){
+                    addScheduleDays(usersDays,professor);
+                }
+                ScheduleDay presentationDay=schedulingService.createPresentationTime(usersDays);
+                project.setPresentationDay(presentationDay);
+
+            }
+
+
+        }
+
+    }
+
+    private void addScheduleDays(ArrayList<ArrayList<ScheduleDay>> usersDays, WebUser webuser) {
+        LinkedHashSet<ScheduleDay> userScheduleDays = (LinkedHashSet<ScheduleDay>)webuser.getSchedule().getScheduleDays();
+        ArrayList<ScheduleDay> scheduleDays= new ArrayList<ScheduleDay>();
+        for(ScheduleDay scheduleDay:userScheduleDays){
+            scheduleDays.add(new ScheduleDay(scheduleDay));
+        }
+        usersDays.add(scheduleDays);
+    }
 
 }
