@@ -46,6 +46,11 @@ public  class WebUser {
 
 
 
+    @OneToOne
+    protected Schedule schedule;
+
+
+
 
 
 
@@ -177,6 +182,13 @@ public  class WebUser {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     @Override
