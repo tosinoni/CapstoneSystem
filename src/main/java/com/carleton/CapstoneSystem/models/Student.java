@@ -17,7 +17,7 @@ public class Student extends WebUser{
 
     @ManyToMany(mappedBy = "appliedStudents", fetch = FetchType.EAGER)
     private Set<Project> appliedProjects = new LinkedHashSet<Project>();
-    
+
 
 
 

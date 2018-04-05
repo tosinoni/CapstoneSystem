@@ -4,11 +4,8 @@ import com.carleton.CapstoneSystem.Controllers.SchedulingController;
 import com.carleton.CapstoneSystem.DTO.DayDTO;
 import com.carleton.CapstoneSystem.DTO.ScheduleDTO;
 import com.carleton.CapstoneSystem.DTO.UserDTO;
-import com.carleton.CapstoneSystem.models.Month;
-import com.carleton.CapstoneSystem.models.Role;
-import com.carleton.CapstoneSystem.models.Schedule;
-import com.carleton.CapstoneSystem.models.WeekDay;
-import com.carleton.CapstoneSystem.models.Time;
+import com.carleton.CapstoneSystem.models.*;
+import com.carleton.CapstoneSystem.restfulControllers.UserController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -38,6 +35,8 @@ public class SchedulingControllerTest {
 
     @Autowired
     SchedulingController schedulingController;
+    @Autowired
+    UserController userController;
 
     ScheduleDTO scheduleDTO;
     ScheduleDTO scheduleDTO2;
@@ -84,10 +83,32 @@ public class SchedulingControllerTest {
     @Test
     @Rollback(true)
     public void testAddSchedule(){
+        UserDTO user= new UserDTO();
+        user.setUsername("kousa11");
+        user.setFirstname("Asd");
+        user.setLastname("tize");
+        user.setIdentifier(1221112);
+        user.setPassword("adasds");
+        user.setEmail("ali22@cmail.carleton.ca");
+        user.setRole(Role.STUDENT);
+        user.setProgram("SE");
+        userController.signUp(user);
+        user= new UserDTO();
+        user.setUsername("kousa23");
+        user.setFirstname("Asd");
+        user.setIdentifier(111111);
+        user.setLastname("tize");
+        user.setEmail("ali111@cmail.carleton.ca");
+        user.setRole(Role.STUDENT);
+        user.setProgram("SE");
+        user.setPassword("asdaads");
+        userController.signUp(user);
+
+
         Principal principal= new Principal() {
             @Override
             public String getName() {
-                return "kousa1";
+                return "kousa11";
             }
 
         };
@@ -96,7 +117,7 @@ public class SchedulingControllerTest {
         principal= new Principal() {
             @Override
             public String getName() {
-                return "kousa2";
+                return "kousa23";
             }
 
         };
