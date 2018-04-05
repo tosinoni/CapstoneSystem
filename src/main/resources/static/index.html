@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/welcome">My Kapi</a>
+                    <a class="navbar-brand" href="{{getHomeUrl()}}">My Kapi</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -48,7 +48,7 @@
         <div class="container-fluid" ng-cloak ng-if="!isHomePage">
             <div class="">
                 <div class="col-sm-3 sidenav hidden-xs">
-                    <h2><a style="color: black; text-decoration: none" href="{{getHomeUrl()}}">Capstone System</a></h2>
+                    <h2><a style="color: black; text-decoration: none" href="{{getHomeUrl()}}">My Kapi</a></h2>
                     <ul class="nav nav-pills nav-stacked">
                         <li ng-cloak ng-if="isAuthenticated"><a href="/welcome">Dashboard</a></li>
                         <li><a href="/projects">Projects</a></li>
