@@ -4,6 +4,7 @@ import com.carleton.CapstoneSystem.Controllers.SubmissionController;
 import com.carleton.CapstoneSystem.DTO.SubmissionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.ws.rs.core.Response;
 
@@ -18,6 +19,13 @@ public class SubmissionResource {
     public Response addDeliverable(@RequestBody SubmissionDTO submissionDTO) {
 
         return submissionController.addDeliverable(submissionDTO);
+    }
+
+    @PostMapping("/submitDeliverable")
+    public Response submitDeliverable(@RequestParam("file") MultipartFile file,
+                                      @RequestParam("submissionId") long submissionId) {
+
+        return submissionController.submitDeliverable(file, submissionId);
     }
 
     @GetMapping("/project/{id}")

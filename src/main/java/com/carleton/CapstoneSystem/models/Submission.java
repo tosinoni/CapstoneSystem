@@ -29,6 +29,9 @@ public class Submission {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dueDate;
 
+    @Column(name="grade")
+    private Grade grade;
+
     public Submission() {
 
     }
@@ -56,6 +59,9 @@ public class Submission {
     }
 
     public byte[] getFile() {
+        if(file == null) {
+            return null;
+        }
         return file.clone();
     }
 
@@ -101,4 +107,11 @@ public class Submission {
         return Objects.hash(name, project, file, dueDate, fileName);
     }
 
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
 }

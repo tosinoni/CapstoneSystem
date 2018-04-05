@@ -1,5 +1,5 @@
 angular.module('CapstoneSystem')
-    .controller('SubmissionsController', function ($scope, User, SubmissionService) {
+    .controller('SubmissionsController', function ($scope, User, SubmissionService, Upload) {
         $scope.isProfOrCoordinator = false;
 
         User.getCurrentUser().then(function (user) {
@@ -12,6 +12,9 @@ angular.module('CapstoneSystem')
                 if(!_.isEmpty($scope.projectsSupervised)) {
                     $scope.selectedProject = $scope.projectsSupervised[0];
                     $scope.getSubmissionsForProject();
+                } else if(user.project) {
+                    $scope.selectedProject = user.project;
+                    $scope.getSubmissionsForProject();
                 }
             }
         });
@@ -23,7 +26,7 @@ angular.module('CapstoneSystem')
 
         $scope.addSubmission = function() {
             //open modal
-            $('#submitModal').modal('show');
+            $('#submitModal').modal('toggle');
         }
 
         $scope.editDeliverable = function() {
@@ -68,6 +71,44 @@ angular.module('CapstoneSystem')
                 if(!_.isEmpty(submissions)) {
                     $scope.submissions = submissions;
                 }
+            });
+        }
+
+        $scope.changeSubmitDeliverableModalTime = function () {
+            $scope.submitDeliverableModalTime = $scope.getTime($scope.selectedDeliverable.dueDate);
+        }
+
+        $scope.downloadFile = function (fileInBytes) {
+            console.log(fileInBytes)
+            var blob = new Blob([fileInBytes], {type: "application/pdf"}),
+                url = window.URL.createObjectURL(blob);
+
+            console.log(url);
+            console.log("i am ger");
+            window.open(url);
+        }
+        
+        $scope.submitDeliverable = function () {
+            Upload.upload({
+                url: '/api/submissions/submitDeliverable',
+                data: {
+                    file: $scope.file,
+                    'submissionId': $scope.selectedDeliverable.id
+                }
+            }).then(function (resp) {
+                swal('Yaah!', $scope.selectedDeliverable.name + ' submitted successfully.', 'success');
+                var index = _.findIndex($scope.submissions, function(s) { return s.id == $scope.selectedDeliverable.id; });
+                $scope.submissions[index] = resp.data.entity;
+
+                $scope.file = undefined;
+                $scope.name = undefined;
+                $('#submitModal').modal('toggle');
+            }, function (res) {
+                console.log('Error status: ' + res.status);
+                swal('Oops..!', res.data.message, 'error');
+            }, function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
             });
         }
     });
